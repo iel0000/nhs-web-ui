@@ -12,6 +12,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { MenubarModule } from 'primeng/menubar';
 import {ButtonModule} from 'primeng/button';
+import { StyleClassModule } from 'primeng/styleclass';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {ButtonModule} from 'primeng/button';
     InputTextModule,
     PasswordModule,
     MenubarModule,
-    ButtonModule
+    ButtonModule,
+    StyleClassModule
   ],
   providers: [],
   bootstrap: [AppComponent]
