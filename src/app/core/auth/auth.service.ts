@@ -8,11 +8,11 @@ import { IUser } from '@shared/interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<IUser>;
+    private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<IUser>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<IUser>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -33,5 +33,6 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null)
     }
 }

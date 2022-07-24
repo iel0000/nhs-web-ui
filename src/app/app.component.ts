@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/auth';
 import { IUser } from '@shared/interface';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,18 @@ import { IUser } from '@shared/interface';
 export class AppComponent {
   title = 'nhs-web-ui';
   currentUser: IUser | undefined
+  items: MenuItem[];
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.items = [  
+      {
+        label: 'Home',
+      }
+    ];
   }
 
   logout() {

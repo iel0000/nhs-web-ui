@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthenticationService } from '@core/auth';
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([returnUrl]);
         },
         error: error => {
-          this.error = error.error.title;
+          this.error = error.error.title === "Unauthorized" ? "Invalid Username/Password" : error.error.title;
           this.loading = false;
         }
       });
