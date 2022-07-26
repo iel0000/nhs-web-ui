@@ -8,11 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {InputTextModule} from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { MenubarModule } from 'primeng/menubar';
-import {ButtonModule} from 'primeng/button';
-import { StyleClassModule } from 'primeng/styleclass';
+import { PrimeNgModule } from './shared/primeng.module';
 
 
 @NgModule({
@@ -24,14 +20,10 @@ import { StyleClassModule } from 'primeng/styleclass';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
+    SharedModule,    
     ReactiveFormsModule,
     HttpClientModule,
-    InputTextModule,
-    PasswordModule,
-    MenubarModule,
-    ButtonModule,
-    StyleClassModule
+    PrimeNgModule
   ],
   providers: [],
   bootstrap: [AppComponent]
