@@ -1,10 +1,12 @@
-﻿
-<p-menubar [model]="items" *ngIf="isAuthenticated">
+﻿<p-menubar [model]="items" *ngIf="isAuthenticated">
   <ng-template pTemplate="start">
-      <img src="../assets/images/logo.png" height="40" class="mr-2">
+    <img src="../assets/images/logo.png" height="40" class="mr-2" />
   </ng-template>
   <ng-template pTemplate="end">
-    <p-button label="Logout" styleClass="p-button-link" (click)="logout()"></p-button>
+    <p-button
+      label="Logout"
+      styleClass="p-button-link"
+      (click)="logout()"></p-button>
   </ng-template>
 </p-menubar>
 
