@@ -1,0 +1,37 @@
+.card{
+    border-radius: .5rem;
+    -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    background-color: rgba(255,255,255,0.9);
+}
+
+.container{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.img-fluid{
+    border-radius: .5rem 0 0 .5rem;
+}
+
+.bg-login{
+    background: url('https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100%;
+      
+    /* Set up proportionate scaling */
+    width: 100%;
+    height: auto;
+      
+    /* Set up positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+}
