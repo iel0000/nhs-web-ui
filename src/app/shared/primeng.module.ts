@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { MenubarModule } from 'primeng/menubar';
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { StyleClassModule } from 'primeng/styleclass';
 
 @NgModule({
@@ -14,7 +14,7 @@ import { StyleClassModule } from 'primeng/styleclass';
     PasswordModule,
     MenubarModule,
     ButtonModule,
-    StyleClassModule
+    StyleClassModule,
   ],
   providers: [],
   exports: [
@@ -24,7 +24,7 @@ import { StyleClassModule } from 'primeng/styleclass';
     PasswordModule,
     MenubarModule,
     ButtonModule,
-    StyleClassModule
-  ]
+    StyleClassModule,
+  ],
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}

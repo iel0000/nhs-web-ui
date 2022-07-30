@@ -5,14 +5,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [],
-  imports: [
-    BrowserModule,
-    FontAwesomeModule
-  ],
+  imports: [BrowserModule, FontAwesomeModule],
   providers: [],
-  exports: [
-    ReactiveFormsModule,
-    FontAwesomeModule
-  ]
+  exports: [ReactiveFormsModule, FontAwesomeModule],
 })
-export class SharedModule { }
+export class SharedModule {}

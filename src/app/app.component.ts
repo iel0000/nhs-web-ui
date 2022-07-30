@@ -7,22 +7,24 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'nhs-web-ui';
-  currentUser: IUser | undefined
+  currentUser: IUser | undefined;
   items: MenuItem[];
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.items = [  
+    this.authenticationService.currentUser.subscribe(
+      x => (this.currentUser = x)
+    );
+    this.items = [
       {
         label: 'Home',
-      }
+      },
     ];
   }
 
@@ -32,10 +34,10 @@ export class AppComponent {
   }
 
   get isAuthenticated(): boolean {
-    const user = this.authenticationService.currentUserValue
+    const user = this.authenticationService.currentUserValue;
     if (user && Object.keys(user).length > 0) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 }

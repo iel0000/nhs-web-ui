@@ -1,0 +1,85 @@
+<div class="container-fluid bg-login">
+  <div class="py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-10 col-xl-8">
+        <div class="card">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img
+                src="https://images.pexels.com/photos/1106476/pexels-photo-1106476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="login form"
+                class="img-fluid" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <span class="h1 fw-bold ml-2 mb-0"
+                      >Sign into your account</span
+                    >
+                  </div>
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                    Lorem ipsum dolor sit amet.
+                  </h5>
+                  <div class="form-outline mb-4">
+                    <div class="p-inputgroup">
+                      <span class="p-float-label">
+                        <input
+                          type="text"
+                          pInputText
+                          formControlName="username"
+                          class="form-control form-control-lg" />
+                        <label for="float-input">Username</label>
+                      </span>
+                    </div>
+                    <!-- Error Message for Username -->
+                    <div class="p-inputgroup">
+                      <small
+                        class="text-danger"
+                        *ngIf="(f['username'].touched || submitted) && f['username'].errors?.['required']">
+                        Username is required
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="p-inputgroup">
+                      <span class="p-float-label">
+                        <input
+                          type="password"
+                          pInputText
+                          formControlName="password"
+                          class="form-control form-control-lg" />
+                        <label for="float-input">Password</label>
+                      </span>
+                    </div>
+                    <div class="p-inputgroup">
+                      <small
+                        class="text-danger"
+                        *ngIf="(f['password'].touched || submitted) && f['password'].errors?.['required']">
+                        Password is required
+                      </small>
+                    </div>
+                    <div *ngIf="error" class="alert alert-danger mt-2 mb-0">
+                      {{ error }}
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <button [disabled]="loading" class="btn btn-dark btn-lg">
+                      <span
+                        *ngIf="loading"
+                        class="spinner-border spinner-border-sm mr-1"></span>
+                      LOGIN
+                    </button>
+                  </div>
+                  <a class="small text-muted" href="#!">Forgot password?</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
