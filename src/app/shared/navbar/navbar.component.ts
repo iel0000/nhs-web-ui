@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@core/auth';
+import { AuthenticationService } from '@app/core/auth';
 import { IUser } from '@shared/interface';
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
 })
-export class AppComponent {
-  title = 'nhs-web-ui';
+export class NavbarComponent {
   currentUser: IUser | undefined;
   items: MenuItem[];
 

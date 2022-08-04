@@ -6,18 +6,16 @@ import { AppComponent } from './app.component';
 import { SharedModule } from '@shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PrimeNgModule } from '@shared/primeng.module';
-import { HomeComponent, LoginComponent } from '@app/pages';
+import { DashboardComponent, LoginComponent } from '@app/pages';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     ReactiveFormsModule,
     HttpClientModule,
-    PrimeNgModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
