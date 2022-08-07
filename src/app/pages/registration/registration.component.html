@@ -1,0 +1,224 @@
+<div class="container-xl px-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <!-- Basic registration form-->
+      <div class="card border-0 rounded-lg mt-5">
+        <div class="card-header justify-content-center">
+          <h1 class="my-2 text-center">REGISTRATION</h1>
+        </div>
+        <div class="card-body">
+          <!-- Registration form-->
+
+          <form class="mt-4">
+            <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+              <span class="mb-2 fw-light" style="margin-right: 0.5rem"
+                >Control Number:</span
+              >
+              <input
+                type="text"
+                class="controlNumber text-center"
+                placeholder="YYYY-MM-DD-XXXX"
+                [disabled]="true" />
+            </div>
+
+            <h4 class="bg-info">PERSONAL INFO</h4>
+            <div class="row gx-3">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputFirstName"
+                    >First Name</label
+                  >
+                  <input
+                    class="form-control"
+                    id="inputFirstName"
+                    type="text"
+                    pInputText
+                    placeholder="Enter first name" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputLastName"
+                    >Last Name</label
+                  >
+                  <input
+                    class="form-control"
+                    id="inputLastName"
+                    type="text"
+                    pInputText
+                    placeholder="Enter last name" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputMiddleName"
+                    >Middle Name</label
+                  >
+                  <input
+                    class="form-control"
+                    id="inputMiddleName"
+                    type="text"
+                    pInputText
+                    placeholder="Enter Middle name" />
+                </div>
+              </div>
+            </div>
+            <!-- Form Row    -->
+            <div class="row gx-3">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputBday"
+                    >Date of Birth</label
+                  >
+                  <p-calendar
+                    [showIcon]="true"
+                    inputId="icon"
+                    id="inputBday"></p-calendar>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputAge">Age</label>
+                  <input
+                    class="form-control"
+                    id="inputAge"
+                    type="text"
+                    pInputText
+                    placeholder="25" />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputAge">Gender</label>
+                  <select pInputText class="form-control" id="sel1">
+                    <option disabled selected>Select GENDER</option>
+                    <option>MALE</option>
+                    <option>FEMALE</option>
+                    >
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputAddress"
+                    >Contact Details</label
+                  >
+                  <input
+                    class="form-control"
+                    id="inputAddress"
+                    type="text"
+                    pInputText
+                    placeholder="09123456789" />
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label class="small mb-1" for="inputEmail">Email Address</label>
+                <input
+                  class="form-control"
+                  id="inputEmail"
+                  type="text"
+                  pInputText
+                  placeholder="sample@sample.com" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label class="small mb-1" for="inputAddress">Address</label>
+                <input
+                  class="form-control"
+                  id="inputAddress"
+                  type="text"
+                  pInputText
+                  placeholder="123 Your Street" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label class="small mb-1" for="inputMedicalRef"
+                  >eMedical Ref No</label
+                >
+                <input
+                  class="form-control"
+                  id="inputMedicalRef"
+                  type="text"
+                  pInputText
+                  placeholder="123456" />
+              </div>
+            </div>
+            <h4 class="bg-info">VISA INFO</h4>
+            <div class="row gx-3">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputMedicalRef"
+                    >Embassy</label
+                  >
+                  <select pInputText class="form-control" id="sel1">
+                    <option disabled selected>Select EMBASSY</option>
+                    <option>AUSTRALIA</option>
+                    <option>CANADA</option>
+                    <option>NEW ZEALAND</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputMedicalRef"
+                    >Visa Type</label
+                  >
+                  <select pInputText class="form-control" id="sel1">
+                    <option disabled selected>Select VISA Type</option>
+                    <option>PERMANENT</option>
+                    <option>TEMPORARY</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label class="small mb-1" for="inputMedicalRef"
+                    >Visa Category</label
+                  >
+                  <select
+                    pInputText
+                    class="form-control"
+                    id="sel1"
+                    placeholder="Select one">
+                    <option disabled selected>Select VISA Category</option>
+                    <option>LIMITED</option>
+                    <option>FULL</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <h4 class="bg-info">LABORATORY REQUISITION</h4>
+            <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+              <span class="mb-2 fw-light" style="margin-right: 0.5rem"
+                >Control Number:</span
+              >
+              <input
+                type="text"
+                class="controlNumber text-center"
+                placeholder="YYYY-MM-DD-XXXX"
+                [disabled]="true" />
+            </div>
+
+            <h4 class="bg-info">X-RAY REQUISITION</h4>
+            <div class="col-12 mb-2 lg:col-4 lg:mb-0">
+              <span class="mb-2 fw-light" style="margin-right: 0.5rem"
+                >Control Number:</span
+              >
+              <input
+                type="text"
+                class="controlNumber text-center"
+                placeholder="YYYY-MM-DD-XXXX"
+                [disabled]="true" />
+            </div>
+            <a class="btn btn-primary btn-block mt-5">Submit</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
