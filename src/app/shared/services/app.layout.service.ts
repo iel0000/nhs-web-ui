@@ -1,29 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-
-export interface AppConfig {
-  inputStyle: string;
-  colorScheme: string;
-  theme: string;
-  ripple: boolean;
-  menuMode: string;
-  scale: number;
-}
-
-interface LayoutState {
-  staticMenuDesktopInactive: boolean;
-  overlayMenuActive: boolean;
-  profileSidebarVisible: boolean;
-  configSidebarVisible: boolean;
-  staticMenuMobileActive: boolean;
-  menuHoverActive: boolean;
-}
+import { IAppConfig, ILayoutState } from '@shared/interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
-  config: AppConfig = {
+  config: IAppConfig = {
     ripple: false,
     inputStyle: 'outlined',
     menuMode: 'static',
@@ -32,7 +15,7 @@ export class LayoutService {
     scale: 14,
   };
 
-  state: LayoutState = {
+  state: ILayoutState = {
     staticMenuDesktopInactive: false,
     overlayMenuActive: false,
     profileSidebarVisible: false,
@@ -41,7 +24,7 @@ export class LayoutService {
     menuHoverActive: false,
   };
 
-  private configUpdate = new Subject<AppConfig>();
+  private configUpdate = new Subject<IAppConfig>();
 
   private overlayOpen = new Subject<any>();
 

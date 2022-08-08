@@ -3,20 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMenuComponent } from './layout/menuitem/menu.component';
-import { AppMenuitemComponent } from './layout/menuitem/menuitem.component';
+import { MenuitemComponent } from './layout/menuitem/menuitem.component';
 import { RouterModule } from '@angular/router';
 import { TopbarComponent } from './layout/topbar/topbar.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { LayoutComponent } from '../shared/layout/layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PrimeNgModule } from './primeng.module';
+import { MenuComponent } from './layout/menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppMenuitemComponent,
+    MenuitemComponent,
     TopbarComponent,
-    AppMenuComponent,
+    MenuComponent,
     SidebarComponent,
     LayoutComponent,
   ],
@@ -36,6 +36,8 @@ import { PrimeNgModule } from './primeng.module';
     FontAwesomeModule,
     PrimeNgModule,
     LayoutComponent,
+    MenuComponent,
+    MenuitemComponent,
   ],
 })
 export class SharedModule {}

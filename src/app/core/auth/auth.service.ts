@@ -18,7 +18,7 @@ export class AuthenticationService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): IUser {
+  get currentUserValue(): IUser {
     return this.currentUserSubject.value;
   }
 
@@ -42,5 +42,13 @@ export class AuthenticationService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+  }
+
+  isAuthenticated(): boolean {
+    const user = this.currentUserValue;
+    if (user && Object.keys(user).length > 0) {
+      return true;
+    }
+    return false;
   }
 }

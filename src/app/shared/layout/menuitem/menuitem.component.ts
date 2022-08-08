@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  HostBinding,
   Input,
   OnDestroy,
   OnInit,
@@ -15,76 +16,12 @@ import {
 } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { MenuService } from './menu.service';
-import { LayoutService } from '@shared/services/app.layout.service';
+import { MenuService, LayoutService } from '@app/shared/services';
 
 @Component({
-  /* tslint:disable:component-selector */
-  selector: '[app-menuitem]',
-  /* tslint:enable:component-selector */
-  template: `
-    <ng-container>
-      <div
-        *ngIf="root && item.visible !== false"
-        class="layout-menuitem-root-text">
-        {{ item.label }}
-      </div>
-      <a
-        *ngIf="(!item.routerLink || item.items) && item.visible !== false"
-        [attr.href]="item.url"
-        (click)="itemClick($event)"
-        [ngClass]="item.class"
-        [attr.target]="item.target"
-        tabindex="0"
-        pRipple>
-        <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-        <span class="layout-menuitem-text">{{ item.label }}</span>
-        <i
-          class="pi pi-fw pi-angle-down layout-submenu-toggler"
-          *ngIf="item.items"></i>
-      </a>
-      <a
-        *ngIf="item.routerLink && !item.items && item.visible !== false"
-        (click)="itemClick($event)"
-        [ngClass]="item.class"
-        [routerLink]="item.routerLink"
-        routerLinkActive="active-route"
-        [routerLinkActiveOptions]="item.routerLinkOptions || { exact: true }"
-        [fragment]="item.fragment"
-        [queryParamsHandling]="item.queryParamsHandling"
-        [preserveFragment]="item.preserveFragment"
-        [skipLocationChange]="item.skipLocationChange"
-        [replaceUrl]="item.replaceUrl"
-        [state]="item.state"
-        [queryParams]="item.queryParams"
-        [attr.target]="item.target"
-        tabindex="0"
-        pRipple>
-        <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-        <span class="layout-menuitem-text">{{ item.label }}</span>
-        <i
-          class="pi pi-fw pi-angle-down layout-submenu-toggler"
-          *ngIf="item.items"></i>
-      </a>
-
-      <ul
-        *ngIf="item.items && item.visible !== false"
-        [@children]="submenuAnimation">
-        <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
-          <li
-            app-menuitem
-            [item]="child"
-            [index]="i"
-            [parentKey]="key"
-            [class]="child.badgeClass"></li>
-        </ng-template>
-      </ul>
-    </ng-container>
-  `,
-  host: {
-    '[class.layout-root-menuitem]': 'root',
-    '[class.active-menuitem]': 'active',
-  },
+  selector: 'app-menuitem',
+  templateUrl: './menuitem.component.html',
+  styleUrls: ['./menuitem.component.scss'],
   animations: [
     trigger('children', [
       state(
@@ -118,15 +55,18 @@ import { LayoutService } from '@shared/services/app.layout.service';
     ]),
   ],
 })
-export class AppMenuitemComponent implements OnInit, OnDestroy {
+export class MenuitemComponent implements OnInit, OnDestroy {
   @Input() item: any;
 
   @Input() index!: number;
 
-  @Input() root!: boolean;
-
   @Input() parentKey!: string;
 
+  @HostBinding('class.layout-root-menuitem')
+  @Input()
+  root!: boolean;
+
+  @HostBinding('class.active-menuitem')
   active = false;
 
   menuSourceSubscription: Subscription;

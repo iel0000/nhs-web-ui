@@ -1,4 +1,4 @@
-<div class="layout-topbar" *ngIf="isAuthenticated">
+<div class="layout-topbar">
   <button
     class="p-link layout-menu-button layout-topbar-button p-trigger"
     (click)="layoutService.onMenuToggle()">
@@ -19,9 +19,8 @@
       'layout-topbar-menu-mobile-active':
         layoutService.state.profileSidebarVisible
     }">
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-bell"></i>
-      <span>Notification</span>
+    <button class="p-link layout-topbar-button" (click)="logout()">
+      Logout
     </button>
   </div>
 </div>

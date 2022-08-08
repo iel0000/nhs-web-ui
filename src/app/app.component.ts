@@ -12,7 +12,6 @@ import { MenuItem, PrimeIcons } from 'primeng/api';
 export class AppComponent {
   title = 'nhs-web-ui';
   currentUser: IUser | undefined;
-  items: MenuItem[];
 
   constructor(
     private router: Router,
@@ -21,11 +20,6 @@ export class AppComponent {
     this.authenticationService.currentUser.subscribe(
       x => (this.currentUser = x)
     );
-    this.items = [
-      {
-        label: 'Home',
-      },
-    ];
   }
 
   logout() {
@@ -34,10 +28,6 @@ export class AppComponent {
   }
 
   get isAuthenticated(): boolean {
-    const user = this.authenticationService.currentUserValue;
-    if (user && Object.keys(user).length > 0) {
-      return true;
-    }
-    return false;
+    return this.authenticationService.isAuthenticated();
   }
 }
