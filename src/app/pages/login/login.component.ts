@@ -7,7 +7,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthenticationService } from '@core/auth';
 
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   loading: boolean | undefined;
   submitted: boolean | undefined;
   error: string | undefined;
-  faCoffee = faCoffee;
+  faUser = faUser;
 
   constructor(
     private formBuilder: FormBuilder,

@@ -1,0 +1,27 @@
+<div class="layout-topbar" *ngIf="isAuthenticated">
+  <button
+    class="p-link layout-menu-button layout-topbar-button p-trigger"
+    (click)="layoutService.onMenuToggle()">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button
+    class="p-link layout-topbar-menu-button layout-topbar-button p-trigger"
+    (click)="layoutService.showProfileSidebar()">
+    <i class="pi pi-ellipsis-v"></i>
+  </button>
+  <a class="layout-topbar-logo" routerLink="">
+    <span>NHS GROUP</span>
+  </a>
+  <div
+    class="layout-topbar-menu"
+    [ngClass]="{
+      'layout-topbar-menu-mobile-active':
+        layoutService.state.profileSidebarVisible
+    }">
+    <button class="p-link layout-topbar-button">
+      <i class="pi pi-bell"></i>
+      <span>Notification</span>
+    </button>
+  </div>
+</div>

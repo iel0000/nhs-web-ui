@@ -6,6 +6,16 @@ import { PasswordModule } from 'primeng/password';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { StyleClassModule } from 'primeng/styleclass';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BadgeModule } from 'primeng/badge';
+import { SidebarModule } from 'primeng/sidebar';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { RippleModule } from 'primeng/ripple';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AvatarModule } from 'primeng/avatar';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [],
@@ -15,6 +25,14 @@ import { StyleClassModule } from 'primeng/styleclass';
     MenubarModule,
     ButtonModule,
     StyleClassModule,
+    SidebarModule,
+    RadioButtonModule,
+    InputSwitchModule,
+    RippleModule,
+    AvatarModule,
+    CalendarModule,
+    CheckboxModule,
+    MultiSelectModule,
   ],
   providers: [],
   exports: [
@@ -25,6 +43,12 @@ import { StyleClassModule } from 'primeng/styleclass';
     MenubarModule,
     ButtonModule,
     StyleClassModule,
+    AvatarGroupModule,
+    BadgeModule,
+    AvatarModule,
+    CalendarModule,
+    CheckboxModule,
+    MultiSelectModule,
   ],
 })
 export class PrimeNgModule {}

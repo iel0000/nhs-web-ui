@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@core/auth';
 import { IUser } from '@shared/interface';
-import { MenuItem, PrimeIcons } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import { LayoutService } from '@shared/services/app.layout.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-topbar',
+  templateUrl: './topbar.component.html',
+  styleUrls: ['./topbar.component.scss'],
 })
-export class AppComponent {
-  title = 'nhs-web-ui';
+export class TopbarComponent {
   currentUser: IUser | undefined;
-  items: MenuItem[];
+  items!: MenuItem[];
+  loading = [false, false, false, false];
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public layoutService: LayoutService
   ) {
     this.authenticationService.currentUser.subscribe(
       x => (this.currentUser = x)
@@ -27,7 +29,6 @@ export class AppComponent {
       },
     ];
   }
-
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
