@@ -1,4 +1,4 @@
-export interface MenuChangeEvent {
+export interface IMenuChangeEvent {
   key: string;
   routeEvent?: boolean;
 }

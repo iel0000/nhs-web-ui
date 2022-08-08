@@ -35,10 +35,6 @@ export class TopbarComponent {
   }
 
   get isAuthenticated(): boolean {
-    const user = this.authenticationService.currentUserValue;
-    if (user && Object.keys(user).length > 0) {
-      return true;
-    }
-    return false;
+    return this.authenticationService.isAuthenticated();
   }
 }
