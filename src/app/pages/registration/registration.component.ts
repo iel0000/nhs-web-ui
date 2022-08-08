@@ -31,10 +31,10 @@ export class RegistrationComponent {
   }
 
   validateEmail() {
-    if(this.registrationForm.get('email')?.value) {
-      this.registrationForm.get('email')?.addValidators(Validators.email)
-    }else {
-      this.registrationForm.get('email')?.setValidators(null)
+    if (this.registrationForm.get('email')?.value) {
+      this.registrationForm.get('email')?.addValidators(Validators.email);
+    } else {
+      this.registrationForm.get('email')?.setValidators(null);
     }
   }
   onSubmit() {
