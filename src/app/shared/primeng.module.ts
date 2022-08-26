@@ -17,6 +17,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { AvatarModule } from 'primeng/avatar';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { StepsModule } from 'primeng/steps';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CheckboxModule,
     MultiSelectModule,
     DropdownModule,
+    StepsModule,
   ],
   providers: [],
   exports: [
@@ -52,6 +54,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CheckboxModule,
     MultiSelectModule,
     DropdownModule,
+    StepsModule,
   ],
 })
 export class PrimeNgModule {}

@@ -3,8 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/auth';
 import { DashboardComponent, LoginComponent } from '@app/pages';
 import { LayoutComponent } from '@shared/layout/layout.component';
-import { RegistrationComponent } from '@app/pages/registration/registration.component';
 import { LoginGuard } from '@core/login';
+import {
+  RegistrationComponent,
+  PersonalComponent,
+  VisaInfoComponent,
+  LabRequisitionComponent,
+  XrayRequisitionComponent,
+  ReviewComponent,
+} from '@app/pages/registration';
 
 const routes: Routes = [
   {
@@ -24,6 +31,14 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegistrationComponent,
+        children: [
+          { path: '', redirectTo: 'personal', pathMatch: 'full' },
+          { path: 'personal', component: PersonalComponent },
+          { path: 'visaInfo', component: VisaInfoComponent },
+          { path: 'labRequisition', component: LabRequisitionComponent },
+          { path: 'xrayRequisition', component: XrayRequisitionComponent },
+          { path: 'review', component: ReviewComponent },
+        ],
       },
     ],
   },
