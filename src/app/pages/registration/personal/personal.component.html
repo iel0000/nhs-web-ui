@@ -1,1 +1,66 @@
-<p>personal works!</p>
+<div class="stepsdemo-content">
+  <p-card>
+    <ng-template pTemplate="title"> Personal Information </ng-template>
+    <ng-template pTemplate="subtitle">
+      Enter your personal information
+    </ng-template>
+    <ng-template pTemplate="content">
+      <form class="mt-4" [formGroup]="personalForm">
+        <div class="p-fluid">
+          <div class="field">
+            <label for="firstName">Firstname</label>
+            <input
+              id="firstName"
+              type="text"
+              pInputText
+              formControlName="firstName"
+              [ngClass]="{
+                'ng-dirty':
+                  personalForm.get('firstName')?.dirty &&
+                  personalForm.get('firstName')?.invalid
+              }" />
+            <small
+              *ngIf="
+                personalForm.get('firstName')?.dirty &&
+                personalForm.get('firstName')?.invalid
+              "
+              class="p-error"
+              >Firstname is required.</small
+            >
+          </div>
+          <div class="field">
+            <label for="lastName">Lastname</label>
+            <input
+              formControlName="lastName"
+              id="lastName"
+              type="text"
+              pInputText
+              [ngClass]="{
+                'ng-dirty':
+                  personalForm.get('lastName')?.dirty &&
+                  personalForm.get('lastName')?.invalid
+              }" />
+            <small
+              class="p-error"
+              *ngIf="
+                personalForm.get('lastName')?.dirty &&
+                personalForm.get('lastName')?.invalid
+              "
+              >Lastname is required.</small
+            >
+          </div>
+        </div>
+      </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="grid grid-nogutter justify-content-end">
+        <p-button
+          label="Next"
+          (onClick)="nextPage()"
+          icon="pi pi-angle-right"
+          iconPos="right"
+          [disabled]="personalForm.invalid"></p-button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>

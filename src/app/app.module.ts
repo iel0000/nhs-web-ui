@@ -14,6 +14,8 @@ import {
   XrayRequisitionComponent,
   ReviewComponent,
 } from '@app/pages/registration';
+import { StoreModule } from '@ngrx/store';
+import { registrationPageReducer } from '@app/pages/registration/store';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import {
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    StoreModule.forRoot({ registration: registrationPageReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent],

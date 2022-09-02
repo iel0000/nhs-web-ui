@@ -18,6 +18,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { StepsModule } from 'primeng/steps';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [],
@@ -37,6 +38,7 @@ import { StepsModule } from 'primeng/steps';
     MultiSelectModule,
     DropdownModule,
     StepsModule,
+    CardModule,
   ],
   providers: [],
   exports: [
@@ -55,6 +57,7 @@ import { StepsModule } from 'primeng/steps';
     MultiSelectModule,
     DropdownModule,
     StepsModule,
+    CardModule,
   ],
 })
 export class PrimeNgModule {}

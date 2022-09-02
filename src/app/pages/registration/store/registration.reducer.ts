@@ -1,0 +1,20 @@
+import { IRegistration } from '@app/shared/interface/registration.interface';
+import { createReducer, on } from '@ngrx/store';
+import * as RegistrationPageActions from './registration.action';
+
+export const initialState: IRegistration = {
+  personalInformation: {
+    firstName: '',
+    lastName: '',
+  },
+};
+
+export const registrationPageReducer = createReducer(
+  initialState,
+  on(
+    RegistrationPageActions.UpdatePersonalInformation,
+    (state, { payload }): IRegistration => {
+      return { ...state, personalInformation: payload };
+    }
+  )
+);
