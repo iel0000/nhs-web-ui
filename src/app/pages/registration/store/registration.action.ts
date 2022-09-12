@@ -1,4 +1,7 @@
-import { IPersonalInformation, IVisaInformation } from '@app/shared/interface/registration.interface';
+import {
+  IPersonalInformation,
+  IVisaInformation,
+} from '@app/shared/interface/registration.interface';
 import { createAction, props } from '@ngrx/store';
 
 export const UpdatePersonalInformation = createAction(

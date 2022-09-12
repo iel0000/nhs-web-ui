@@ -14,9 +14,8 @@ export const initialState: IRegistration = {
     contactDetails: '',
     email: '',
     eMedicalRefNo: '',
-
   },
-  visaInformation:{
+  visaInformation: {
     embassy: '',
     visaType: '',
     visaCategory: '',

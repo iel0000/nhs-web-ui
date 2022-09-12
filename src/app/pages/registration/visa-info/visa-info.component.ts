@@ -23,26 +23,26 @@ export class VisaInfoComponent implements OnInit {
     private store: Store,
     private router: Router,
     private formBuilder: FormBuilder
-    ) {
-      this.visaForm = this.formBuilder.group({
-        embassy: ['', Validators.required],
-        visaType: ['', Validators.required],
-        visaCategory: ['', Validators.required],
-      });
-    }
+  ) {
+    this.visaForm = this.formBuilder.group({
+      embassy: ['', Validators.required],
+      visaType: ['', Validators.required],
+      visaCategory: ['', Validators.required],
+    });
+  }
 
-    ngOnInit(): void {
-      this.store
-        .select(selectRecord)
-        .pipe(take(1))
-        .subscribe(s => {
-          this.visaForm.patchValue({
-            embassy: s.visaInformation.embassy,
-            visaType: s.visaInformation.visaType,
-            visaCategory: s.visaInformation.visaCategory,
-          });
+  ngOnInit(): void {
+    this.store
+      .select(selectRecord)
+      .pipe(take(1))
+      .subscribe(s => {
+        this.visaForm.patchValue({
+          embassy: s.visaInformation.embassy,
+          visaType: s.visaInformation.visaType,
+          visaCategory: s.visaInformation.visaCategory,
         });
-    }
+      });
+  }
 
   back() {
     this.router.navigate(['register/personal']);

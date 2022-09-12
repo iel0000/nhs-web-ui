@@ -31,7 +31,7 @@ export class PersonalComponent implements OnInit {
       contactDetails: ['', Validators.required],
       email: '',
       address: ['', Validators.required],
-      eMedicalRefNo: ['', Validators.required]
+      eMedicalRefNo: ['', Validators.required],
     });
   }
 

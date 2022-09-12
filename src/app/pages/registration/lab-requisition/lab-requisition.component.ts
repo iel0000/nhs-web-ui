@@ -17,7 +17,7 @@ export class LabRequisitionComponent {
     this.router.navigate(['register/visaInfo']);
   }
   nextPage() {
-    this.router.navigate(['/register/xrayRequisition'])
+    this.router.navigate(['register/xrayRequisition'])
   }
 }
 

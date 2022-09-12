@@ -2,200 +2,214 @@
   <p-card>
     <ng-template pTemplate="title"> Personal Information </ng-template>
     <ng-template pTemplate="subtitle">
-      Please fill-in all the required field ( <span  style="color:red">*</span> )
+      Please fill-in all the required field (
+      <span style="color: red">*</span> )
     </ng-template>
     <ng-template pTemplate="content">
       <form class="mt-4" [formGroup]="personalForm">
         <div class="p-fluid formgrid grid">
-              <div class="field col-12 md:col-4">
-                <label class="mb-1" for="firstName">First Name<span style="color:red">*</span></label>
-                <input
-                  id="firstName"
-                  type="text"
-                  pInputText
-                  formControlName="firstName"
-                  [ngClass]="{
-                    'ng-dirty':
-                      personalForm.get('firstName')?.dirty &&
-                      personalForm.get('firstName')?.invalid
-                  }" />
-                <small
-                  *ngIf="
-                    personalForm.get('firstName')?.dirty &&
-                    personalForm.get('firstName')?.invalid
-                  "
-                  class="p-error"
-                  >Firstname is required.</small
-                >
-            </div>
-              <div class="field col-12 md:col-4">
-                <label class="mb-1" for="lastName">Last Name <span style="color:red">*</span></label>
-                <input
-                  id="lastName"
-                  type="text"
-                  pInputText
-                  formControlName="lastName"
-                  [ngClass]="{
-                    'ng-dirty':
-                      personalForm.get('lastName')?.dirty &&
-                      personalForm.get('lastName')?.invalid
-                  }" />
-                <small
-                  *ngIf="
-                    personalForm.get('lastName')?.dirty &&
-                    personalForm.get('lastName')?.invalid
-                  "
-                  class="p-error"
-                  >Last Name is required.</small
-                >
-            </div>
-            <div class="field col-12 md:col-4">
-              <label class="mb-1" for="middleName">Middle Name</label>
-              <input
-                id="middleName"
-                type="text"
-                pInputText 
-                formControlName="middleName"/>
-              </div>
-              <div class="field col-12 md:col-4">
-                <label class="mb-1" for="birthDate">Date of Birth<span style="color:red">*</span></label>
-                <p-calendar
-                inputId="icon"
-                id="birthDate"
-                formControlName="birthDate"
-                [ngClass]="{
-                  'ng-dirty':
-                    personalForm.get('birthDate')?.dirty &&
-                    personalForm.get('birthDate')?.invalid
-                }"></p-calendar>
-                <small
-                *ngIf="
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="firstName"
+              >First Name<span style="color: red">*</span></label
+            >
+            <input
+              id="firstName"
+              type="text"
+              pInputText
+              formControlName="firstName"
+              [ngClass]="{
+                'ng-dirty':
+                  personalForm.get('firstName')?.dirty &&
+                  personalForm.get('firstName')?.invalid
+              }" />
+            <small
+              *ngIf="
+                personalForm.get('firstName')?.dirty &&
+                personalForm.get('firstName')?.invalid
+              "
+              class="p-error"
+              >Firstname is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="lastName"
+              >Last Name <span style="color: red">*</span></label
+            >
+            <input
+              id="lastName"
+              type="text"
+              pInputText
+              formControlName="lastName"
+              [ngClass]="{
+                'ng-dirty':
+                  personalForm.get('lastName')?.dirty &&
+                  personalForm.get('lastName')?.invalid
+              }" />
+            <small
+              *ngIf="
+                personalForm.get('lastName')?.dirty &&
+                personalForm.get('lastName')?.invalid
+              "
+              class="p-error"
+              >Last Name is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="middleName">Middle Name</label>
+            <input
+              id="middleName"
+              type="text"
+              pInputText
+              formControlName="middleName" />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="birthDate"
+              >Date of Birth<span style="color: red">*</span></label
+            >
+            <p-calendar
+              inputId="icon"
+              id="birthDate"
+              formControlName="birthDate"
+              [ngClass]="{
+                'ng-dirty':
                   personalForm.get('birthDate')?.dirty &&
                   personalForm.get('birthDate')?.invalid
-                "
-                class="p-error"
-                >Date of Birth is required.</small
-                >
-              </div>
-              <div class="field col-12  md:col-4">
-                <label class="mb-1" for="age">Age<span style="color:red">*</span></label>
-                <p-inputMask
-                  id="age"
-                  mask="99"
-                  formControlName="age"
-                  [ngClass]="{
-                    'ng-dirty':
-                      personalForm.get('age')?.dirty &&
-                      personalForm.get('age')?.invalid
-                  }"></p-inputMask>
-                  <small
-                  *ngIf="
-                    personalForm.get('age')?.dirty &&
-                    personalForm.get('age')?.invalid
-                  "
-                  class="p-error"
-                  >Age is required.</small
-                  >
-              </div>
-              <div class="field col-12  md:col-4">
-                <label class="mb-1" for="gender">Gender<span style="color:red">*</span></label>
-              <p-dropdown
-                [options]="gender"
-                placeholder="Select Gender"
-                optionLabel="name"
-                [showClear]="true"
-                formControlName="gender"
-                [ngClass]="{
-                  'ng-dirty':
-                    personalForm.get('gender')?.dirty &&
-                    personalForm.get('gender')?.invalid
-                }"></p-dropdown>
-                <small
-                *ngIf="
+              }"></p-calendar>
+            <small
+              *ngIf="
+                personalForm.get('birthDate')?.dirty &&
+                personalForm.get('birthDate')?.invalid
+              "
+              class="p-error"
+              >Date of Birth is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="age"
+              >Age<span style="color: red">*</span></label
+            >
+            <p-inputMask
+              id="age"
+              mask="99"
+              formControlName="age"
+              [ngClass]="{
+                'ng-dirty':
+                  personalForm.get('age')?.dirty &&
+                  personalForm.get('age')?.invalid
+              }"></p-inputMask>
+            <small
+              *ngIf="
+                personalForm.get('age')?.dirty &&
+                personalForm.get('age')?.invalid
+              "
+              class="p-error"
+              >Age is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="gender"
+              >Gender<span style="color: red">*</span></label
+            >
+            <p-dropdown
+              [options]="gender"
+              placeholder="Select Gender"
+              optionLabel="name"
+              [showClear]="true"
+              formControlName="gender"
+              [ngClass]="{
+                'ng-dirty':
                   personalForm.get('gender')?.dirty &&
                   personalForm.get('gender')?.invalid
-                "
-                class="p-error"
-                >Gender is required.</small
-                >
-              </div>
-              <div class="field col-12">
-                <label class="mb-1" for="address">Address<span style="color:red">*</span></label>
-              <input
-                id="address"
-                type="text"
-                pInputText
-                formControlName="address"
-                placeholder="123 Your Street" 
-                [ngClass]="{
-                  'ng-dirty':
-                    personalForm.get('address')?.dirty &&
-                    personalForm.get('address')?.invalid
-                }"/>
-                <small
-                *ngIf="
+              }"></p-dropdown>
+            <small
+              *ngIf="
+                personalForm.get('gender')?.dirty &&
+                personalForm.get('gender')?.invalid
+              "
+              class="p-error"
+              >Gender is required.</small
+            >
+          </div>
+          <div class="field col-12">
+            <label class="mb-1" for="address"
+              >Address<span style="color: red">*</span></label
+            >
+            <input
+              id="address"
+              type="text"
+              pInputText
+              formControlName="address"
+              placeholder="123 Your Street"
+              [ngClass]="{
+                'ng-dirty':
                   personalForm.get('address')?.dirty &&
                   personalForm.get('address')?.invalid
-                "
-                class="p-error"
-                >Address is required.</small
-                >
-              </div>
-              <div class="field col-12 md:col-4">
-                <label class="mb-1" for="contactDetails"
-                >Contact Details<span style="color:red">*</span></label>
-              <p-inputMask
-                id="contactDetails"
-                mask="99999999999"
-                placeholder="09123456789"
-                formControlName="contactDetails"
-                [ngClass]="{
-                  'ng-dirty':
-                    personalForm.get('contactDetails')?.dirty &&
-                    personalForm.get('contactDetails')?.invalid
-                }"></p-inputMask>
-                <small
-                *ngIf="
+              }" />
+            <small
+              *ngIf="
+                personalForm.get('address')?.dirty &&
+                personalForm.get('address')?.invalid
+              "
+              class="p-error"
+              >Address is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="contactDetails"
+              >Contact Details<span style="color: red">*</span></label
+            >
+            <p-inputMask
+              id="contactDetails"
+              mask="99999999999"
+              placeholder="09123456789"
+              formControlName="contactDetails"
+              [ngClass]="{
+                'ng-dirty':
                   personalForm.get('contactDetails')?.dirty &&
                   personalForm.get('contactDetails')?.invalid
-                "
-                class="p-error"
-                >Contact Details is required.</small
-                >
-              </div>
-              <div class="field col-12 md:col-4">
-                <label class="small mb-1" for="email">Email Address</label>
-                <input
-                  id="email"
-                  type="text"
-                  pInputText
-                  formControlName="email"
-                  placeholder="sample@sample.com" />
-              </div>
-              <div class="field col-12 md:col-4">
-                <label class="mb-1" for="eMedicalRefNo"
-                >eMedical Ref No<span style="color:red">*</span></label
-              >
-              <input
-                id="eMedicalRefNo"
-                type="text"
-                pInputText
-                placeholder="123456"
-                formControlName="eMedicalRefNo" 
-                [ngClass]="{
-                  'ng-dirty':
-                    personalForm.get('eMedicalRefNo')?.dirty &&
-                    personalForm.get('eMedicalRefNo')?.invalid
-                }"/>
-                <small
-                *ngIf="
+              }"></p-inputMask>
+            <small
+              *ngIf="
+                personalForm.get('contactDetails')?.dirty &&
+                personalForm.get('contactDetails')?.invalid
+              "
+              class="p-error"
+              >Contact Details is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="small mb-1" for="email">Email Address</label>
+            <input
+              id="email"
+              type="text"
+              pInputText
+              formControlName="email"
+              placeholder="sample@sample.com" />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="eMedicalRefNo"
+              >eMedical Ref No<span style="color: red">*</span></label
+            >
+            <input
+              id="eMedicalRefNo"
+              type="text"
+              pInputText
+              placeholder="123456"
+              formControlName="eMedicalRefNo"
+              [ngClass]="{
+                'ng-dirty':
                   personalForm.get('eMedicalRefNo')?.dirty &&
                   personalForm.get('eMedicalRefNo')?.invalid
-                "
-                class="p-error"
-                >Date of Birth is required.</small
-                >
-              </div>
+              }" />
+            <small
+              *ngIf="
+                personalForm.get('eMedicalRefNo')?.dirty &&
+                personalForm.get('eMedicalRefNo')?.invalid
+              "
+              class="p-error"
+              >Date of Birth is required.</small
+            >
+          </div>
         </div>
       </form>
     </ng-template>

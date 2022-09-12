@@ -16,6 +16,6 @@ export class ReviewComponent {
     this.router.navigate(['register/xrayRequisition']);
   }
   nextPage() {
-    this.router.navigate(['/register/review'])
-}
+    this.router.navigate(['/register/review']);
+  }
 }
