@@ -19,6 +19,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
+import { InputMaskModule } from "primeng/inputmask";
 
 @NgModule({
   declarations: [],
@@ -58,6 +59,7 @@ import { CardModule } from 'primeng/card';
     DropdownModule,
     StepsModule,
     CardModule,
+    InputMaskModule,
   ],
 })
 export class PrimeNgModule {}

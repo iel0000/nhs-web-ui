@@ -1,1 +1,46 @@
-<p>lab-requisition works!</p>
+<div class="stepsdemo-content mt-4">
+    <p-card>
+      <ng-template pTemplate="title"> Laboratory Requisition</ng-template>
+      <ng-template pTemplate="subtitle">
+        Select Laboratory Requisition
+      </ng-template>
+      <ng-template pTemplate="content">
+        <form>
+            <div class="p-fluid formgrid grid">
+              <div class="field-checkbox col-12 md:col-6">       
+                <p-checkbox name="labRequisition" value="AE Package - HIV, Urinalysis" [(ngModel)]="labTest" inputId="aep"></p-checkbox>
+                <label for="aep">AE Package - HIV, Urinalysis</label>
+              </div>
+              <div class="field-checkbox col-12 md:col-6"> 
+                <p-checkbox name="labRequisition" value="CE Package - HIV, VDRL/RPR, Creatinine, Urinalysis" [(ngModel)]="labTest" inputId="cep"></p-checkbox>
+                <label for="cep">CE Package - HIV, VDRL/RPR, Creatinine, Urinalysis</label>
+              </div>
+              <div class="field-checkbox col-12 md:col-6"> 
+                <p-checkbox name="labRequisition" value="NZ Package - VDRL, HIV, HBSag, Anti-HCV, FBC, HBA1c, Creatine w/ eGFR, Urinalysis" [(ngModel)]="labTest" inputId="nzp"></p-checkbox>
+                <label for="nzp">NZ Package - VDRL, HIV, HBSag, Anti-HCV, FBC, HBA1c, Creatine w/ eGFR, Urinalysis</label>
+              </div>
+              <div class="field-checkbox col-12 md:col-6"> 
+                <p-checkbox name="labRequisition" value="NZ Limited -FBC, Creatinine w/eGFR" [(ngModel)]="labTest" inputId="nzl"></p-checkbox>
+                <label for="nzl">NZ Limited -FBC, Creatinine w/eGFR</label>
+              </div>
+              <div class="field-checkbox col-12 md:col-6"> 
+                <p-checkbox name="labRequisition" value="Urinalysis" [(ngModel)]="labTest" inputId="urinalysis"></p-checkbox>
+                <label for="urinalysis">Urinalysis</label>
+              </div>
+              <div class="field-checkbox col-12 md:col-6"> 
+                <p-checkbox name="labRequisition" value="IGRA'" [(ngModel)]="labTest" inputId="igra"></p-checkbox>
+                <label for="igra">IGRA</label>
+              </div>
+              <div class="field-checkbox col-12 md:col-4"> 
+                <p-checkbox name="labRequisition" value="Others" [(ngModel)]="labTest" inputId="others"></p-checkbox>
+                <label for="others">Others</label>
+              </div>
+            </div>
+        </form>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <button class="btn btn-primary" (click)="back()">Back</button>
+        <button style="float:right;"class="btn btn-primary" (click)="nextPage()">Next</button>
+      </ng-template>
+    </p-card>
+</div>
