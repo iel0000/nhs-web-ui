@@ -5,19 +5,18 @@ import { take } from 'rxjs';
 import { selectRecord } from '../store';
 
 @Component({
-  selector: 'app-lab-requisition',
-  templateUrl: './lab-requisition.component.html',
-  styleUrls: ['./lab-requisition.component.scss'],
+  selector: 'app-xray-requisition',
+  templateUrl: './xray-requisition.component.html',
+  styleUrls: ['./xray-requisition.component.scss'],
 })
-export class LabRequisitionComponent {
-  labTest: string[] = [];
+export class XrayRequisitionComponent {
+  xray: string[] = [];
   constructor(private store: Store, private router: Router) {}
 
   back() {
-    this.router.navigate(['register/visaInfo']);
+    this.router.navigate(['register/labRequisition']);
   }
   nextPage() {
-    this.router.navigate(['register/xrayRequisition'])
+    this.router.navigate(['/register/review']);
   }
 }
-

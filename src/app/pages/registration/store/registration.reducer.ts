@@ -6,6 +6,19 @@ export const initialState: IRegistration = {
   personalInformation: {
     firstName: '',
     lastName: '',
+    middleName: '',
+    birthDate: '',
+    age: '',
+    gender: '',
+    address: '',
+    contactDetails: '',
+    email: '',
+    eMedicalRefNo: '',
+  },
+  visaInformation: {
+    embassy: '',
+    visaType: '',
+    visaCategory: '',
   },
 };
 

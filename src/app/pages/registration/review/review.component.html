@@ -1,1 +1,95 @@
-<p>review works!</p>
+<div class="stepsdemo-content mt-4">
+  <p-card>
+    <ng-template pTemplate="title"> Confirmation</ng-template>
+    <ng-template pTemplate="subtitle"> Reviewing Details </ng-template>
+    <ng-template pTemplate="content">
+      <form>
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12">
+            <h4>Personal Information</h4>
+          </div>
+
+          <div class="field col-12 md:col-4">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="lastName">last Name</label>
+            <input id="lastName" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="middleName">Middle Name</label>
+            <input id="middleName" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="dob">Date of Birth</label>
+            <input id="dob" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="age">Age</label>
+            <input id="age" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="gender">Gender</label>
+            <input id="gender" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12">
+            <label for="address">Address</label>
+            <input id="address" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="contactDetails">Contact Details</label>
+            <input id="contactDetails" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="email">Email Address</label>
+            <input id="email" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="eMedicalRefNo">eMedical Ref No</label>
+            <input id="eMedicalRefNo" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12">
+            <h4>VISA Information</h4>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="embassy"> Embassy</label>
+            <input id="embassy" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="visaType">Visa Type</label>
+            <input id="visaType" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-4">
+            <label for="visaCategory">Visa Category</label>
+            <input id="visaCategory" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12">
+            <h4>Laboratory Requisition</h4>
+          </div>
+          <div class="field col-12">
+            <label for="labTest">Laboratory Test</label>
+            <input id="labTest" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12">
+            <h4>XRAY Requisition</h4>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="lmp">LMP</label>
+            <input id="lmp" type="text" disabled pInputText />
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="xray">XRAY Test</label>
+            <input id="xray" type="text" disabled pInputText />
+          </div>
+        </div>
+      </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button class="btn btn-primary" (click)="back()">Back</button>
+      <button style="float: right" class="btn btn-primary" (click)="nextPage()">
+        Complete
+      </button>
+    </ng-template>
+  </p-card>
+</div>

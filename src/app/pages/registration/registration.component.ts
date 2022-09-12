@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Gender } from '@app/shared/constants/gender';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 
@@ -11,8 +10,6 @@ import { MenuItem } from 'primeng/api';
 })
 export class RegistrationComponent {
   items: MenuItem[];
-
-  gender = Gender;
 
   constructor(private formBuilder: FormBuilder, private store: Store) {
     this.items = [
