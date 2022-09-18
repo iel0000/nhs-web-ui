@@ -19,12 +19,14 @@
               formControlName="firstName"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('firstName')?.dirty &&
+                  (personalForm.get('firstName')?.dirty ||
+                    personalForm.get('firstName')?.touched) &&
                   personalForm.get('firstName')?.invalid
               }" />
             <small
               *ngIf="
-                personalForm.get('firstName')?.dirty &&
+                (personalForm.get('firstName')?.dirty ||
+                  personalForm.get('firstName')?.touched) &&
                 personalForm.get('firstName')?.invalid
               "
               class="p-error"
@@ -42,12 +44,14 @@
               formControlName="lastName"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('lastName')?.dirty &&
+                  (personalForm.get('lastName')?.dirty ||
+                    personalForm.get('lastName')?.touched) &&
                   personalForm.get('lastName')?.invalid
               }" />
             <small
               *ngIf="
-                personalForm.get('lastName')?.dirty &&
+                (personalForm.get('lastName')?.dirty ||
+                  personalForm.get('lastName')?.touched) &&
                 personalForm.get('lastName')?.invalid
               "
               class="p-error"
@@ -55,12 +59,29 @@
             >
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="middleName">Middle Name</label>
+            <label class="mb-1" for="middleName"
+              >Middle Name <span style="color: red">*</span></label
+            >
             <input
               id="middleName"
               type="text"
               pInputText
-              formControlName="middleName" />
+              formControlName="middleName"
+              [ngClass]="{
+                'ng-dirty':
+                  (personalForm.get('middleName')?.dirty ||
+                    personalForm.get('middleName')?.touched) &&
+                  personalForm.get('middleName')?.invalid
+              }" />
+            <small
+              *ngIf="
+                (personalForm.get('middleName')?.dirty ||
+                  personalForm.get('middleName')?.touched) &&
+                personalForm.get('middleName')?.invalid
+              "
+              class="p-error"
+              >Middle Name is required.</small
+            >
           </div>
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="birthDate"
@@ -72,12 +93,14 @@
               formControlName="birthDate"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('birthDate')?.dirty &&
+                  (personalForm.get('birthDate')?.dirty ||
+                    personalForm.get('birthDate')?.touched) &&
                   personalForm.get('birthDate')?.invalid
               }"></p-calendar>
             <small
               *ngIf="
-                personalForm.get('birthDate')?.dirty &&
+                (personalForm.get('birthDate')?.dirty ||
+                  personalForm.get('birthDate')?.touched) &&
                 personalForm.get('birthDate')?.invalid
               "
               class="p-error"
@@ -94,12 +117,14 @@
               formControlName="age"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('age')?.dirty &&
+                  (personalForm.get('age')?.dirty ||
+                    personalForm.get('age')?.touched) &&
                   personalForm.get('age')?.invalid
               }"></p-inputMask>
             <small
               *ngIf="
-                personalForm.get('age')?.dirty &&
+                (personalForm.get('age')?.dirty ||
+                  personalForm.get('age')?.touched) &&
                 personalForm.get('age')?.invalid
               "
               class="p-error"
@@ -118,12 +143,14 @@
               formControlName="gender"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('gender')?.dirty &&
+                  (personalForm.get('gender')?.dirty ||
+                    personalForm.get('gender')?.touched) &&
                   personalForm.get('gender')?.invalid
               }"></p-dropdown>
             <small
               *ngIf="
-                personalForm.get('gender')?.dirty &&
+                (personalForm.get('gender')?.dirty ||
+                  personalForm.get('gender')?.touched) &&
                 personalForm.get('gender')?.invalid
               "
               class="p-error"
@@ -142,12 +169,14 @@
               placeholder="123 Your Street"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('address')?.dirty &&
+                  (personalForm.get('address')?.dirty ||
+                    personalForm.get('address')?.touched) &&
                   personalForm.get('address')?.invalid
               }" />
             <small
               *ngIf="
-                personalForm.get('address')?.dirty &&
+                (personalForm.get('address')?.dirty ||
+                  personalForm.get('address')?.touched) &&
                 personalForm.get('address')?.invalid
               "
               class="p-error"
@@ -165,12 +194,14 @@
               formControlName="contactDetails"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('contactDetails')?.dirty &&
+                  (personalForm.get('contactDetails')?.dirty ||
+                    personalForm.get('contactDetails')?.touched) &&
                   personalForm.get('contactDetails')?.invalid
               }"></p-inputMask>
             <small
               *ngIf="
-                personalForm.get('contactDetails')?.dirty &&
+                (personalForm.get('contactDetails')?.dirty ||
+                  personalForm.get('contactDetails')?.touched) &&
                 personalForm.get('contactDetails')?.invalid
               "
               class="p-error"
@@ -184,7 +215,23 @@
               type="text"
               pInputText
               formControlName="email"
-              placeholder="sample@sample.com" />
+              placeholder="sample@sample.com"
+              (keypress)="validateEmail($event)"
+              [ngClass]="{
+                'ng-dirty':
+                  (personalForm.get('email')?.dirty ||
+                    personalForm.get('email')?.touched) &&
+                  personalForm.get('email')?.invalid
+              }" />
+            <small
+              *ngIf="
+                (personalForm.get('email')?.dirty ||
+                  personalForm.get('email')?.touched) &&
+                personalForm.get('email')?.invalid
+              "
+              class="p-error"
+              >Invalid Email Format.</small
+            >
           </div>
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="eMedicalRefNo"
@@ -198,12 +245,14 @@
               formControlName="eMedicalRefNo"
               [ngClass]="{
                 'ng-dirty':
-                  personalForm.get('eMedicalRefNo')?.dirty &&
+                  (personalForm.get('eMedicalRefNo')?.dirty ||
+                    personalForm.get('eMedicalRefNo')?.touched) &&
                   personalForm.get('eMedicalRefNo')?.invalid
               }" />
             <small
               *ngIf="
-                personalForm.get('eMedicalRefNo')?.dirty &&
+                (personalForm.get('eMedicalRefNo')?.dirty ||
+                  personalForm.get('eMedicalRefNo')?.touched) &&
                 personalForm.get('eMedicalRefNo')?.invalid
               "
               class="p-error"

@@ -13,7 +13,6 @@ import { Gender } from '@app/shared/constants/gender';
   styleUrls: ['./personal.component.scss'],
 })
 export class PersonalComponent implements OnInit {
-  submitted: boolean = false;
   personalForm: FormGroup;
   gender = Gender;
   constructor(
@@ -22,16 +21,16 @@ export class PersonalComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.personalForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      middleName: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      age: ['', Validators.required],
-      gender: ['', Validators.required],
-      contactDetails: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      middleName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      birthDate: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      age: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      gender: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      contactDetails: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       email: '',
-      address: ['', Validators.required],
-      eMedicalRefNo: ['', Validators.required],
+      address: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      eMedicalRefNo: ['', [Validators.required, Validators.pattern(/[\S]/)]],
     });
   }
 
@@ -65,7 +64,13 @@ export class PersonalComponent implements OnInit {
       this.router.navigate(['register/visaInfo']);
       return;
     }
+  }
 
-    this.submitted = true;
+  validateEmail($event: Event) {
+    if ($event) {
+      this.personalForm.get('email')?.addValidators(Validators.email);
+    } else {
+      this.personalForm.get('email')?.removeValidators;
+    }
   }
 }

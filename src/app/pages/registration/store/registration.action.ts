@@ -8,7 +8,13 @@ export const UpdatePersonalInformation = createAction(
   '[Personal Component] Update Personal Information',
   props<{ payload: IPersonalInformation }>()
 );
+
 export const UpdateVisaInformation = createAction(
   '[Visa Info Component] Update Visa Information',
   props<{ payload: IVisaInformation }>()
+);
+
+export const UpdateLabRequisition = createAction(
+  '[Lab Requisition Component] Update Lab Requisition',
+  props<{ payload: string[] }>()
 );

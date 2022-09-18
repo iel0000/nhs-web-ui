@@ -5,8 +5,8 @@
       Select Laboratory Requisition
     </ng-template>
     <ng-template pTemplate="content">
-      <form>
-        <div class="p-fluid formgrid grid">
+      <!-- <form> -->
+      <!-- <div class="p-fluid formgrid grid">
           <div class="field-checkbox col-12 md:col-6">
             <p-checkbox
               name="labRequisition"
@@ -68,8 +68,20 @@
               inputId="others"></p-checkbox>
             <label for="others">Others</label>
           </div>
+        </div> -->
+      <div class="p-fluid formgrid grid">
+        <div
+          *ngFor="let choice of items; let i = index"
+          class="field-checkbox col-12 md:col-6">
+          <p-checkbox
+            name="labRequisition"
+            [value]="choice.value"
+            [inputId]="choice.value"
+            [(ngModel)]="labTest"></p-checkbox>
+          <label [for]="choice.value"> {{ choice.description }}</label>
         </div>
-      </form>
+      </div>
+      <!-- </form> -->
     </ng-template>
     <ng-template pTemplate="footer">
       <button class="btn btn-primary" (click)="back()">Back</button>

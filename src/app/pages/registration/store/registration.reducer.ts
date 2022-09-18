@@ -20,6 +20,7 @@ export const initialState: IRegistration = {
     visaType: '',
     visaCategory: '',
   },
+  labRequisition: [],
 };
 
 export const registrationPageReducer = createReducer(
@@ -28,6 +29,18 @@ export const registrationPageReducer = createReducer(
     RegistrationPageActions.UpdatePersonalInformation,
     (state, { payload }): IRegistration => {
       return { ...state, personalInformation: payload };
+    }
+  ),
+  on(
+    RegistrationPageActions.UpdateVisaInformation,
+    (state, { payload }): IRegistration => {
+      return { ...state, visaInformation: payload };
+    }
+  ),
+  on(
+    RegistrationPageActions.UpdateLabRequisition,
+    (state, { payload }): IRegistration => {
+      return { ...state, labRequisition: payload };
     }
   )
 );

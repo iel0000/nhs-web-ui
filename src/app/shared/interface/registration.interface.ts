@@ -1,6 +1,7 @@
 export interface IRegistration {
   personalInformation: IPersonalInformation;
   visaInformation: IVisaInformation;
+  labRequisition: string[];
 }
 
 export interface IPersonalInformation {
@@ -15,6 +16,7 @@ export interface IPersonalInformation {
   email: string;
   eMedicalRefNo: string;
 }
+
 export interface IVisaInformation {
   embassy: string;
   visaType: string;
