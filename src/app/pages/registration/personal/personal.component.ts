@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IPersonalInformation } from '@app/shared/interface/registration.interface';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { selectRecord, UpdatePersonalInformation } from '../store';
 import { Gender } from '@app/shared/constants/gender';
 
@@ -12,9 +12,12 @@ import { Gender } from '@app/shared/constants/gender';
   templateUrl: './personal.component.html',
   styleUrls: ['./personal.component.scss'],
 })
-export class PersonalComponent implements OnInit {
+export class PersonalComponent implements OnInit, OnDestroy {
   personalForm: FormGroup;
   gender = Gender;
+
+  private ngUnsubscribe = new Subject<void>();
+
   constructor(
     private store: Store,
     private router: Router,
@@ -37,7 +40,7 @@ export class PersonalComponent implements OnInit {
   ngOnInit(): void {
     this.store
       .select(selectRecord)
-      .pipe(take(1))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(s => {
         this.personalForm.patchValue({
           firstName: s.personalInformation.firstName,
@@ -52,6 +55,11 @@ export class PersonalComponent implements OnInit {
           eMedicalRefNo: s.personalInformation.eMedicalRefNo,
         });
       });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   nextPage() {

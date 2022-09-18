@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IChoices } from '@app/shared/interface';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { selectRecord, UpdateLabRequisition } from '../store';
 
 @Component({
@@ -11,8 +11,10 @@ import { selectRecord, UpdateLabRequisition } from '../store';
   templateUrl: './lab-requisition.component.html',
   styleUrls: ['./lab-requisition.component.scss'],
 })
-export class LabRequisitionComponent {
+export class LabRequisitionComponent implements OnInit, OnDestroy{
   labTest: string[] = [];
+
+  private ngUnsubscribe = new Subject<void>();
 
   items: Array<IChoices> = [
     { description: 'AE Package - HIV, Urinalysis', value: '1' },
@@ -36,9 +38,13 @@ export class LabRequisitionComponent {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
+    
+  }  
+
+  ngOnInit(): void {
     this.store
       .select(selectRecord)
-      .pipe(take(1))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(s => {
         if (!s.personalInformation.firstName) {
           this.router.navigate(['register/personal']);
@@ -47,6 +53,11 @@ export class LabRequisitionComponent {
 
         this.labTest = s.labRequisition;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   back() {

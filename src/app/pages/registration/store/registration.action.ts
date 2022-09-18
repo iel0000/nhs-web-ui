@@ -9,6 +9,10 @@ export const UpdatePersonalInformation = createAction(
   props<{ payload: IPersonalInformation }>()
 );
 
+export const ResetRegistrationForm = createAction(
+  '[Personal Component] Reset RegistrationForm'
+)
+
 export const UpdateVisaInformation = createAction(
   '[Visa Info Component] Update Visa Information',
   props<{ payload: IVisaInformation }>()
