@@ -45,7 +45,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:44370'],
+        allowedDomains: ['localhost:44370', 'stage-webapi.nationwidehealthsystems.com'],
         disallowedRoutes: [],
       },
     }),
