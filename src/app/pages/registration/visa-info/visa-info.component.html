@@ -17,6 +17,7 @@
               optionLabel="name"
               [showClear]="true"
               formControlName="embassy"
+              optionValue="code"
               [ngClass]="{
                 'ng-dirty':
                   visaForm.get('embassy')?.dirty &&
@@ -41,6 +42,7 @@
               optionLabel="name"
               [showClear]="true"
               formControlName="visaType"
+              optionValue="code"
               [ngClass]="{
                 'ng-dirty':
                   visaForm.get('visaType')?.dirty &&
@@ -65,6 +67,7 @@
               optionLabel="name"
               [showClear]="true"
               formControlName="visaCategory"
+              optionValue="code"
               [ngClass]="{
                 'ng-dirty':
                   visaForm.get('visaCategory')?.dirty &&

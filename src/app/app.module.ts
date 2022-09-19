@@ -16,6 +16,11 @@ import {
 } from '@app/pages/registration';
 import { StoreModule } from '@ngrx/store';
 import { registrationPageReducer } from '@app/pages/registration/store';
+import { JwtModule } from "@auth0/angular-jwt";
+
+export function tokenGetter() { 
+  return localStorage.getItem("jwt"); 
+}
 
 @NgModule({
   declarations: [
@@ -37,6 +42,13 @@ import { registrationPageReducer } from '@app/pages/registration/store';
     HttpClientModule,
     FormsModule,
     StoreModule.forRoot({ registration: registrationPageReducer }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:44370"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

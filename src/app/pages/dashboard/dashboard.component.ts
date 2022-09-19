@@ -1,4 +1,6 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '@environments/environment';
 import { faBars, faBell, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,10 +15,16 @@ export class DashboardComponent implements OnInit {
   faChartLine = faChartLine;
 
   pageTitle: string | undefined;
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.pageTitle = 'Home';
+
+    this.http.get(`${environment.apiUrl}/api/Client/GetEmbassies`)
+    .subscribe({
+      next: (result: any) => console.log(result),
+      error: (err: HttpErrorResponse) => console.log(err)
+    })
   }
 
   // toggleNavbar(){

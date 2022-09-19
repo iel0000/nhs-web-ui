@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IChoices } from '@app/shared/interface';
 import { IPersonalInformation, IRegistration, IVisaInformation } from '@app/shared/interface/registration.interface';
+import { HttpService } from '@app/shared/services';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
+import { RegistrationService } from '../registration.service';
 import { selectRecord } from '../store';
 
 @Component({
@@ -32,7 +34,7 @@ export class ReviewComponent implements OnInit {
     { description: 'Others', value: '7' },
   ];
 
-  constructor(private store: Store, private router: Router) {
+  constructor(private store: Store, private router: Router, private registrationSvc: RegistrationService, private httpService: HttpService) {
 
     this.reviewForm = {
       personalInformation: {
@@ -83,7 +85,10 @@ export class ReviewComponent implements OnInit {
     this.router.navigate(['register/xrayRequisition']);
   }
 
-  nextPage() {
-    this.router.navigate(['/register/review']);
+  saveRecord() {
+    this.httpService.post('Client/SaveClientForm', this.reviewForm).subscribe(response => {
+      console.log(response);
+      this.router.navigate(['register']);
+    })
   }
 }

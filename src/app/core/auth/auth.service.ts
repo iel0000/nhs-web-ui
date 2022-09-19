@@ -29,11 +29,13 @@ export class AuthenticationService {
         password,
       })
       .pipe(
-        map(user => {
+        map(response => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
+          localStorage.setItem('currentUser', JSON.stringify(response));
+          const token = response.token;
+          localStorage.setItem("jwt", token);
+          this.currentUserSubject.next(response);
+          return response;
         })
       );
   }
@@ -41,6 +43,7 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem("jwt");
     this.currentUserSubject.next(null);
   }
 
