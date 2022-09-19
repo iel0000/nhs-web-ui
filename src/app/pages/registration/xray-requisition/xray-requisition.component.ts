@@ -9,9 +9,21 @@ import { selectRecord } from '../store';
   templateUrl: './xray-requisition.component.html',
   styleUrls: ['./xray-requisition.component.scss'],
 })
-export class XrayRequisitionComponent {
+export class XrayRequisitionComponent implements OnInit {
   xray: string[] = [];
   constructor(private store: Store, private router: Router) {}
+
+  ngOnInit(): void {
+    this.store
+      .select(selectRecord)
+      .pipe(take(1))
+      .subscribe(s => {
+        if (!s.personalInformation.firstName) {
+          this.router.navigate(['register/personal']);
+          return;
+        }
+      });
+  }
 
   back() {
     this.router.navigate(['register/labRequisition']);

@@ -82,6 +82,12 @@ export class ReviewComponent implements OnInit {
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
+
+        if (!s.personalInformation.firstName) {
+          this.router.navigate(['register/personal']);
+          return;
+        }
+        
         this.reviewForm.personalInformation = s.personalInformation;
         this.reviewForm.labRequisition = s.labRequisition;
         this.reviewForm.visaInformation = s.visaInformation;
