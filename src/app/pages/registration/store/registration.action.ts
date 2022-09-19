@@ -11,7 +11,7 @@ export const UpdatePersonalInformation = createAction(
 
 export const ResetRegistrationForm = createAction(
   '[Personal Component] Reset RegistrationForm'
-)
+);
 
 export const UpdateVisaInformation = createAction(
   '[Visa Info Component] Update Visa Information',

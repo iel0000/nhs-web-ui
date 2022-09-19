@@ -20,11 +20,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.pageTitle = 'Home';
 
-    this.http.get(`${environment.apiUrl}/api/Client/GetEmbassies`)
-    .subscribe({
+    this.http.get(`${environment.apiUrl}/api/Client/GetEmbassies`).subscribe({
       next: (result: any) => console.log(result),
-      error: (err: HttpErrorResponse) => console.log(err)
-    })
+      error: (err: HttpErrorResponse) => console.log(err),
+    });
   }
 
   // toggleNavbar(){

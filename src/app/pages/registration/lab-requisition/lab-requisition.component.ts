@@ -11,7 +11,7 @@ import { selectRecord, UpdateLabRequisition } from '../store';
   templateUrl: './lab-requisition.component.html',
   styleUrls: ['./lab-requisition.component.scss'],
 })
-export class LabRequisitionComponent implements OnInit, OnDestroy{
+export class LabRequisitionComponent implements OnInit, OnDestroy {
   labTest: string[] = [];
 
   private ngUnsubscribe = new Subject<void>();
@@ -37,9 +37,7 @@ export class LabRequisitionComponent implements OnInit, OnDestroy{
     private store: Store,
     private router: Router,
     private formBuilder: FormBuilder
-  ) {
-    
-  }  
+  ) {}
 
   ngOnInit(): void {
     this.store

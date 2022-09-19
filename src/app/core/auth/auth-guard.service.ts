@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService, 
+    private authenticationService: AuthenticationService,
     private jwtHelper: JwtHelperService
   ) {}
 
@@ -26,8 +26,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   ) {
     if (this.authenticationService.isAuthenticated()) {
       // logged in so return true
-      const token = localStorage.getItem("jwt");
-      if (token && !this.jwtHelper.isTokenExpired(token)){
+      const token = localStorage.getItem('jwt');
+      if (token && !this.jwtHelper.isTokenExpired(token)) {
         return true;
       }
     }

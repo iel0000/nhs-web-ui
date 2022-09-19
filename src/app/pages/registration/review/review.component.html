@@ -11,11 +11,21 @@
 
           <div class="field col-12 md:col-4">
             <label for="firstName">First Name</label>
-            <input id="firstName" type="text" disabled pInputText [value]="personalInformation.firstName"/>
+            <input
+              id="firstName"
+              type="text"
+              disabled
+              pInputText
+              [value]="personalInformation.firstName" />
           </div>
           <div class="field col-12 md:col-4">
             <label for="lastName">last Name</label>
-            <input id="lastName" type="text" disabled pInputText [value]="personalInformation.lastName"/>
+            <input
+              id="lastName"
+              type="text"
+              disabled
+              pInputText
+              [value]="personalInformation.lastName" />
           </div>
           <div class="field col-12 md:col-4">
             <label for="middleName">Middle Name</label>
@@ -87,7 +97,10 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <button class="btn btn-primary" (click)="back()">Back</button>
-      <button style="float: right" class="btn btn-primary" (click)="saveRecord()">
+      <button
+        style="float: right"
+        class="btn btn-primary"
+        (click)="saveRecord()">
         Complete
       </button>
     </ng-template>

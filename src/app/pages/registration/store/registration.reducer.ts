@@ -43,11 +43,15 @@ export const registrationPageReducer = createReducer(
       return { ...state, labRequisition: payload };
     }
   ),
-  on(RegistrationPageActions.ResetRegistrationForm,
-    (state): IRegistration => {
-      let personalInformation = initialState.personalInformation
-      let visaInformation = initialState.visaInformation
-      
-      return { ...state, personalInformation: personalInformation,visaInformation: visaInformation, labRequisition: []}
-    })
+  on(RegistrationPageActions.ResetRegistrationForm, (state): IRegistration => {
+    let personalInformation = initialState.personalInformation;
+    let visaInformation = initialState.visaInformation;
+
+    return {
+      ...state,
+      personalInformation: personalInformation,
+      visaInformation: visaInformation,
+      labRequisition: [],
+    };
+  })
 );

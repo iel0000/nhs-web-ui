@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IChoices } from '@app/shared/interface';
-import { IPersonalInformation, IRegistration, IVisaInformation } from '@app/shared/interface/registration.interface';
+import {
+  IPersonalInformation,
+  IRegistration,
+  IVisaInformation,
+} from '@app/shared/interface/registration.interface';
 import { HttpService } from '@app/shared/services';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
@@ -14,7 +18,6 @@ import { selectRecord } from '../store';
   styleUrls: ['./review.component.scss'],
 })
 export class ReviewComponent implements OnInit {
-
   reviewForm!: IRegistration;
 
   labItems: Array<IChoices> = [
@@ -34,8 +37,12 @@ export class ReviewComponent implements OnInit {
     { description: 'Others', value: '7' },
   ];
 
-  constructor(private store: Store, private router: Router, private registrationSvc: RegistrationService, private httpService: HttpService) {
-
+  constructor(
+    private store: Store,
+    private router: Router,
+    private registrationSvc: RegistrationService,
+    private httpService: HttpService
+  ) {
     this.reviewForm = {
       personalInformation: {
         firstName: '',
@@ -55,7 +62,7 @@ export class ReviewComponent implements OnInit {
         visaCategory: '',
       },
       labRequisition: [],
-    }
+    };
   }
 
   get personalInformation(): IPersonalInformation {
@@ -75,9 +82,9 @@ export class ReviewComponent implements OnInit {
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
-          this.reviewForm.personalInformation = s.personalInformation
-          this.reviewForm.labRequisition = s.labRequisition
-          this.reviewForm.visaInformation = s.visaInformation
+        this.reviewForm.personalInformation = s.personalInformation;
+        this.reviewForm.labRequisition = s.labRequisition;
+        this.reviewForm.visaInformation = s.visaInformation;
       });
   }
 
@@ -86,9 +93,11 @@ export class ReviewComponent implements OnInit {
   }
 
   saveRecord() {
-    this.httpService.post('Client/SaveClientForm', this.reviewForm).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['register']);
-    })
+    this.httpService
+      .post('Client/SaveClientForm', this.reviewForm)
+      .subscribe(response => {
+        console.log(response);
+        this.router.navigate(['register']);
+      });
   }
 }

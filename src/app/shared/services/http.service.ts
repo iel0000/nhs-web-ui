@@ -7,37 +7,46 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class HttpService {
-  constructor(private readonly httpClient: HttpClient,) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   get(entityName: string) {
-    var url = `${environment.apiUrl}/api/${entityName}`
-    return this.httpClient.get<any>(url).pipe(catchError(this.handleError))
+    var url = `${environment.apiUrl}/api/${entityName}`;
+    return this.httpClient.get<any>(url).pipe(catchError(this.handleError));
   }
 
   getAll(entityName: string) {
-    var url = `${environment.apiUrl}/api/${entityName}`
-    return this.httpClient.get<any[]>(url).pipe(catchError(this.handleError)
-    );
+    var url = `${environment.apiUrl}/api/${entityName}`;
+    return this.httpClient.get<any[]>(url).pipe(catchError(this.handleError));
   }
 
-  put(entityName: string, object: any, id: string, options: any = {}): Observable<any> {
+  put(
+    entityName: string,
+    object: any,
+    id: string,
+    options: any = {}
+  ): Observable<any> {
     const url = `${environment.apiUrl}/api/${entityName}/${id}`;
-    return this.httpClient.put<any>(url, object, options).pipe(catchError(this.handleError));
+    return this.httpClient
+      .put<any>(url, object, options)
+      .pipe(catchError(this.handleError));
   }
 
   post(entityName: string, object: any, options: any = {}): Observable<any> {
     const url = `${environment.apiUrl}/api/${entityName}`;
-    return this.httpClient.post<any>(url, object, options).pipe(catchError(this.handleError));
+    return this.httpClient
+      .post<any>(url, object, options)
+      .pipe(catchError(this.handleError));
   }
 
   delete(entityName: string, id: any, options: any = {}): Observable<any> {
     const url = `${environment.apiUrl}/api/${entityName}/${id}`;
-    return this.httpClient.delete<any>(url, options).pipe(catchError(this.handleError));
+    return this.httpClient
+      .delete<any>(url, options)
+      .pipe(catchError(this.handleError));
   }
 
-
   handleError(error: HttpErrorResponse) {
-    console.log(error)
+    console.log(error);
     return throwError(error);
   }
 }

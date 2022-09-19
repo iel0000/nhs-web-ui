@@ -11,11 +11,15 @@ import { ResetRegistrationForm } from './store';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
-  items: MenuItem[];  
-  private unsubscribe$ = new Subject<void>()
+export class RegistrationComponent implements OnInit, OnDestroy {
+  items: MenuItem[];
+  private unsubscribe$ = new Subject<void>();
 
-  constructor(private formBuilder: FormBuilder, private store: Store, private registrationSvc: RegistrationService ) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store,
+    private registrationSvc: RegistrationService
+  ) {
     this.items = [
       { label: 'Personal Info', routerLink: 'personal' },
       { label: 'Visa Info', routerLink: 'visaInfo' },
@@ -32,11 +36,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-		this.unsubscribe$.next()
-		this.unsubscribe$.complete()
-    this.store.dispatch(ResetRegistrationForm())
-		// this.store.dispatch() Reset state
-	}
-
-
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+    this.store.dispatch(ResetRegistrationForm());
+    // this.store.dispatch() Reset state
+  }
 }

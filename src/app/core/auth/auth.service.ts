@@ -33,7 +33,7 @@ export class AuthenticationService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(response));
           const token = response.token;
-          localStorage.setItem("jwt", token);
+          localStorage.setItem('jwt', token);
           this.currentUserSubject.next(response);
           return response;
         })
@@ -43,7 +43,7 @@ export class AuthenticationService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
     this.currentUserSubject.next(null);
   }
 

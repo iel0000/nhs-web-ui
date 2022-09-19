@@ -55,33 +55,38 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
         });
       });
 
-    this.getVisaCategories()
-    this.getVisaTypes()
-    this.getEmbassies()
-   
+    this.getVisaCategories();
+    this.getVisaTypes();
+    this.getEmbassies();
   }
-  
+
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
   getEmbassies() {
-    this.registrationSvc.embassyList$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(element => {
-      this.embassy = element;
-    })
+    this.registrationSvc.embassyList$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(element => {
+        this.embassy = element;
+      });
   }
 
   getVisaTypes() {
-    this.registrationSvc.visaType$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(element => {
-      this.visaType = element;
-    })
+    this.registrationSvc.visaType$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(element => {
+        this.visaType = element;
+      });
   }
 
   getVisaCategories() {
-    this.registrationSvc.visaCategory$.pipe(takeUntil(this.ngUnsubscribe)).subscribe(element => {
-      this.visaCategory = element;
-    })
+    this.registrationSvc.visaCategory$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(element => {
+        this.visaCategory = element;
+      });
   }
 
   back() {
