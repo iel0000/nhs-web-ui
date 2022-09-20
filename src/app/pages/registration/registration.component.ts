@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.registrationSvc.getEmbassies();
     this.registrationSvc.getVisaCategory();
     this.registrationSvc.getVisaType();
-    this.registrationSvc.getLabRequisitionItems()
+    this.registrationSvc.getLabRequisitionItems();
   }
 
   ngOnDestroy(): void {

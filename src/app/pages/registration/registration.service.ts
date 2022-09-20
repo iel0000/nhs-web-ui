@@ -42,8 +42,10 @@ export class RegistrationService {
   }
 
   getLabRequisitionItems() {
-    this.httpService.get('Client/GetLabRequisitionItems').subscribe(response => {
-      this._labRequisitionItems.next(response);
-    });
+    this.httpService
+      .get('Client/GetLabRequisitionItems')
+      .subscribe(response => {
+        this._labRequisitionItems.next(response);
+      });
   }
 }

@@ -23,10 +23,10 @@ export class ReviewComponent implements OnInit, OnDestroy {
 
   labItems: Array<IChoices> = [];
 
-  embassy: string | undefined
-  visaType: string | undefined
-  visaCategory: string | undefined
-  selectedLabRequisition: string[] = []
+  embassy: string | undefined;
+  visaType: string | undefined;
+  visaCategory: string | undefined;
+  selectedLabRequisition: string[] = [];
 
   constructor(
     private store: Store,
@@ -60,16 +60,15 @@ export class ReviewComponent implements OnInit, OnDestroy {
     return this.reviewForm.personalInformation;
   }
 
-
   get visaInformation(): IVisaInformation {
     return this.reviewForm.visaInformation;
   }
 
   get emailAddress(): string {
     if (this.personalInformation.email) {
-      return this.personalInformation.email
+      return this.personalInformation.email;
     }
-    return "-"
+    return '-';
   }
 
   ngOnInit(): void {
@@ -77,7 +76,6 @@ export class ReviewComponent implements OnInit, OnDestroy {
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
-
         if (!s.personalInformation.firstName) {
           this.router.navigate(['register/personal']);
           return;
@@ -99,25 +97,25 @@ export class ReviewComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
   getlabRequisition() {
-
     this.registrationSvc.labRequisitionItems$.subscribe(response => {
-      this.selectedLabRequisition = []
-      this.labItems = response.map((x): IChoices => ({
-        description: x.name,
-        value: x.code
-      }))
+      this.selectedLabRequisition = [];
+      this.labItems = response.map(
+        (x): IChoices => ({
+          description: x.name,
+          value: x.code,
+        })
+      );
       this.reviewForm.labRequisition.forEach(element => {
-        let labItem = this.labItems.find(x => x.value === element)
+        let labItem = this.labItems.find(x => x.value === element);
         if (labItem) {
-          this.selectedLabRequisition.push(labItem.description)
+          this.selectedLabRequisition.push(labItem.description);
         }
       });
 
       if (this.selectedLabRequisition.length === 0) {
-        this.selectedLabRequisition.push(" ")
+        this.selectedLabRequisition.push(' ');
       }
-    })
-
+    });
   }
 
   getEmbassies() {
@@ -125,7 +123,9 @@ export class ReviewComponent implements OnInit, OnDestroy {
       this.registrationSvc.embassyList$
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(element => {
-          this.embassy = element.find(x => x.code === this.visaInformation.embassy).name;
+          this.embassy = element.find(
+            x => x.code === this.visaInformation.embassy
+          ).name;
         });
     }
   }
@@ -135,7 +135,9 @@ export class ReviewComponent implements OnInit, OnDestroy {
       this.registrationSvc.visaType$
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(element => {
-          this.visaType = element.find(x => x.code === this.visaInformation.visaType).name;
+          this.visaType = element.find(
+            x => x.code === this.visaInformation.visaType
+          ).name;
         });
     }
   }
@@ -145,7 +147,9 @@ export class ReviewComponent implements OnInit, OnDestroy {
       this.registrationSvc.visaCategory$
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(element => {
-          this.visaCategory = element.find(x => x.code === this.visaInformation.visaCategory).name;
+          this.visaCategory = element.find(
+            x => x.code === this.visaInformation.visaCategory
+          ).name;
         });
     }
   }
@@ -162,5 +166,4 @@ export class ReviewComponent implements OnInit, OnDestroy {
         this.router.navigate(['register']);
       });
   }
-
 }

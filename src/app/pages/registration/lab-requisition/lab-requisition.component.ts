@@ -39,16 +39,18 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
         this.labTest = s.labRequisition;
       });
 
-      this.getLabItems()
+    this.getLabItems();
   }
 
   getLabItems() {
     this.registrationSvc.labRequisitionItems$.subscribe(response => {
-      this.items = response.map((x): IChoices => ({
-        description: x.name,
-        value: x.code
-      }))
-    })
+      this.items = response.map(
+        (x): IChoices => ({
+          description: x.name,
+          value: x.code,
+        })
+      );
+    });
   }
 
   ngOnDestroy(): void {

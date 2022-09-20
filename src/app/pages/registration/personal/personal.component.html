@@ -113,7 +113,8 @@
             <label class="mb-1" for="age"
               >Age<span style="color: red">*</span></label
             >
-            <input pInputText
+            <input
+              pInputText
               id="age"
               formControlName="age"
               [ngClass]="{
@@ -121,7 +122,8 @@
                   (personalForm.get('age')?.dirty ||
                     personalForm.get('age')?.touched) &&
                   personalForm.get('age')?.invalid
-              }" readonly />
+              }"
+              readonly />
             <small
               *ngIf="
                 (personalForm.get('age')?.dirty ||

@@ -10,7 +10,7 @@
 
         <div class="field col-12 md:col-4">
           <label for="firstName">First Name</label>
-          <div class="text-lg"> {{ personalInformation.firstName }}</div>
+          <div class="text-lg">{{ personalInformation.firstName }}</div>
         </div>
         <div class="field col-12 md:col-4">
           <label for="lastName">last Name</label>
@@ -69,7 +69,9 @@
         </div>
         <div class="field col-12">
           <div class="p-fluid formgrid grid">
-            <div *ngFor="let item of selectedLabRequisition" class="field-checkbox col-12 md:col-6 text-lg">
+            <div
+              *ngFor="let item of selectedLabRequisition"
+              class="field-checkbox col-12 md:col-6 text-lg">
               - {{ item }}
             </div>
           </div>
@@ -89,7 +91,10 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <button class="btn btn-primary" (click)="back()">Back</button>
-      <button style="float: right" class="btn btn-primary" (click)="saveRecord()">
+      <button
+        style="float: right"
+        class="btn btn-primary"
+        (click)="saveRecord()">
         Complete
       </button>
     </ng-template>
