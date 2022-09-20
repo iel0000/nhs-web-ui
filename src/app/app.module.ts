@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DashboardComponent, LoginComponent } from '@app/pages';
 import {
   RegistrationComponent,
@@ -18,6 +18,8 @@ import { StoreModule } from '@ngrx/store';
 import { registrationPageReducer } from '@app/pages/registration/store';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RegistrationListComponent } from './pages/registration-list/registration-list.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from '@core/interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -35,6 +37,7 @@ export function tokenGetter() {
     XrayRequisitionComponent,
     ReviewComponent,
     RegistrationListComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,13 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
