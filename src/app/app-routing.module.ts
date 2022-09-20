@@ -12,6 +12,7 @@ import {
   XrayRequisitionComponent,
   ReviewComponent,
 } from '@app/pages/registration';
+import { RegistrationListComponent } from './pages/registration-list/registration-list.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'registration-list',
+        component: RegistrationListComponent
       },
       {
         path: 'register',

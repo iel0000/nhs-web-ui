@@ -1,7 +1,7 @@
 import {
   IPersonalInformation,
   IVisaInformation,
-} from '@app/shared/interface/registration.interface';
+} from '@app/shared/interface';
 import { createAction, props } from '@ngrx/store';
 
 export const UpdatePersonalInformation = createAction(

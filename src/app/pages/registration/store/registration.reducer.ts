@@ -1,4 +1,4 @@
-import { IRegistration } from '@app/shared/interface/registration.interface';
+import { IRegistration } from '@app/shared/interface';
 import { createReducer, on } from '@ngrx/store';
 import * as RegistrationPageActions from './registration.action';
 

@@ -1,4 +1,4 @@
-import { IRegistration } from '@app/shared/interface/registration.interface';
+import { IRegistration } from '@app/shared/interface';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const selectRegistration =

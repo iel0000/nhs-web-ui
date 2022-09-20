@@ -11,6 +11,7 @@ import { LayoutComponent } from '../shared/layout/layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PrimeNgModule } from './primeng.module';
 import { MenuComponent } from './layout/menu/menu.component';
+import { TableComponent } from './component/table/table.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MenuComponent } from './layout/menu/menu.component';
     MenuComponent,
     SidebarComponent,
     LayoutComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { MenuComponent } from './layout/menu/menu.component';
     LayoutComponent,
     MenuComponent,
     MenuitemComponent,
+    TableComponent
   ],
 })
 export class SharedModule {}

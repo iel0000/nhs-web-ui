@@ -161,9 +161,9 @@ export class ReviewComponent implements OnInit, OnDestroy {
   saveRecord() {
     this.httpService
       .post('Client/SaveClientForm', this.reviewForm)
+      .pipe()
       .subscribe(response => {
-        console.log(response);
-        this.router.navigate(['register']);
+        this.router.navigate(['registration-list']);
       });
   }
 }

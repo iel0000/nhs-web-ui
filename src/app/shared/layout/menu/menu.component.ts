@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Register',
             icon: 'pi pi-fw pi-database',
-            routerLink: ['register'],
+            routerLink: ['registration-list'],
           },
         ],
       },

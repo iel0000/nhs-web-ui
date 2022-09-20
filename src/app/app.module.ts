@@ -17,6 +17,7 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { registrationPageReducer } from '@app/pages/registration/store';
 import { JwtModule } from '@auth0/angular-jwt';
+import { RegistrationListComponent } from './pages/registration-list/registration-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -33,6 +34,7 @@ export function tokenGetter() {
     LabRequisitionComponent,
     XrayRequisitionComponent,
     ReviewComponent,
+    RegistrationListComponent
   ],
   imports: [
     BrowserModule,
