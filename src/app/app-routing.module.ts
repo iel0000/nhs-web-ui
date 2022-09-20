@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'registration-list',
-        component: RegistrationListComponent
+        component: RegistrationListComponent,
       },
       {
         path: 'register',

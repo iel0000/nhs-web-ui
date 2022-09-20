@@ -1,3 +1,1 @@
-export interface IRegistrationTable {
-    
-}
+export interface IRegistrationTable {}

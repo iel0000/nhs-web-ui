@@ -20,7 +20,7 @@ import { TableComponent } from './component/table/table.component';
     MenuComponent,
     SidebarComponent,
     LayoutComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +40,7 @@ import { TableComponent } from './component/table/table.component';
     LayoutComponent,
     MenuComponent,
     MenuitemComponent,
-    TableComponent
+    TableComponent,
   ],
 })
 export class SharedModule {}

@@ -20,7 +20,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { InputMaskModule } from 'primeng/inputmask';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [],
@@ -41,7 +41,7 @@ import {TableModule} from 'primeng/table';
     DropdownModule,
     StepsModule,
     CardModule,
-    TableModule
+    TableModule,
   ],
   providers: [],
   exports: [
@@ -62,7 +62,7 @@ import {TableModule} from 'primeng/table';
     StepsModule,
     CardModule,
     InputMaskModule,
-    TableModule
+    TableModule,
   ],
 })
 export class PrimeNgModule {}

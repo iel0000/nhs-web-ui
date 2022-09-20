@@ -34,7 +34,7 @@ export function tokenGetter() {
     LabRequisitionComponent,
     XrayRequisitionComponent,
     ReviewComponent,
-    RegistrationListComponent
+    RegistrationListComponent,
   ],
   imports: [
     BrowserModule,
