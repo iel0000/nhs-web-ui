@@ -5,11 +5,13 @@
     <ng-template pTemplate="content">
       <form>
         <div class="p-fluid formgrid grid">
-          <div class="field col-12">
+          <div class="field col-12 md:col-4">
             <label for="lmp">LMP<span style="color: red">*</span></label>
             <p-calendar inputId="icon" id="lmp"></p-calendar>
           </div>
-          <div class="field-checkbox col-12 md:col-4">
+          </div>
+          <div class="p-fluid formgrid grid">
+          <div class="field-checkbox col-12 md:col-3">
             <p-checkbox
               name="xrayRequisition"
               value="Chest X-Ray PA"
@@ -17,7 +19,7 @@
               inputId="xray"></p-checkbox>
             <label for="xray">Chest X-Ray PA</label>
           </div>
-          <div class="field-checkbox col-12 md:col-4">
+          <div class="field-checkbox col-12 md:col-3">
             <p-checkbox
               name="xrayRequisition"
               value="Apicolordotic"
@@ -25,7 +27,7 @@
               inputId="apicolordotic"></p-checkbox>
             <label for="apicolordotic">Apicolordotic</label>
           </div>
-          <div class="field-checkbox col-12 md:col-4">
+          <div class="field-checkbox col-12 md:col-3">
             <p-checkbox
               name="xrayRequisition"
               value="Others"

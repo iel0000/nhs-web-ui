@@ -81,4 +81,15 @@ export class PersonalComponent implements OnInit, OnDestroy {
       this.personalForm.get('email')?.removeValidators;
     }
   }
+
+  calculateAge() {
+    let control = this.personalForm.get('birthDate');
+    let age = 0;
+    if(!control?.invalid) {
+      let timeDiff = Math.abs(Date.now() - new Date(control?.value).getTime());
+      age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25)
+    }
+    
+    this.personalForm.patchValue({ age: age})
+  }
 }

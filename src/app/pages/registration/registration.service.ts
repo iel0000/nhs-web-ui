@@ -18,23 +18,32 @@ export class RegistrationService {
   private readonly _visaType = new BehaviorSubject<any[]>([]);
   readonly visaType$ = this._visaType.asObservable();
 
+  private readonly _labRequisitionItems = new BehaviorSubject<any[]>([]);
+  readonly labRequisitionItems$ = this._labRequisitionItems.asObservable();
+
   constructor(private httpService: HttpService) {}
 
   getEmbassies() {
-    this.httpService.get('Client/GetEmbassies').subscribe(embassy => {
-      this._embassyList.next(embassy);
+    this.httpService.get('Client/GetEmbassies').subscribe(response => {
+      this._embassyList.next(response);
     });
   }
 
   getVisaCategory() {
-    this.httpService.get('Client/GetVisaCategories').subscribe(embassy => {
-      this._visaCategory.next(embassy);
+    this.httpService.get('Client/GetVisaCategories').subscribe(response => {
+      this._visaCategory.next(response);
     });
   }
 
   getVisaType() {
-    this.httpService.get('Client/GetVisaTypes').subscribe(embassy => {
-      this._visaType.next(embassy);
+    this.httpService.get('Client/GetVisaTypes').subscribe(response => {
+      this._visaType.next(response);
+    });
+  }
+
+  getLabRequisitionItems() {
+    this.httpService.get('Client/GetLabRequisitionItems').subscribe(response => {
+      this._labRequisitionItems.next(response);
     });
   }
 }

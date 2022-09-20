@@ -91,6 +91,8 @@
               inputId="icon"
               id="birthDate"
               formControlName="birthDate"
+              (onSelect)="calculateAge()"
+              (onInput)="calculateAge()"
               [ngClass]="{
                 'ng-dirty':
                   (personalForm.get('birthDate')?.dirty ||
@@ -111,16 +113,15 @@
             <label class="mb-1" for="age"
               >Age<span style="color: red">*</span></label
             >
-            <p-inputMask
+            <input pInputText
               id="age"
-              mask="99"
               formControlName="age"
               [ngClass]="{
                 'ng-dirty':
                   (personalForm.get('age')?.dirty ||
                     personalForm.get('age')?.touched) &&
                   personalForm.get('age')?.invalid
-              }"></p-inputMask>
+              }" readonly />
             <small
               *ngIf="
                 (personalForm.get('age')?.dirty ||

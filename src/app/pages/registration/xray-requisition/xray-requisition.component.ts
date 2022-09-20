@@ -18,10 +18,10 @@ export class XrayRequisitionComponent implements OnInit {
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
-        if (!s.personalInformation.firstName) {
-          this.router.navigate(['register/personal']);
-          return;
-        }
+        // if (!s.personalInformation.firstName) {
+        //   this.router.navigate(['register/personal']);
+        //   return;
+        // }
       });
   }
 
