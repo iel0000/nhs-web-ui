@@ -21,6 +21,8 @@ import { RegistrationListComponent } from './pages/registration-list/registratio
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from '@core/interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { UsersComponent } from './pages/users/users.component';
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -39,6 +41,8 @@ export function tokenGetter() {
     ReviewComponent,
     RegistrationListComponent,
     SpinnerComponent,
+    UsersComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,8 @@ import {
   ReviewComponent,
 } from '@app/pages/registration';
 import { RegistrationListComponent } from '@app/pages/registration-list/registration-list.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
 
 const routes: Routes = [
   {
@@ -54,6 +56,18 @@ const routes: Routes = [
           { path: 'xrayRequisition', component: XrayRequisitionComponent },
           { path: 'review', component: ReviewComponent },
         ],
+      },
+      {
+        path: 'users/:action',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'Admin' },
       },
     ],
   },

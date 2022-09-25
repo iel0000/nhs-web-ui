@@ -29,7 +29,16 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (this.authenticationService.isAuthenticated()) {
       // logged in so return true
       const token = localStorage.getItem('jwt');
+      const currentUser = JSON.parse(
+        localStorage.getItem('currentUser') || '{}'
+      );
       if (token && !this.jwtHelper.isTokenExpired(token)) {
+        const role = childRoute.data['role'];
+        if (role) {
+          if (!currentUser.role.some((x: any) => x === role)) {
+            return false;
+          }
+        }
         return true;
       }
     }

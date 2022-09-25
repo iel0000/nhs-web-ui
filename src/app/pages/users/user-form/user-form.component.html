@@ -1,0 +1,164 @@
+<div class="p-fluid formgrid grid">
+  <div class="col-lg-12">
+    <div class="card border-0 rounded-lg">
+      <div class="card-header justify-content-center bg-white border-0">
+        <h3 class="my-2">Create User</h3>
+      </div>
+    </div>
+    <div class="p-fluid formgrid grid card border-0 rounded-lg">
+      <form class="mt-4" [formGroup]="userForm" autocomplete="off">
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-6">
+            <label class="mb-1" for="firstName"
+              >First Name<span style="color: red">*</span></label
+            >
+            <input
+              id="firstName"
+              type="text"
+              pInputText
+              formControlName="firstName"
+              [ngClass]="{
+                'ng-dirty':
+                  (userForm.get('firstName')?.dirty ||
+                    userForm.get('firstName')?.touched) &&
+                  userForm.get('firstName')?.invalid
+              }" />
+            <small
+              *ngIf="
+                (userForm.get('firstName')?.dirty ||
+                  userForm.get('firstName')?.touched) &&
+                userForm.get('firstName')?.invalid
+              "
+              class="p-error"
+              >Firstname is required.</small
+            >
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label class="mb-1" for="lastName"
+              >Last Name<span style="color: red">*</span></label
+            >
+            <input
+              id="lastName"
+              type="text"
+              pInputText
+              formControlName="lastName"
+              [ngClass]="{
+                'ng-dirty':
+                  (userForm.get('lastName')?.dirty ||
+                    userForm.get('lastName')?.touched) &&
+                  userForm.get('lastName')?.invalid
+              }" />
+            <small
+              *ngIf="
+                (userForm.get('lastName')?.dirty ||
+                  userForm.get('lastName')?.touched) &&
+                userForm.get('lastName')?.invalid
+              "
+              class="p-error"
+              >Lastname is required.</small
+            >
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label class="mb-1" for="email"
+              >Email<span style="color: red">*</span></label
+            >
+            <input
+              id="email"
+              type="text"
+              pInputText
+              formControlName="email"
+              [ngClass]="{
+                'ng-dirty':
+                  (userForm.get('email')?.dirty ||
+                    userForm.get('email')?.touched) &&
+                  userForm.get('email')?.invalid
+              }" />
+            <small
+              *ngIf="
+                (userForm.get('email')?.dirty ||
+                  userForm.get('email')?.touched) &&
+                userForm.get('email')?.invalid
+              "
+              class="p-error"
+              >Email is required.</small
+            >
+          </div>
+
+          <div class="field col-12 md:col-6">
+            <label class="mb-1" for="role"
+              >Role<span style="color: red">*</span></label
+            >
+            <p-dropdown
+              [options]="roles"
+              placeholder="Select User Role"
+              optionLabel="name"
+              [showClear]="true"
+              formControlName="role"
+              optionValue="code"
+              [ngClass]="{
+                'ng-dirty':
+                  userForm.get('role')?.dirty && userForm.get('role')?.invalid
+              }"></p-dropdown>
+            <small
+              *ngIf="
+                (userForm.get('role')?.dirty ||
+                  userForm.get('role')?.touched) &&
+                userForm.get('role')?.invalid
+              "
+              class="p-error"
+              >Role is required.</small
+            >
+          </div>
+        </div>
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="password"
+              >Password<span style="color: red">*</span></label
+            >
+            <p-password [(ngModel)]="password" [toggleMask]="true" formControlName="password" [ngClass]="{
+                'ng-dirty':
+                  (userForm.get('password')?.dirty ||
+                    userForm.get('password')?.touched) &&
+                  userForm.get('password')?.invalid
+              }" >
+            </p-password>
+            <small
+              *ngIf="
+                (userForm.get('password')?.dirty ||
+                  userForm.get('password')?.touched) &&
+                userForm.get('password')?.invalid
+              "
+              class="p-error"
+              ><span *ngIf="userForm.get('password')?.errors?.['required']">Password is required.</span>
+              <span *ngIf="userForm.get('password')?.errors?.['minlength']">Password must be atleast 8 characters.</span></small
+            >
+          </div>
+
+          <!-- <div class="field col-12 md:col-4">
+            <label class="mb-1" for="confirmPassword"
+              >Confirm Password<span style="color: red">*</span></label
+            >
+            <p-password [(ngModel)]="password" [toggleMask]="true" formControlName="confirmPassword" [ngClass]="{
+                'ng-dirty':
+                  (userForm.get('confirmPassword')?.dirty ||
+                    userForm.get('confirmPassword')?.touched) &&
+                  userForm.get('confirmPassword')?.invalid
+              }" >
+            </p-password>
+            <small
+              *ngIf="
+                (userForm.get('confirmPassword')?.dirty ||
+                  userForm.get('confirmPassword')?.touched) &&
+                userForm.get('confirmPassword')?.invalid
+              "
+              class="p-error"
+              >Confirm is required.</small
+            >
+          </div> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

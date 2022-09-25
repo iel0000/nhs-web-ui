@@ -11,6 +11,13 @@ export class MenuComponent implements OnInit {
 
   constructor(public layoutService: LayoutService) {}
 
+  get isAdmin(): boolean {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (currentUser.role.some((x: any) => x === 'Admin')) {
+      return true;
+    }
+    return false;
+  }
   ngOnInit() {
     this.model = [
       {
@@ -25,6 +32,12 @@ export class MenuComponent implements OnInit {
             label: 'Register',
             icon: 'pi pi-fw pi-database',
             routerLink: ['registration-list'],
+          },
+          {
+            label: 'Users',
+            icon: 'pi pi-fw pi-user',
+            routerLink: ['users'],
+            visible: this.isAdmin,
           },
         ],
       },
