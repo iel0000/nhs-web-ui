@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
-import { selectRecord } from '../../store';
+import { selectRecord } from '../store';
 
 @Component({
   selector: 'app-xray-requisition',
@@ -11,14 +11,23 @@ import { selectRecord } from '../../store';
 })
 export class XrayRequisitionComponent implements OnInit {
   xray: string[] = [];
-  constructor(private store: Store, private router: Router) {}
+  id: any;
+
+  constructor(private store: Store, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+    
     this.store
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
         if (!s.personalInformation.firstName) {
+
+          if(this.id) {
+            this.router.navigate([`register/personal/${this.id}`]);
+      return;
+          }
           this.router.navigate(['register/personal']);
           return;
         }
@@ -26,9 +35,19 @@ export class XrayRequisitionComponent implements OnInit {
   }
 
   back() {
+    if(this.id) {
+      this.router.navigate([`register/labRequisition/${this.id}`]);
+      return;
+    }
+
     this.router.navigate(['register/labRequisition']);
   }
   nextPage() {
+    if(this.id) {
+      this.router.navigate([`register/review/${this.id}`]);
+      return;
+    }
+
     this.router.navigate(['register/review']);
   }
 }

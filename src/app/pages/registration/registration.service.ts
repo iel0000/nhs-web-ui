@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { BehaviorSubject, of, Subject } from 'rxjs';
 import { HttpService } from '@app/shared/services';
-import { IDropDown, IPersonalInformation, IVisaInformation } from '@app/shared/interface';
+import { IRegistration } from '@app/shared/interface';
 import { Store } from '@ngrx/store';
-import { UpdatePersonalInformation, UpdateVisaInformation } from './store';
+import { LoadRegistrationRecord } from './store';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
@@ -58,16 +56,35 @@ export class RegistrationService {
     this.httpService
       .get(`Client/LoadRegistrationRecord/${id}`)
       .subscribe(response => {
-        this._registrationRecord.next(response)
+        let registrationModel: IRegistration = {
+          id: response.id,
+          personalInformation: {
+            id: response.personalInformation.id,
+            firstName: response.personalInformation.firstName,
+            lastName: response.personalInformation.lastName,
+            middleName: response.personalInformation.middleName,
+            birthDate: response.personalInformation.birthDate,
+            age: response.personalInformation.age,
+            gender: response.personalInformation.gender,
+            address: response.personalInformation.address,
+            contactDetails: response.personalInformation.contactDetails,
+            email: response.personalInformation.email,
+            eMedicalRefNo: response.personalInformation.eMedicalRefNo,
+          },
+          visaInformation: {
+            id: response.visaInformation.id,
+            embassy: response.visaInformation.embassy.toString(),
+            visaCategory: response.visaInformation.visaCategory.toString(),
+            visaType: response.visaInformation.visaType.toString()
+          },
+          labRequisition: {
+            id: response.labRequisition.id,
+            labRequisition: response.labRequisition.labRequisition
+          }
+        }
         this.store.dispatch(
-          UpdatePersonalInformation({
-            payload: <IPersonalInformation>response.personalInformation,
-          })
-        );
-
-        this.store.dispatch(
-          UpdateVisaInformation({
-            payload: <IVisaInformation>response.visaInformation,
+          LoadRegistrationRecord({
+            payload: <IRegistration>registrationModel,
           })
         );
       });

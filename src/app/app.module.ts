@@ -13,7 +13,7 @@ import {
   LabRequisitionComponent,
   XrayRequisitionComponent,
   ReviewComponent,
-} from '@app/pages/registration/new';
+} from '@app/pages/registration';
 import { StoreModule } from '@ngrx/store';
 import { registrationPageReducer } from '@app/pages/registration/store';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -21,14 +21,6 @@ import { RegistrationListComponent } from './pages/registration-list/registratio
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from '@core/interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import {
-  EditPersonalComponent,
-  EditRegistrationComponent,
-  EditVisaInfoComponent,
-  EditLabRequisitionComponent,
-  EditXrayRequisitionComponent,
-  EditReviewComponent,
-} from './pages/registration/edit';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -47,12 +39,6 @@ export function tokenGetter() {
     ReviewComponent,
     RegistrationListComponent,
     SpinnerComponent,
-    EditRegistrationComponent,
-    EditPersonalComponent,
-    EditVisaInfoComponent,
-    EditLabRequisitionComponent,
-    EditXrayRequisitionComponent,
-    EditReviewComponent,
   ],
   imports: [
     BrowserModule,

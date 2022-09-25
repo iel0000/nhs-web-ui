@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { statusMessage } from '@app/shared/constants';
 import { IChoices } from '@app/shared/interface';
 import {
@@ -11,8 +11,8 @@ import { HttpService } from '@app/shared/services';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 import { Subject, take, takeUntil } from 'rxjs';
-import { RegistrationService } from '../../registration.service';
-import { selectRecord } from '../../store';
+import { RegistrationService } from '../registration.service';
+import { selectRecord } from '../store';
 
 @Component({
   selector: 'app-review',
@@ -29,16 +29,19 @@ export class ReviewComponent implements OnInit, OnDestroy {
   visaType: string | undefined;
   visaCategory: string | undefined;
   selectedLabRequisition: string[] = [];
-
+  id: any
   constructor(
     private store: Store,
     private router: Router,
     private registrationSvc: RegistrationService,
     private httpService: HttpService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute
   ) {
     this.reviewForm = {
+      id: 0,
       personalInformation: {
+        id: 0,
         firstName: '',
         lastName: '',
         middleName: '',
@@ -51,11 +54,15 @@ export class ReviewComponent implements OnInit, OnDestroy {
         eMedicalRefNo: '',
       },
       visaInformation: {
+        id: 0,
         embassy: '',
         visaType: '',
         visaCategory: '',
       },
-      labRequisition: [],
+      labRequisition: {
+        id: 0,
+        labRequisition: []
+      },
     };
   }
 
@@ -75,15 +82,22 @@ export class ReviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.id = this.route.snapshot.paramMap.get('id');
+
     this.store
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
         if (!s.personalInformation.firstName) {
-          this.router.navigate(['register/personal']);
-          return;
-        }
+          if(this.id) {
+            this.router.navigate([`register/personal/${this.id}`]);
+            return;
+          }
 
+          this.router.navigate(['register/personal']);
+        }
+        this.reviewForm.id = s.id;
         this.reviewForm.personalInformation = s.personalInformation;
         this.reviewForm.labRequisition = s.labRequisition;
         this.reviewForm.visaInformation = s.visaInformation;
@@ -108,7 +122,8 @@ export class ReviewComponent implements OnInit, OnDestroy {
           value: x.code,
         })
       );
-      this.reviewForm.labRequisition.forEach(element => {
+
+      this.reviewForm.labRequisition.labRequisition.forEach(element => {
         let labItem = this.labItems.find(x => x.value === element);
         if (labItem) {
           this.selectedLabRequisition.push(labItem.description);
@@ -158,12 +173,22 @@ export class ReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
+    if(this.id) {
+      this.router.navigate([`register/xrayRequisition/${this.id}`]);
+      return;
+    }
+
     this.router.navigate(['register/xrayRequisition']);
   }
 
   saveRecord() {
+    let url = 'Client/SaveClientForm';
+    if(this.id) {
+      url = 'Client/UpdateClientForm'
+    }
+
     this.httpService
-      .post('Client/SaveClientForm', this.reviewForm)
+      .post(url, this.reviewForm)
       .pipe()
       .subscribe(
         response => {
@@ -182,5 +207,6 @@ export class ReviewComponent implements OnInit, OnDestroy {
           });
         }
       );
+    
   }
 }

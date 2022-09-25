@@ -53,7 +53,7 @@ export class RegistrationListComponent implements OnInit {
 
   loadRegisterPage() {
     this.isLoading = true;
-    this.router.navigate(['register']);
+    this.router.navigate(['register/personal']);
   }
 
   editItem(item: any) {

@@ -1,10 +1,12 @@
 export interface IRegistration {
+  id: number
   personalInformation: IPersonalInformation;
   visaInformation: IVisaInformation;
-  labRequisition: string[];
+  labRequisition: ILabRequisition;
 }
 
 export interface IPersonalInformation {
+  id: number;
   firstName: string;
   lastName: string;
   middleName: string;
@@ -18,7 +20,13 @@ export interface IPersonalInformation {
 }
 
 export interface IVisaInformation {
+  id: number;
   embassy: string;
   visaType: string;
   visaCategory: string;
+}
+
+export interface ILabRequisition {
+  id: number;
+  labRequisition: string[];
 }

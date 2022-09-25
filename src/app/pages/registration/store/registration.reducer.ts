@@ -1,9 +1,11 @@
-import { IRegistration } from '@app/shared/interface';
+import { ILabRequisition, IRegistration } from '@app/shared/interface';
 import { createReducer, on } from '@ngrx/store';
 import * as RegistrationPageActions from './registration.action';
 
 export const initialState: IRegistration = {
+  id: 0,
   personalInformation: {
+    id: 0,
     firstName: '',
     lastName: '',
     middleName: '',
@@ -16,11 +18,15 @@ export const initialState: IRegistration = {
     eMedicalRefNo: '',
   },
   visaInformation: {
+    id: 0,
     embassy: '',
     visaType: '',
     visaCategory: '',
   },
-  labRequisition: [],
+  labRequisition: {
+    id: 0,
+    labRequisition: []
+  },
 };
 
 export const registrationPageReducer = createReducer(
@@ -40,18 +46,37 @@ export const registrationPageReducer = createReducer(
   on(
     RegistrationPageActions.UpdateLabRequisition,
     (state, { payload }): IRegistration => {
-      return { ...state, labRequisition: payload };
+      let labRequisitionId = state.labRequisition.id
+      let newData: ILabRequisition = {
+        id: labRequisitionId,
+        labRequisition: payload
+      }
+      return { ...state, labRequisition: newData };
     }
   ),
   on(RegistrationPageActions.ResetRegistrationForm, (state): IRegistration => {
     let personalInformation = initialState.personalInformation;
     let visaInformation = initialState.visaInformation;
-
+    let labRequisition = initialState.labRequisition;
     return {
       ...state,
       personalInformation: personalInformation,
       visaInformation: visaInformation,
-      labRequisition: [],
+      labRequisition: labRequisition,
+    };
+  }),
+  on(RegistrationPageActions.LoadRegistrationRecord, (state, { payload }): IRegistration => {
+    let personalInformation = payload.personalInformation;
+    let visaInformation = payload.visaInformation;
+    let labRequisition = payload.labRequisition;
+    let id = payload.id;
+
+    return {
+      ...state,
+      id: id,
+      personalInformation: personalInformation,
+      visaInformation: visaInformation,
+      labRequisition: labRequisition,
     };
   })
 );

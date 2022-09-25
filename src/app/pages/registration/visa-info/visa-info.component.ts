@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IVisaInformation } from '@app/shared/interface/registration.interface';
 import { Store } from '@ngrx/store';
 import { map, Subject, take, takeUntil } from 'rxjs';
-import { selectRecord, UpdateVisaInformation } from '../../store';
 import { HttpClient } from '@angular/common/http';
 import { IDropDown } from '@app/shared/interface';
 import { HttpService } from '@app/shared/services';
-import { RegistrationService } from '../../registration.service';
+import { RegistrationService } from '../registration.service';
+import { selectRecord, UpdateVisaInformation } from '../store';
 
 @Component({
   selector: 'app-visa-info',
@@ -21,6 +21,8 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   embassy!: IDropDown[];
   visaType!: IDropDown[];
   visaCategory!: IDropDown[];
+  id: any
+
   private ngUnsubscribe = new Subject<void>();
 
   constructor(
@@ -29,9 +31,11 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private httpService: HttpService,
-    private registrationSvc: RegistrationService
+    private registrationSvc: RegistrationService,
+    private route: ActivatedRoute
   ) {
     this.visaForm = this.formBuilder.group({
+      id: 0,
       embassy: ['', Validators.required],
       visaType: ['', Validators.required],
       visaCategory: ['', Validators.required],
@@ -39,16 +43,25 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.id = this.route.snapshot.paramMap.get('id');
+
     this.store
       .select(selectRecord)
       .pipe(take(1))
       .subscribe(s => {
         if (!s.personalInformation.firstName) {
+          if (this.id) {
+            this.router.navigate([`register/personal/${this.id}`]);
+            return;
+          }
+
           this.router.navigate(['register/personal']);
           return;
         }
 
         this.visaForm.patchValue({
+          id: s.visaInformation.id,
           embassy: s.visaInformation.embassy,
           visaType: s.visaInformation.visaType,
           visaCategory: s.visaInformation.visaCategory,
@@ -90,6 +103,11 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   }
 
   back() {
+    if (this.id) {
+      this.router.navigate([`register/personal/${this.id}`]);
+      return;
+    }
+
     this.router.navigate(['register/personal']);
   }
 
@@ -100,10 +118,14 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
           payload: <IVisaInformation>this.visaForm.getRawValue(),
         })
       );
+
+      if (this.id) {
+        this.router.navigate([`register/labRequisition/${this.id}`]);
+        return;
+      }
+
       this.router.navigate(['register/labRequisition']);
-      return;
     }
 
-    this.submitted = true;
   }
 }

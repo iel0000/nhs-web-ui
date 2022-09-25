@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
-import { RegistrationService } from '../registration.service';
-import { ResetRegistrationForm } from '../store';
+import { RegistrationService } from './registration.service';
+import { ResetRegistrationForm } from './store';
 
 @Component({
   selector: 'app-registration',
@@ -18,7 +19,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store,
-    private registrationSvc: RegistrationService
+    private registrationSvc: RegistrationService,
+    private router: Router
   ) {
     this.items = [
       { label: 'Personal Info', routerLink: 'personal' },
@@ -30,6 +32,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    const id = this.router.url.split('/')[this.router.url.split('/').length - 1]; 
+    if(!isNaN(+id)){
+      this.registrationSvc.loadRegistrationRecord(id);
+    }  
+
     this.registrationSvc.getEmbassies();
     this.registrationSvc.getVisaCategory();
     this.registrationSvc.getVisaType();

@@ -1,4 +1,4 @@
-import { IPersonalInformation, IVisaInformation } from '@app/shared/interface';
+import { ILabRequisition, IPersonalInformation, IRegistration, IVisaInformation } from '@app/shared/interface';
 import { createAction, props } from '@ngrx/store';
 
 export const UpdatePersonalInformation = createAction(
@@ -18,4 +18,9 @@ export const UpdateVisaInformation = createAction(
 export const UpdateLabRequisition = createAction(
   '[Lab Requisition Component] Update Lab Requisition',
   props<{ payload: string[] }>()
+);
+
+export const LoadRegistrationRecord = createAction(
+  '[Registration Component] Load Registration Record',
+  props<{ payload: IRegistration }>()
 );

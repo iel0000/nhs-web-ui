@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IPersonalInformation } from '@app/shared/interface/registration.interface';
 import { Store } from '@ngrx/store';
 import { Subject, take, takeUntil } from 'rxjs';
-import { selectRecord, UpdatePersonalInformation } from '../../store';
+import { selectRecord, UpdatePersonalInformation } from '../store';
 import { Gender } from '@app/shared/constants/gender';
 
 @Component({
@@ -15,15 +15,18 @@ import { Gender } from '@app/shared/constants/gender';
 export class PersonalComponent implements OnInit, OnDestroy {
   personalForm: FormGroup;
   gender = Gender;
+  id: any
 
   private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private store: Store,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {
     this.personalForm = this.formBuilder.group({
+      id: 0,
       firstName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       lastName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       middleName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
@@ -38,11 +41,14 @@ export class PersonalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id');
+
     this.store
       .select(selectRecord)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(s => {
         this.personalForm.patchValue({
+          id: s.personalInformation.id,
           firstName: s.personalInformation.firstName,
           lastName: s.personalInformation.lastName,
           middleName: s.personalInformation.middleName,
@@ -69,6 +75,14 @@ export class PersonalComponent implements OnInit, OnDestroy {
           payload: <IPersonalInformation>this.personalForm.getRawValue(),
         })
       );
+
+      
+
+      if(this.id) {
+        this.router.navigate([`register/visaInfo/${this.id}`]);
+        return;
+      }
+
       this.router.navigate(['register/visaInfo']);
       return;
     }
