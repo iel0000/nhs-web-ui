@@ -3,7 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject, of, Subject } from 'rxjs';
 import { HttpService } from '@app/shared/services';
-import { IDropDown } from '@app/shared/interface';
+import { IDropDown, IPersonalInformation, IVisaInformation } from '@app/shared/interface';
+import { Store } from '@ngrx/store';
+import { UpdatePersonalInformation, UpdateVisaInformation } from './store';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
@@ -21,7 +23,10 @@ export class RegistrationService {
   private readonly _labRequisitionItems = new BehaviorSubject<any[]>([]);
   readonly labRequisitionItems$ = this._labRequisitionItems.asObservable();
 
-  constructor(private httpService: HttpService) {}
+  private readonly _registrationRecord = new BehaviorSubject<any[]>([]);
+  readonly registrationRecord$ = this._registrationRecord.asObservable();
+
+  constructor(private httpService: HttpService, private store: Store) { }
 
   getEmbassies() {
     this.httpService.get('Client/GetEmbassies').subscribe(response => {
@@ -46,6 +51,25 @@ export class RegistrationService {
       .get('Client/GetLabRequisitionItems')
       .subscribe(response => {
         this._labRequisitionItems.next(response);
+      });
+  }
+
+  loadRegistrationRecord(id: any) {
+    this.httpService
+      .get(`Client/LoadRegistrationRecord/${id}`)
+      .subscribe(response => {
+        this._registrationRecord.next(response)
+        this.store.dispatch(
+          UpdatePersonalInformation({
+            payload: <IPersonalInformation>response.personalInformation,
+          })
+        );
+
+        this.store.dispatch(
+          UpdateVisaInformation({
+            payload: <IVisaInformation>response.visaInformation,
+          })
+        );
       });
   }
 }

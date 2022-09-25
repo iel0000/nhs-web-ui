@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { IVisaInformation } from '@app/shared/interface/registration.interface';
 import { Store } from '@ngrx/store';
 import { map, Subject, take, takeUntil } from 'rxjs';
-import { selectRecord, UpdateVisaInformation } from '../store';
+import { selectRecord, UpdateVisaInformation } from '../../store';
 import { HttpClient } from '@angular/common/http';
 import { IDropDown } from '@app/shared/interface';
 import { HttpService } from '@app/shared/services';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../../registration.service';
 
 @Component({
   selector: 'app-visa-info',

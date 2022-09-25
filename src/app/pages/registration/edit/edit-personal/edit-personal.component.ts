@@ -1,27 +1,40 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IPersonalInformation } from '@app/shared/interface/registration.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  IPersonalInformation,
+  IVisaInformation,
+} from '@app/shared/interface/registration.interface';
 import { Store } from '@ngrx/store';
 import { Subject, take, takeUntil } from 'rxjs';
-import { selectRecord, UpdatePersonalInformation } from '../store';
+import {
+  selectRecord,
+  UpdatePersonalInformation,
+  UpdateVisaInformation,
+} from '../../store';
 import { Gender } from '@app/shared/constants/gender';
+import { HttpService } from '@app/shared/services';
+import { RegistrationService } from '../../registration.service';
 
 @Component({
-  selector: 'app-personal',
-  templateUrl: './personal.component.html',
-  styleUrls: ['./personal.component.scss'],
+  selector: 'app-edit-personal',
+  templateUrl: './edit-personal.component.html',
+  styleUrls: ['./edit-personal.component.scss'],
 })
-export class PersonalComponent implements OnInit, OnDestroy {
+export class EditPersonalComponent implements OnInit, OnDestroy {
   personalForm: FormGroup;
   gender = Gender;
+  id: number = 0;
 
   private ngUnsubscribe = new Subject<void>();
 
   constructor(
     private store: Store,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private httpSvc: HttpService,
+    private registerSvc: RegistrationService
   ) {
     this.personalForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
@@ -37,7 +50,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+
     this.store
       .select(selectRecord)
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -69,7 +83,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
           payload: <IPersonalInformation>this.personalForm.getRawValue(),
         })
       );
-      this.router.navigate(['register/visaInfo']);
+      const id = this.route.snapshot.paramMap.get('id');
+      this.router.navigate([`register/visaInfo/${id}`]);
       return;
     }
   }

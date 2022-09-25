@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
+import {
+  ConfirmationService,
+  LazyLoadEvent,
+  MessageService,
+} from 'primeng/api';
 
 @Component({
   selector: 'app-registration-list',
@@ -16,22 +21,71 @@ export class RegistrationListComponent implements OnInit {
     { field: 'dateCreated', header: 'DATE CREATED' },
     { field: 'createdBy', header: 'CREATED BY' },
   ];
-  isLoading = false;
+  isLoading: boolean = true;
 
-  constructor(private router: Router, private httpSvc: HttpService) {}
+  constructor(
+    private router: Router,
+    private httpSvc: HttpService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
-    this.loadTableItems();
+    console.log('init');
   }
 
   loadTableItems() {
-    this.httpSvc.get('Client/GetRegistrationList').subscribe(response => {
-      this.items = response;
-    });
+    this.httpSvc.get('Client/GetRegistrationList').subscribe(
+      response => {
+        this.items = response;
+        this.isLoading = false;
+      },
+      error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Get Lists',
+          detail: error.message,
+        });
+        this.isLoading = false;
+      }
+    );
   }
 
   loadRegisterPage() {
     this.isLoading = true;
     this.router.navigate(['register']);
+  }
+
+  editItem(item: any) {
+    this.router.navigate([`register/personal/${item.id}`]);
+  }
+
+  deleteItem(item: any) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete selected record?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.httpSvc
+          .get(`Client/DeleteRegistrationRecord/${item.id}`)
+          .subscribe(
+            response => {
+              this.messageService.add({
+                severity: response.status.toLowerCase(),
+                summary: 'Delete Record',
+                detail: response.message,
+              });
+              this.loadTableItems();
+            },
+            error => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Delete Record',
+                detail: error.message,
+              });
+            }
+          );
+      },
+    });
   }
 }

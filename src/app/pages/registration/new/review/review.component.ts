@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { statusMessage } from '@app/shared/constants';
 import { IChoices } from '@app/shared/interface';
 import {
   IPersonalInformation,
@@ -8,9 +9,10 @@ import {
 } from '@app/shared/interface/registration.interface';
 import { HttpService } from '@app/shared/services';
 import { Store } from '@ngrx/store';
+import { MessageService } from 'primeng/api';
 import { Subject, take, takeUntil } from 'rxjs';
-import { RegistrationService } from '../registration.service';
-import { selectRecord } from '../store';
+import { RegistrationService } from '../../registration.service';
+import { selectRecord } from '../../store';
 
 @Component({
   selector: 'app-review',
@@ -32,7 +34,8 @@ export class ReviewComponent implements OnInit, OnDestroy {
     private store: Store,
     private router: Router,
     private registrationSvc: RegistrationService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private messageService: MessageService
   ) {
     this.reviewForm = {
       personalInformation: {
@@ -162,8 +165,22 @@ export class ReviewComponent implements OnInit, OnDestroy {
     this.httpService
       .post('Client/SaveClientForm', this.reviewForm)
       .pipe()
-      .subscribe(response => {
-        this.router.navigate(['registration-list']);
-      });
+      .subscribe(
+        response => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Save Record',
+            detail: statusMessage.SAVESUCCESS,
+          });
+          this.router.navigate(['registration-list']);
+        },
+        error => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Save Record',
+            detail: error.message,
+          });
+        }
+      );
   }
 }

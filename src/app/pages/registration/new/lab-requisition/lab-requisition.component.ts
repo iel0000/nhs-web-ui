@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { IChoices } from '@app/shared/interface';
 import { Store } from '@ngrx/store';
 import { Subject, take, takeUntil } from 'rxjs';
-import { RegistrationService } from '../registration.service';
-import { selectRecord, UpdateLabRequisition } from '../store';
+import { RegistrationService } from '../../registration.service';
+import { selectRecord, UpdateLabRequisition } from '../../store';
 
 @Component({
   selector: 'app-lab-requisition',

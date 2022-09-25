@@ -11,8 +11,14 @@ import {
   LabRequisitionComponent,
   XrayRequisitionComponent,
   ReviewComponent,
-} from '@app/pages/registration';
+} from '@app/pages/registration/new';
 import { RegistrationListComponent } from './pages/registration-list/registration-list.component';
+import { EditPersonalComponent } from './pages/registration/edit/edit-personal/edit-personal.component';
+import { EditRegistrationComponent } from './pages/registration/edit/edit-registration.component';
+import { EditVisaInfoComponent } from './pages/registration/edit/edit-visa-info/edit-visa-info.component';
+import { EditLabRequisitionComponent } from './pages/registration/edit/edit-lab-requisition/edit-lab-requisition.component';
+import { EditXrayRequisitionComponent } from './pages/registration/edit/edit-xray-requisition/edit-xray-requisition.component';
+import { EditReviewComponent } from './pages/registration/edit/edit-review/edit-review.component';
 
 const routes: Routes = [
   {
@@ -43,6 +49,24 @@ const routes: Routes = [
           { path: 'labRequisition', component: LabRequisitionComponent },
           { path: 'xrayRequisition', component: XrayRequisitionComponent },
           { path: 'review', component: ReviewComponent },
+        ],
+      },
+      {
+        path: 'register',
+        component: EditRegistrationComponent,
+        children: [
+          { path: '', redirectTo: 'personal/:id', pathMatch: 'full' },
+          { path: 'personal/:id', component: EditPersonalComponent },
+          { path: 'visaInfo/:id', component: EditVisaInfoComponent },
+          {
+            path: 'labRequisition/:id',
+            component: EditLabRequisitionComponent,
+          },
+          {
+            path: 'xrayRequisition/:id',
+            component: EditXrayRequisitionComponent,
+          },
+          { path: 'review/:id', component: EditReviewComponent },
         ],
       },
     ],

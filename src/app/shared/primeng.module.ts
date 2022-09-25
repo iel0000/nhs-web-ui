@@ -21,6 +21,9 @@ import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
@@ -42,8 +45,9 @@ import { TableModule } from 'primeng/table';
     StepsModule,
     CardModule,
     TableModule,
+    ConfirmDialogModule,
+    ToastModule,
   ],
-  providers: [],
   exports: [
     ReactiveFormsModule,
     HttpClientModule,
@@ -63,6 +67,9 @@ import { TableModule } from 'primeng/table';
     CardModule,
     InputMaskModule,
     TableModule,
+    ConfirmDialogModule,
+    ToastModule,
   ],
+  providers: [MessageService, ConfirmationService],
 })
 export class PrimeNgModule {}
