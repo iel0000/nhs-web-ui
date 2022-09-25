@@ -24,7 +24,7 @@ export class RegistrationService {
   private readonly _registrationRecord = new BehaviorSubject<any[]>([]);
   readonly registrationRecord$ = this._registrationRecord.asObservable();
 
-  constructor(private httpService: HttpService, private store: Store) { }
+  constructor(private httpService: HttpService, private store: Store) {}
 
   getEmbassies() {
     this.httpService.get('Client/GetEmbassies').subscribe(response => {
@@ -75,13 +75,13 @@ export class RegistrationService {
             id: response.visaInformation.id,
             embassy: response.visaInformation.embassy.toString(),
             visaCategory: response.visaInformation.visaCategory.toString(),
-            visaType: response.visaInformation.visaType.toString()
+            visaType: response.visaInformation.visaType.toString(),
           },
           labRequisition: {
             id: response.labRequisition.id,
-            labRequisition: response.labRequisition.labRequisition
-          }
-        }
+            labRequisition: response.labRequisition.labRequisition,
+          },
+        };
         this.store.dispatch(
           LoadRegistrationRecord({
             payload: <IRegistration>registrationModel,

@@ -29,7 +29,6 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.store
@@ -37,7 +36,7 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(s => {
         if (!s.personalInformation.firstName) {
-          if(this.id) {
+          if (this.id) {
             this.router.navigate([`register/personal/${this.id}`]);
             return;
           }
@@ -47,8 +46,6 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
 
         this.labTest = s.labRequisition.labRequisition;
       });
-
-      
 
     this.getLabItems();
   }
@@ -70,7 +67,7 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    if(this.id) {
+    if (this.id) {
       this.router.navigate([`register/visaInfo/${this.id}`]);
       return;
     }
@@ -78,19 +75,17 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
     this.router.navigate(['register/visaInfo']);
   }
   nextPage() {
-
     this.store.dispatch(
       UpdateLabRequisition({
         payload: <string[]>this.labTest,
       })
     );
 
-    if(this.id) {
+    if (this.id) {
       this.router.navigate([`register/xrayRequisition/${this.id}`]);
       return;
     }
 
     this.router.navigate(['register/xrayRequisition']);
-
   }
 }

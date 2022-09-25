@@ -1,5 +1,5 @@
 export interface IRegistration {
-  id: number
+  id: number;
   personalInformation: IPersonalInformation;
   visaInformation: IVisaInformation;
   labRequisition: ILabRequisition;

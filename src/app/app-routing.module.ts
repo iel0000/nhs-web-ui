@@ -36,7 +36,7 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegistrationComponent,
-        children: [          
+        children: [
           { path: 'personal/:id', component: PersonalComponent },
           { path: 'visaInfo/:id', component: VisaInfoComponent },
           {

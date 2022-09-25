@@ -25,7 +25,7 @@ export const initialState: IRegistration = {
   },
   labRequisition: {
     id: 0,
-    labRequisition: []
+    labRequisition: [],
   },
 };
 
@@ -46,11 +46,11 @@ export const registrationPageReducer = createReducer(
   on(
     RegistrationPageActions.UpdateLabRequisition,
     (state, { payload }): IRegistration => {
-      let labRequisitionId = state.labRequisition.id
+      let labRequisitionId = state.labRequisition.id;
       let newData: ILabRequisition = {
         id: labRequisitionId,
-        labRequisition: payload
-      }
+        labRequisition: payload,
+      };
       return { ...state, labRequisition: newData };
     }
   ),
@@ -65,18 +65,21 @@ export const registrationPageReducer = createReducer(
       labRequisition: labRequisition,
     };
   }),
-  on(RegistrationPageActions.LoadRegistrationRecord, (state, { payload }): IRegistration => {
-    let personalInformation = payload.personalInformation;
-    let visaInformation = payload.visaInformation;
-    let labRequisition = payload.labRequisition;
-    let id = payload.id;
+  on(
+    RegistrationPageActions.LoadRegistrationRecord,
+    (state, { payload }): IRegistration => {
+      let personalInformation = payload.personalInformation;
+      let visaInformation = payload.visaInformation;
+      let labRequisition = payload.labRequisition;
+      let id = payload.id;
 
-    return {
-      ...state,
-      id: id,
-      personalInformation: personalInformation,
-      visaInformation: visaInformation,
-      labRequisition: labRequisition,
-    };
-  })
+      return {
+        ...state,
+        id: id,
+        personalInformation: personalInformation,
+        visaInformation: visaInformation,
+        labRequisition: labRequisition,
+      };
+    }
+  )
 );

@@ -15,7 +15,7 @@ import { Gender } from '@app/shared/constants/gender';
 export class PersonalComponent implements OnInit, OnDestroy {
   personalForm: FormGroup;
   gender = Gender;
-  id: any
+  id: any;
 
   private ngUnsubscribe = new Subject<void>();
 
@@ -76,9 +76,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
         })
       );
 
-      
-
-      if(this.id) {
+      if (this.id) {
         this.router.navigate([`register/visaInfo/${this.id}`]);
         return;
       }

@@ -21,7 +21,7 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   embassy!: IDropDown[];
   visaType!: IDropDown[];
   visaCategory!: IDropDown[];
-  id: any
+  id: any;
 
   private ngUnsubscribe = new Subject<void>();
 
@@ -43,7 +43,6 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.store
@@ -126,6 +125,5 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
 
       this.router.navigate(['register/labRequisition']);
     }
-
   }
 }

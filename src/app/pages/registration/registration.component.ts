@@ -32,11 +32,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    const id = this.router.url.split('/')[this.router.url.split('/').length - 1]; 
-    if(!isNaN(+id)){
+    const id =
+      this.router.url.split('/')[this.router.url.split('/').length - 1];
+    if (!isNaN(+id)) {
       this.registrationSvc.loadRegistrationRecord(id);
-    }  
+    }
 
     this.registrationSvc.getEmbassies();
     this.registrationSvc.getVisaCategory();

@@ -29,7 +29,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
   visaType: string | undefined;
   visaCategory: string | undefined;
   selectedLabRequisition: string[] = [];
-  id: any
+  id: any;
   constructor(
     private store: Store,
     private router: Router,
@@ -61,7 +61,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
       },
       labRequisition: {
         id: 0,
-        labRequisition: []
+        labRequisition: [],
       },
     };
   }
@@ -82,7 +82,6 @@ export class ReviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.store
@@ -90,7 +89,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe(s => {
         if (!s.personalInformation.firstName) {
-          if(this.id) {
+          if (this.id) {
             this.router.navigate([`register/personal/${this.id}`]);
             return;
           }
@@ -173,7 +172,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    if(this.id) {
+    if (this.id) {
       this.router.navigate([`register/xrayRequisition/${this.id}`]);
       return;
     }
@@ -183,8 +182,8 @@ export class ReviewComponent implements OnInit, OnDestroy {
 
   saveRecord() {
     let url = 'Client/SaveClientForm';
-    if(this.id) {
-      url = 'Client/UpdateClientForm'
+    if (this.id) {
+      url = 'Client/UpdateClientForm';
     }
 
     this.httpService
@@ -207,6 +206,5 @@ export class ReviewComponent implements OnInit, OnDestroy {
           });
         }
       );
-    
   }
 }
