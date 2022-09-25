@@ -35,7 +35,7 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.personalInformation.firstName }}</td>
                 <td>{{ item.personalInformation.lastName }}</td>
-                <td>{{ item.dateCreated }}</td>
+                <td>{{ item.dateCreated | date: 'dd/MMM/yyyy' }}</td>
                 <td>{{ item.createdBy }}</td>
                 <td>
                   <button
