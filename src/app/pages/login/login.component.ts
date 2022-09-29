@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
       )
       .pipe(first())
       .subscribe({
-        next: (data) => {
+        next: data => {
           // get return url from route parameters or default to '/'
           this.messageService.add({
             severity: 'success',

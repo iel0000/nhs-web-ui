@@ -13,7 +13,12 @@ export class UsersComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private httpSvc: HttpService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(
+    private httpSvc: HttpService,
+    private router: Router,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     console.log('init');
@@ -31,7 +36,7 @@ export class UsersComponent implements OnInit {
   }
 
   editUser(item: any) {
-    this.router.navigate([`users/edit/${item.userId}`])
+    this.router.navigate([`users/edit/${item.userId}`]);
   }
 
   deleteUser(item: any) {
@@ -40,25 +45,23 @@ export class UsersComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.httpSvc
-          .get(`User/Delete/${item.userId}`)
-          .subscribe(
-            response => {
-              this.messageService.add({
-                severity: response.status.toLowerCase(),
-                summary: 'Delete Record',
-                detail: response.message,
-              });
-              this.loadUsers();
-            },
-            error => {
-              this.messageService.add({
-                severity: 'error',
-                summary: 'Delete Record',
-                detail: error.message,
-              });
-            }
-          );
+        this.httpSvc.get(`User/Delete/${item.userId}`).subscribe(
+          response => {
+            this.messageService.add({
+              severity: response.status.toLowerCase(),
+              summary: 'Delete Record',
+              detail: response.message,
+            });
+            this.loadUsers();
+          },
+          error => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Delete Record',
+              detail: error.message,
+            });
+          }
+        );
       },
     });
   }

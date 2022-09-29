@@ -16,14 +16,22 @@
             (click)="addUser()"></button>
         </div> -->
         <p-toolbar styleClass="mb-4">
-          <ng-template pTemplate="left">
-          </ng-template>
+          <ng-template pTemplate="left"> </ng-template>
           <ng-template pTemplate="right">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-info"
+            <button
+              pButton
+              pRipple
+              label="New"
+              icon="pi pi-plus"
+              class="p-button-info"
               (click)="addUser()"></button>
           </ng-template>
         </p-toolbar>
-        <p-table [value]="items" responsiveLayout="scroll" [lazy]="true" (onLazyLoad)="loadUsers()"
+        <p-table
+          [value]="items"
+          responsiveLayout="scroll"
+          [lazy]="true"
+          (onLazyLoad)="loadUsers()"
           [loading]="isLoading">
           <ng-template pTemplate="header">
             <tr>
@@ -43,9 +51,17 @@
               <td>{{ item.lastName }}</td>
               <td>{{ item.dateCreated | date: 'dd/MMM/yyyy' }}</td>
               <td>
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-success mr-2"
                   (click)="editUser(item)"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-warning"
                   (click)="deleteUser(item)"></button>
               </td>
             </tr>

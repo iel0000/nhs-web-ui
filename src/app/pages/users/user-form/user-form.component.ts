@@ -1,5 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  MinLengthValidator,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmPasswordValidator } from '@app/core/validators';
 import { HttpService } from '@app/shared/services';
@@ -22,33 +27,43 @@ export class UserFormComponent implements OnInit {
     private messageService: MessageService,
     private route: ActivatedRoute,
     private router: Router,
-    private changeDetectorRef: ChangeDetectorRef) {
-
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.userForm = this.fb.group({
       id: '0',
       firstName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       lastName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/),
+        ],
+      ],
       confirmPassword: ['', Validators.required],
-      role: ['', Validators.required]
-    }
-    );
+      role: ['', Validators.required],
+    });
   }
 
   ngOnInit(): void {
     this.httpSvc.get('User/GetRoles').subscribe(response => {
-      this.roles = response.sort((a: any, b: any) => a.name.localeCompare(b.name));;
+      this.roles = response.sort((a: any, b: any) =>
+        a.name.localeCompare(b.name)
+      );
     });
-
-
 
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEdit = true;
       this.loadUserDetails(id);
     } else {
-      this.userForm.addValidators(ConfirmPasswordValidator(this.userForm.get('password'), this.userForm.get('confirmPassword')))
+      this.userForm.addValidators(
+        ConfirmPasswordValidator(
+          this.userForm.get('password'),
+          this.userForm.get('confirmPassword')
+        )
+      );
     }
   }
 
@@ -56,14 +71,13 @@ export class UserFormComponent implements OnInit {
     this.httpSvc.get(`User/GetUserById/${id}`).subscribe(response => {
       console.log(response);
 
-
       this.userForm.patchValue({
         id: response.userId,
         firstName: response.firstName,
         lastName: response.lastName,
         email: response.userName,
-        role: response.role
-      })
+        role: response.role,
+      });
 
       this.userForm.get('password')?.setValidators(null);
       this.userForm.get('password')?.setErrors(null);
@@ -72,11 +86,15 @@ export class UserFormComponent implements OnInit {
       this.userForm.get('email')?.disable();
 
       this.userForm.updateValueAndValidity();
-    })
+    });
   }
 
   validateControl(controlName: string): boolean {
-    if ((this.userForm.get(controlName)?.dirty || this.userForm.get(controlName)?.touched) && this.userForm.get(controlName)?.invalid) {
+    if (
+      (this.userForm.get(controlName)?.dirty ||
+        this.userForm.get(controlName)?.touched) &&
+      this.userForm.get(controlName)?.invalid
+    ) {
       return true;
     }
     return false;
@@ -93,39 +111,52 @@ export class UserFormComponent implements OnInit {
       url = 'User/Update';
     }
 
-    this.httpSvc.post(url, this.userForm.getRawValue()).subscribe(response => {
-      this.messageService.add({
-        severity: response.status.toLowerCase(),
-        summary: 'Save Record',
-        detail: response.message,
-      });
+    this.httpSvc.post(url, this.userForm.getRawValue()).subscribe(
+      response => {
+        this.messageService.add({
+          severity: response.status.toLowerCase(),
+          summary: 'Save Record',
+          detail: response.message,
+        });
 
-      this.router.navigate(['users'])
-    },
+        this.router.navigate(['users']);
+      },
       error => {
         this.messageService.add({
           severity: 'error',
           summary: 'Save Record',
           detail: error.error.message,
         });
-      })
+      }
+    );
   }
 
   changePassword() {
     //console.log(event.target.value)
     if (!this.isEdit) {
-      return
+      return;
     }
 
-    if (this.userForm.get('password')?.value || this.userForm.get('confirmPassword')?.value) {
-      this.userForm.get('password')?.setValidators([ Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)]);
-      this.userForm.addValidators(ConfirmPasswordValidator(this.userForm.get('password'), this.userForm.get('confirmPassword')))
+    if (
+      this.userForm.get('password')?.value ||
+      this.userForm.get('confirmPassword')?.value
+    ) {
+      this.userForm
+        .get('password')
+        ?.setValidators([
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/),
+        ]);
+      this.userForm.addValidators(
+        ConfirmPasswordValidator(
+          this.userForm.get('password'),
+          this.userForm.get('confirmPassword')
+        )
+      );
 
       //workaround for not working validator, need to find other way
       if (this.userForm.get('password')?.value.length < 8) {
         this.userForm.get('password')?.setErrors({ pattern: true });
       }
-
     } else {
       this.userForm.get('password')?.setValidators(null);
       this.userForm.get('password')?.setErrors(null);

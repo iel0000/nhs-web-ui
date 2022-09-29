@@ -23,10 +23,9 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
-import {ToolbarModule} from 'primeng/toolbar';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
-
 
 @NgModule({
   declarations: [],
@@ -50,7 +49,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     TableModule,
     ConfirmDialogModule,
     ToastModule,
-    ToolbarModule
+    ToolbarModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -73,7 +72,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     TableModule,
     ConfirmDialogModule,
     ToastModule,
-    ToolbarModule
+    ToolbarModule,
   ],
   providers: [MessageService, ConfirmationService],
 })
