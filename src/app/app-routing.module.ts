@@ -64,6 +64,12 @@ const routes: Routes = [
         data: { role: 'Admin' },
       },
       {
+        path: 'users/:action/:id',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'Admin' },
+      },
+      {
         path: 'users',
         component: UsersComponent,
         canActivate: [AuthGuard],

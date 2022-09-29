@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  constructor(private httpSvc: HttpService, private router: Router) {}
+  constructor(private httpSvc: HttpService, private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     console.log('init');
@@ -30,10 +31,35 @@ export class UsersComponent implements OnInit {
   }
 
   editUser(item: any) {
-    console.log(item);
+    this.router.navigate([`users/edit/${item.userId}`])
   }
 
   deleteUser(item: any) {
-    console.log(item);
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete selected record?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.httpSvc
+          .get(`User/Delete/${item.userId}`)
+          .subscribe(
+            response => {
+              this.messageService.add({
+                severity: response.status.toLowerCase(),
+                summary: 'Delete Record',
+                detail: response.message,
+              });
+              this.loadUsers();
+            },
+            error => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Delete Record',
+                detail: error.message,
+              });
+            }
+          );
+      },
+    });
   }
 }

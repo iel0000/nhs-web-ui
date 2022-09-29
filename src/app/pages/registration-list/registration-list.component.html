@@ -6,13 +6,15 @@
       </div>
     </div>
     <div class="p-fluid formgrid grid card border-0 rounded-lg">
-      <div class="field col-12 md:col-2 col-offset-10">
-        <button
-          pButton
-          type="button"
-          label="Create New"
-          icon="pi pi-plus-circle"
-          (click)="loadRegisterPage()"></button>
+      <div class="field col-12 md:col-12">
+        <p-toolbar styleClass="mb-4">
+          <ng-template pTemplate="left">
+          </ng-template>
+          <ng-template pTemplate="right">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-info"
+              (click)="loadRegisterPage()"></button>
+          </ng-template>
+        </p-toolbar>
       </div>
       <div class="field col-12 md:col-12">
         <p-table
