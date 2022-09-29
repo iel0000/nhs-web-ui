@@ -119,11 +119,13 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
       );
 
       if (this.id) {
-        this.router.navigate([`register/labRequisition/${this.id}`]);
+        // this.router.navigate([`register/labRequisition/${this.id}`]);
+        this.router.navigate([`register/review/${this.id}`]);
         return;
       }
 
-      this.router.navigate(['register/labRequisition']);
+      // this.router.navigate(['register/labRequisition']);
+      this.router.navigate(['register/review']);
     }
   }
 }

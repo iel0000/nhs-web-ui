@@ -25,8 +25,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.items = [
       { label: 'Personal Info', routerLink: 'personal' },
       { label: 'Visa Info', routerLink: 'visaInfo' },
-      { label: 'Laboratory Requisition', routerLink: 'labRequisition' },
-      { label: 'X-RAY Requisition', routerLink: 'xrayRequisition' },
+      // { label: 'Laboratory Requisition', routerLink: 'labRequisition' },
+      // { label: 'X-RAY Requisition', routerLink: 'xrayRequisition' },
       { label: 'Review', routerLink: 'review' },
     ];
   }

@@ -173,11 +173,13 @@ export class ReviewComponent implements OnInit, OnDestroy {
 
   back() {
     if (this.id) {
-      this.router.navigate([`register/xrayRequisition/${this.id}`]);
+      // this.router.navigate([`register/xrayRequisition/${this.id}`]);
+      this.router.navigate([`register/visaInfo/${this.id}`]);
       return;
     }
 
-    this.router.navigate(['register/xrayRequisition']);
+    // this.router.navigate(['register/xrayRequisition']);
+    this.router.navigate(['register/visaInfo']);
   }
 
   saveRecord() {

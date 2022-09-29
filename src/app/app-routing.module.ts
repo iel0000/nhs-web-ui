@@ -41,19 +41,19 @@ const routes: Routes = [
         children: [
           { path: 'personal/:id', component: PersonalComponent },
           { path: 'visaInfo/:id', component: VisaInfoComponent },
-          {
-            path: 'labRequisition/:id',
-            component: LabRequisitionComponent,
-          },
-          {
-            path: 'xrayRequisition/:id',
-            component: XrayRequisitionComponent,
-          },
+          // {
+          //   path: 'labRequisition/:id',
+          //   component: LabRequisitionComponent,
+          // },
+          // {
+          //   path: 'xrayRequisition/:id',
+          //   component: XrayRequisitionComponent,
+          // },
           { path: 'review/:id', component: ReviewComponent },
           { path: 'personal', component: PersonalComponent },
           { path: 'visaInfo', component: VisaInfoComponent },
-          { path: 'labRequisition', component: LabRequisitionComponent },
-          { path: 'xrayRequisition', component: XrayRequisitionComponent },
+          // { path: 'labRequisition', component: LabRequisitionComponent },
+          // { path: 'xrayRequisition', component: XrayRequisitionComponent },
           { path: 'review', component: ReviewComponent },
         ],
       },
