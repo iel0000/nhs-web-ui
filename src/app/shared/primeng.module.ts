@@ -24,6 +24,7 @@ import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -50,6 +51,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ConfirmDialogModule,
     ToastModule,
     ToolbarModule,
+    InputTextareaModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -73,6 +75,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ConfirmDialogModule,
     ToastModule,
     ToolbarModule,
+    InputTextareaModule,
   ],
   providers: [MessageService, ConfirmationService],
 })

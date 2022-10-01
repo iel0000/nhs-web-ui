@@ -67,7 +67,12 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
         });
       });
 
-    this.getVisaCategories();
+    this.registrationSvc.visaCategory$
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(element => {
+        this.visaCategory = element;
+      });
+
     this.getVisaTypes();
     this.getEmbassies();
   }
@@ -93,12 +98,8 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  getVisaCategories() {
-    this.registrationSvc.visaCategory$
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(element => {
-        this.visaCategory = element;
-      });
+  getVisaCategories(event: any) {
+    this.registrationSvc.getVisaCategory(+event.value);
   }
 
   back() {

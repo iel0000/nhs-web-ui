@@ -32,10 +32,12 @@ export class RegistrationService {
     });
   }
 
-  getVisaCategory() {
-    this.httpService.get('Client/GetVisaCategories').subscribe(response => {
-      this._visaCategory.next(response);
-    });
+  getVisaCategory(embassyId: number) {
+    this.httpService
+      .get(`Client/GetVisaCategories/${embassyId}`)
+      .subscribe(response => {
+        this._visaCategory.next(response);
+      });
   }
 
   getVisaType() {
@@ -60,6 +62,8 @@ export class RegistrationService {
           id: response.id,
           personalInformation: {
             id: response.personalInformation.id,
+            personalCategory: response.personalInformation.personalCategory,
+            referral: response.personalInformation.referral,
             firstName: response.personalInformation.firstName,
             lastName: response.personalInformation.lastName,
             middleName: response.personalInformation.middleName,
@@ -70,6 +74,19 @@ export class RegistrationService {
             contactDetails: response.personalInformation.contactDetails,
             email: response.personalInformation.email,
             eMedicalRefNo: response.personalInformation.eMedicalRefNo,
+            civilStatus: response.personalInformation.civilStatus,
+            hasMenstrualPeriod: response.personalInformation.hasMenstrualPeriod,
+            menstrualPeriodStart:
+              response.personalInformation.menstrualPeriodStart,
+            menstrualPeriodEnd: response.personalInformation.menstrualPeriodEnd,
+            intendedOccupation: response.personalInformation.intendedOccupation,
+            hasPassport: response.personalInformation.hasPassport,
+            passportNumber: response.personalInformation.passportNumber,
+            dateIssued: response.personalInformation.dateIssued,
+            isExpired: response.personalInformation.isExpired,
+            otherId: response.personalInformation.otherId,
+            landLineNumber: response.personalInformation.landLineNumber,
+            isAcceptedTerms: response.personalInformation.isAcceptedTerms,
           },
           visaInformation: {
             id: response.visaInformation.id,

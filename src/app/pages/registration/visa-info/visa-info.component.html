@@ -22,7 +22,8 @@
                 'ng-dirty':
                   visaForm.get('embassy')?.dirty &&
                   visaForm.get('embassy')?.invalid
-              }"></p-dropdown>
+              }"
+              (onChange)="getVisaCategories($event)"></p-dropdown>
             <small
               *ngIf="
                 visaForm.get('embassy')?.dirty &&
@@ -79,7 +80,7 @@
                 visaForm.get('visaCategory')?.invalid
               "
               class="p-error"
-              >Gender is required.</small
+              >Visa Category is required.</small
             >
           </div>
         </div>

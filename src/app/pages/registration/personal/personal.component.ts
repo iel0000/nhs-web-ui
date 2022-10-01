@@ -6,6 +6,9 @@ import { Store } from '@ngrx/store';
 import { Subject, take, takeUntil } from 'rxjs';
 import { selectRecord, UpdatePersonalInformation } from '../store';
 import { Gender } from '@app/shared/constants/gender';
+import { IDropDown } from '@app/shared/interface';
+import { HttpService } from '@app/shared/services';
+import { CiviStatus } from '@app/shared/constants';
 
 @Component({
   selector: 'app-personal',
@@ -16,17 +19,26 @@ export class PersonalComponent implements OnInit, OnDestroy {
   personalForm: FormGroup;
   gender = Gender;
   id: any;
+  categories!: IDropDown[];
+  referrals!: IDropDown[];
+  civilStatus = CiviStatus;
 
   private ngUnsubscribe = new Subject<void>();
+  today: Date;
 
   constructor(
     private store: Store,
     private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private httpSvc: HttpService
   ) {
+    this.today = new Date();
+
     this.personalForm = this.formBuilder.group({
       id: 0,
+      personalCategory: ['', Validators.required],
+      referral: ['', Validators.required],
       firstName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       lastName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       middleName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
@@ -37,6 +49,18 @@ export class PersonalComponent implements OnInit, OnDestroy {
       email: '',
       address: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       eMedicalRefNo: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      civilStatus: ['', Validators.required],
+      hasMenstrualPeriod: false,
+      menstrualPeriodStart: '',
+      menstrualPeriodEnd: '',
+      intendedOccupation: ['', Validators.required],
+      hasPassport: false,
+      passportNumber: ['', Validators.required],
+      dateIssued: ['', Validators.required],
+      isExpired: [false, Validators.required],
+      otherId: '',
+      landLineNumber: ['', Validators.required],
+      isAcceptedTerms: [false, Validators.required],
     });
   }
 
@@ -61,11 +85,34 @@ export class PersonalComponent implements OnInit, OnDestroy {
           eMedicalRefNo: s.personalInformation.eMedicalRefNo,
         });
       });
+
+    this.httpSvc.get('Client/GetPersonalCategories').subscribe(response => {
+      this.categories = response;
+    });
+
+    this.httpSvc.get('Client/GetReferrals').subscribe(response => {
+      this.referrals = response;
+    });
+
+    this.httpSvc.get('Client/GetReferrals').subscribe(response => {
+      this.referrals = response;
+    });
   }
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  validateControl(controlName: string): boolean {
+    if (
+      (this.personalForm.get(controlName)?.dirty ||
+        this.personalForm.get(controlName)?.touched) &&
+      this.personalForm.get(controlName)?.invalid
+    ) {
+      return true;
+    }
+    return false;
   }
 
   nextPage() {
@@ -103,5 +150,25 @@ export class PersonalComponent implements OnInit, OnDestroy {
     }
 
     this.personalForm.patchValue({ age: age });
+  }
+
+  validateMenstrualDates(event: any) {
+    console.log(event);
+    if (event.checked) {
+      this.personalForm.get('menstrualPeriodStart')?.patchValue('');
+      this.personalForm.get('menstrualPeriodEnd')?.patchValue('');
+      this.personalForm
+        .get('menstrualPeriodStart')
+        ?.addValidators(Validators.required);
+      this.personalForm
+        .get('menstrualPeriodEnd')
+        ?.addValidators(Validators.required);
+    } else {
+      this.personalForm.get('menstrualPeriodStart')?.removeValidators;
+      this.personalForm.get('menstrualPeriodEnd')?.removeValidators;
+    }
+
+    this.personalForm.get('menstrualPeriodStart')?.updateValueAndValidity();
+    this.personalForm.get('menstrualPeriodEnd')?.updateValueAndValidity();
   }
 }

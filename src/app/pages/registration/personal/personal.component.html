@@ -10,29 +10,43 @@
         <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="firstName"
-              >First Name<span style="color: red">*</span></label
+              >Child/Adult/PWD/Senior <span style="color: red">*</span></label
             >
-            <input
-              id="firstName"
-              type="text"
-              pInputText
-              formControlName="firstName"
+            <p-dropdown
+              [options]="categories"
+              placeholder="Select"
+              optionLabel="name"
+              [showClear]="true"
+              formControlName="personalCategory"
+              optionValue="code"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('firstName')?.dirty ||
-                    personalForm.get('firstName')?.touched) &&
-                  personalForm.get('firstName')?.invalid
-              }" />
-            <small
-              *ngIf="
-                (personalForm.get('firstName')?.dirty ||
-                  personalForm.get('firstName')?.touched) &&
-                personalForm.get('firstName')?.invalid
-              "
-              class="p-error"
-              >Firstname is required.</small
+                'ng-dirty': validateControl('personalCategory')
+              }"></p-dropdown>
+            <small *ngIf="validateControl('personalCategory')" class="p-error"
+              >Field is required.</small
             >
           </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="firstName"
+              >Referred by <span style="color: red">*</span></label
+            >
+            <p-dropdown
+              [options]="referrals"
+              placeholder="Select"
+              optionLabel="name"
+              [showClear]="true"
+              formControlName="referral"
+              optionValue="code"
+              [ngClass]="{
+                'ng-dirty': validateControl('referral')
+              }"></p-dropdown>
+            <small *ngIf="validateControl('referral')" class="p-error"
+              >Referred by is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="lastName"
               >Last Name <span style="color: red">*</span></label
@@ -43,19 +57,26 @@
               pInputText
               formControlName="lastName"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('lastName')?.dirty ||
-                    personalForm.get('lastName')?.touched) &&
-                  personalForm.get('lastName')?.invalid
+                'ng-dirty': validateControl('lastName')
               }" />
-            <small
-              *ngIf="
-                (personalForm.get('lastName')?.dirty ||
-                  personalForm.get('lastName')?.touched) &&
-                personalForm.get('lastName')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('lastName')" class="p-error"
               >Last Name is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="firstName"
+              >First Name <span style="color: red">*</span></label
+            >
+            <input
+              id="firstName"
+              type="text"
+              pInputText
+              formControlName="firstName"
+              [ngClass]="{
+                'ng-dirty': validateControl('firstName')
+              }" />
+            <small *ngIf="validateControl('firstName')" class="p-error"
+              >Firstname is required.</small
             >
           </div>
           <div class="field col-12 md:col-4">
@@ -68,44 +89,30 @@
               pInputText
               formControlName="middleName"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('middleName')?.dirty ||
-                    personalForm.get('middleName')?.touched) &&
-                  personalForm.get('middleName')?.invalid
+                'ng-dirty': validateControl('middleName')
               }" />
-            <small
-              *ngIf="
-                (personalForm.get('middleName')?.dirty ||
-                  personalForm.get('middleName')?.touched) &&
-                personalForm.get('middleName')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('middleName')" class="p-error"
               >Middle Name is required.</small
             >
           </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="birthDate"
-              >Date of Birth<span style="color: red">*</span></label
+              >Date of Birth <span style="color: red">*</span></label
             >
             <p-calendar
               inputId="icon"
               id="birthDate"
               formControlName="birthDate"
               (onSelect)="calculateAge()"
+              [maxDate]="today"
               (onInput)="calculateAge()"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('birthDate')?.dirty ||
-                    personalForm.get('birthDate')?.touched) &&
-                  personalForm.get('birthDate')?.invalid
+                'ng-dirty': validateControl('birthDate')
               }"></p-calendar>
-            <small
-              *ngIf="
-                (personalForm.get('birthDate')?.dirty ||
-                  personalForm.get('birthDate')?.touched) &&
-                personalForm.get('birthDate')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('birthDate')" class="p-error"
               >Date of Birth is required.</small
             >
           </div>
@@ -118,22 +125,34 @@
               id="age"
               formControlName="age"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('age')?.dirty ||
-                    personalForm.get('age')?.touched) &&
-                  personalForm.get('age')?.invalid
+                'ng-dirty': validateControl('age')
               }"
               readonly />
-            <small
-              *ngIf="
-                (personalForm.get('age')?.dirty ||
-                  personalForm.get('age')?.touched) &&
-                personalForm.get('age')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('age')" class="p-error"
               >Age is required.</small
             >
           </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="firstName"
+              >Civil Status <span style="color: red">*</span></label
+            >
+            <p-dropdown
+              [options]="civilStatus"
+              placeholder="Select"
+              optionLabel="name"
+              [showClear]="true"
+              formControlName="civilStatus"
+              optionValue="name"
+              [ngClass]="{
+                'ng-dirty': validateControl('civilStatus')
+              }"></p-dropdown>
+            <small *ngIf="validateControl('civilStatus')" class="p-error"
+              >Civil Status is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="gender"
               >Gender<span style="color: red">*</span></label
@@ -146,47 +165,112 @@
               formControlName="gender"
               optionValue="name"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('gender')?.dirty ||
-                    personalForm.get('gender')?.touched) &&
-                  personalForm.get('gender')?.invalid
+                'ng-dirty': validateControl('gender')
               }"></p-dropdown>
-            <small
-              *ngIf="
-                (personalForm.get('gender')?.dirty ||
-                  personalForm.get('gender')?.touched) &&
-                personalForm.get('gender')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('gender')" class="p-error"
               >Gender is required.</small
             >
           </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
+          <div
+            class="field col-12 md:col-4"
+            *ngIf="personalForm.get('gender')?.value === 'Female'">
+            <label class="mb-1 mr-2" for="hasMenstrualPeriod"
+              >Is Menstrual Period Applicable?
+            </label>
+            <p-checkbox
+              [binary]="true"
+              inputId="hasMenstrualPeriod"
+              formControlName="hasMenstrualPeriod"
+              (onChange)="validateMenstrualDates($event)"></p-checkbox>
+          </div>
+        </div>
+
+        <div
+          class="p-fluid formgrid grid"
+          *ngIf="
+            personalForm.get('gender')?.value === 'Female' &&
+            personalForm.get('hasMenstrualPeriod')?.value === true
+          ">
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="menstrualPeriodStart"
+              >Menstrual Period Start <span style="color: red">*</span></label
+            >
+            <p-calendar
+              inputId="icon"
+              id="menstrualPeriodStart"
+              formControlName="menstrualPeriodStart"
+              [maxDate]="today"
+              [ngClass]="{
+                'ng-dirty': validateControl('menstrualPeriodStart')
+              }"></p-calendar>
+            <small
+              *ngIf="validateControl('menstrualPeriodStart')"
+              class="p-error"
+              >Menstrual Period Start is required.</small
+            >
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="menstrualPeriodEnd"
+              >Menstrual Period End <span style="color: red">*</span></label
+            >
+            <p-calendar
+              inputId="icon"
+              id="menstrualPeriodEnd"
+              formControlName="menstrualPeriodEnd"
+              [maxDate]="today"
+              [ngClass]="{
+                'ng-dirty': validateControl('menstrualPeriodEnd')
+              }"></p-calendar>
+            <small *ngIf="validateControl('menstrualPeriodEnd')" class="p-error"
+              >Menstrual Period End is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12">
+            <label class="mb-1" for="intendedOccupation"
+              >Intended Occupation / Activity / Study(Course)
+              <span style="color: red">*</span></label
+            >
+            <textarea
+              pInputTextarea
+              formControlName="intendedOccupation"
+              [rows]="5"
+              placeholder="Intended Occupation / Activity / Study(Course)"
+              [ngClass]="{
+                'ng-dirty': validateControl('intendedOccupation')
+              }"></textarea>
+            <small *ngIf="validateControl('intendedOccupation')" class="p-error"
+              >Intended Occupation / Activity / Study(Course) is
+              required.</small
+            >
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
           <div class="field col-12">
             <label class="mb-1" for="address"
               >Address<span style="color: red">*</span></label
             >
-            <input
-              id="address"
-              type="text"
-              pInputText
+            <textarea
+              pInputTextarea
               formControlName="address"
-              placeholder="123 Your Street"
+              [rows]="5"
+              placeholder="Address"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('address')?.dirty ||
-                    personalForm.get('address')?.touched) &&
-                  personalForm.get('address')?.invalid
-              }" />
-            <small
-              *ngIf="
-                (personalForm.get('address')?.dirty ||
-                  personalForm.get('address')?.touched) &&
-                personalForm.get('address')?.invalid
-              "
-              class="p-error"
+                'ng-dirty': validateControl('address')
+              }"></textarea>
+            <small *ngIf="validateControl('address')" class="p-error"
               >Address is required.</small
             >
           </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="contactDetails"
               >Contact Details<span style="color: red">*</span></label
@@ -197,21 +281,13 @@
               placeholder="09123456789"
               formControlName="contactDetails"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('contactDetails')?.dirty ||
-                    personalForm.get('contactDetails')?.touched) &&
-                  personalForm.get('contactDetails')?.invalid
+                'ng-dirty': validateControl('contactDetails')
               }"></p-inputMask>
-            <small
-              *ngIf="
-                (personalForm.get('contactDetails')?.dirty ||
-                  personalForm.get('contactDetails')?.touched) &&
-                personalForm.get('contactDetails')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('contactDetails')" class="p-error"
               >Contact Details is required.</small
             >
           </div>
+
           <div class="field col-12 md:col-4">
             <label class="small mb-1" for="email">Email Address</label>
             <input
@@ -222,21 +298,13 @@
               placeholder="sample@sample.com"
               (keypress)="validateEmail($event)"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('email')?.dirty ||
-                    personalForm.get('email')?.touched) &&
-                  personalForm.get('email')?.invalid
+                'ng-dirty': validateControl('email')
               }" />
-            <small
-              *ngIf="
-                (personalForm.get('email')?.dirty ||
-                  personalForm.get('email')?.touched) &&
-                personalForm.get('email')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('email')" class="p-error"
               >Invalid Email Format.</small
             >
           </div>
+
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="eMedicalRefNo"
               >eMedical Ref No<span style="color: red">*</span></label
@@ -248,18 +316,9 @@
               placeholder="123456"
               formControlName="eMedicalRefNo"
               [ngClass]="{
-                'ng-dirty':
-                  (personalForm.get('eMedicalRefNo')?.dirty ||
-                    personalForm.get('eMedicalRefNo')?.touched) &&
-                  personalForm.get('eMedicalRefNo')?.invalid
+                'ng-dirty': validateControl('eMedicalRefNo')
               }" />
-            <small
-              *ngIf="
-                (personalForm.get('eMedicalRefNo')?.dirty ||
-                  personalForm.get('eMedicalRefNo')?.touched) &&
-                personalForm.get('eMedicalRefNo')?.invalid
-              "
-              class="p-error"
+            <small *ngIf="validateControl('eMedicalRefNo')" class="p-error"
               >Date of Birth is required.</small
             >
           </div>
