@@ -30,6 +30,12 @@ export class ReviewComponent implements OnInit, OnDestroy {
   visaCategory: string | undefined;
   selectedLabRequisition: string[] = [];
   id: any;
+
+  categories!: string
+  referrals!: string
+  intendedWork!: string
+  lengthOfStay!: string
+
   constructor(
     private store: Store,
     private router: Router,
@@ -50,7 +56,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
         birthDate: '',
         age: '',
         gender: '',
-        contactDetails: '',
+        mobileNumber: '',
         email: '',
         address: '',
         eMedicalRefNo: '',
@@ -63,6 +69,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
         passportNumber: '',
         dateIssued: '',
         isExpired: false,
+        hasOtherId: false,
         otherId: '',
         landLineNumber: '',
         isAcceptedTerms: false,
@@ -72,6 +79,13 @@ export class ReviewComponent implements OnInit, OnDestroy {
         embassy: '',
         visaType: '',
         visaCategory: '',
+        isFirstVisa: '',
+        hasVisaRejected: '',
+        lengthOfStay: '0',
+        hasLetterReceived: '',
+        isTemporaryVisa: '',
+        isHealthAssessed: '',
+        intendedWork: '0'
       },
       labRequisition: {
         id: 0,
@@ -94,6 +108,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
     }
     return '-';
   }
+
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -120,6 +135,23 @@ export class ReviewComponent implements OnInit, OnDestroy {
     this.getVisaTypes();
     this.getEmbassies();
     this.getlabRequisition();
+
+    this.httpService.get('Client/GetPersonalCategories').subscribe(response => {
+      this.categories = response.find((x: any)=> x.code === this.personalInformation.personalCategory)?.name;
+    });
+
+    this.httpService.get('Client/GetReferrals').subscribe(response => {
+      this.referrals = response.find((x: any)=> x.code === this.personalInformation.referral)?.name;
+    });
+
+
+      this.httpService.get('Client/GetIntendedLengthOfStay').subscribe(response => {
+        this.lengthOfStay = response.find((x: any)=> x.code === this.visaInformation.lengthOfStay)?.name;
+      })
+  
+      this.httpService.get('Client/GetIntendedWork').subscribe(response => {
+        this.intendedWork = response.find((x: any)=> x.code === this.visaInformation.intendedWork)?.name;
+      })
   }
 
   ngOnDestroy(): void {

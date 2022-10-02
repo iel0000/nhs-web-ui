@@ -15,7 +15,7 @@ export interface IPersonalInformation {
   birthDate: string;
   age: string;
   gender: string;
-  contactDetails: string;
+  mobileNumber: string;
   email: string;
   address: string;
   eMedicalRefNo: string;
@@ -28,6 +28,7 @@ export interface IPersonalInformation {
   passportNumber: string;
   dateIssued: string;
   isExpired: boolean;
+  hasOtherId: boolean;
   otherId: string;
   landLineNumber: string;
   isAcceptedTerms: boolean;
@@ -38,6 +39,13 @@ export interface IVisaInformation {
   embassy: string;
   visaType: string;
   visaCategory: string;
+  isFirstVisa: string;
+  hasVisaRejected: string;
+  lengthOfStay: string;
+  hasLetterReceived: string;
+  isTemporaryVisa: string;
+  isHealthAssessed: string;
+  intendedWork: string;
 }
 
 export interface ILabRequisition {

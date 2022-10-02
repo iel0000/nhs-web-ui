@@ -62,8 +62,8 @@ export class RegistrationService {
           id: response.id,
           personalInformation: {
             id: response.personalInformation.id,
-            personalCategory: response.personalInformation.personalCategory,
-            referral: response.personalInformation.referral,
+            personalCategory: response.personalInformation.personalCategory.toString(),
+            referral: response.personalInformation.referral.toString(),
             firstName: response.personalInformation.firstName,
             lastName: response.personalInformation.lastName,
             middleName: response.personalInformation.middleName,
@@ -71,7 +71,7 @@ export class RegistrationService {
             age: response.personalInformation.age,
             gender: response.personalInformation.gender,
             address: response.personalInformation.address,
-            contactDetails: response.personalInformation.contactDetails,
+            mobileNumber: response.personalInformation.mobileNumber,
             email: response.personalInformation.email,
             eMedicalRefNo: response.personalInformation.eMedicalRefNo,
             civilStatus: response.personalInformation.civilStatus,
@@ -84,6 +84,7 @@ export class RegistrationService {
             passportNumber: response.personalInformation.passportNumber,
             dateIssued: response.personalInformation.dateIssued,
             isExpired: response.personalInformation.isExpired,
+            hasOtherId: response.personalInformation.hasOtherId,
             otherId: response.personalInformation.otherId,
             landLineNumber: response.personalInformation.landLineNumber,
             isAcceptedTerms: response.personalInformation.isAcceptedTerms,
@@ -93,12 +94,22 @@ export class RegistrationService {
             embassy: response.visaInformation.embassy.toString(),
             visaCategory: response.visaInformation.visaCategory.toString(),
             visaType: response.visaInformation.visaType.toString(),
+            isFirstVisa: response.visaInformation.isFirstVisa,
+            hasVisaRejected: response.visaInformation.hasVisaRejected,
+            lengthOfStay: response.visaInformation.lengthOfStay.toString(),
+            hasLetterReceived: response.visaInformation.hasLetterReceived,
+            isTemporaryVisa: response.visaInformation.isTemporaryVisa,
+            isHealthAssessed: response.visaInformation.isHealthAssessed,
+            intendedWork: response.visaInformation.intendedWork.toString()
           },
           labRequisition: {
             id: response.labRequisition.id,
             labRequisition: response.labRequisition.labRequisition,
           },
         };
+
+        this.getVisaCategory(response.visaInformation.embassy.toString())
+
         this.store.dispatch(
           LoadRegistrationRecord({
             payload: <IRegistration>registrationModel,

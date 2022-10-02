@@ -39,7 +39,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
-              <td>{{ item.id }}</td>
+              <td>{{ getControlNumber(item) }}</td>
               <td>{{ item.personalInformation.firstName }}</td>
               <td>{{ item.personalInformation.lastName }}</td>
               <td>{{ item.dateCreated | date: 'dd/MMM/yyyy' }}</td>
@@ -49,14 +49,20 @@
                   pButton
                   pRipple
                   icon="pi pi-pencil"
-                  class="p-button-rounded p-button-success mr-2"
+                  class="p-button-rounded p-button-text p-button-success"
                   (click)="editItem(item)"></button>
                 <button
                   pButton
                   pRipple
                   icon="pi pi-trash"
-                  class="p-button-rounded p-button-warning"
+                  class="p-button-rounded p-button-text p-button-danger"
                   (click)="deleteItem(item)"></button>
+                  <button
+                  pButton
+                  pRipple
+                  icon="pi pi-print"
+                  class="p-button-rounded p-button-text"
+                  (click)="generatePdf(item)"></button>
               </td>
             </tr>
           </ng-template>

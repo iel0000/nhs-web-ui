@@ -9,329 +9,230 @@
       <form class="mt-4" [formGroup]="personalForm">
         <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="firstName"
-              >Child/Adult/PWD/Senior <span style="color: red">*</span></label
-            >
-            <p-dropdown
-              [options]="categories"
-              placeholder="Select"
-              optionLabel="name"
-              [showClear]="true"
-              formControlName="personalCategory"
-              optionValue="code"
-              [ngClass]="{
+            <label class="mb-1" for="firstName">Child/Adult/PWD/Senior <span style="color: red">*</span></label>
+            <p-dropdown [options]="categories" placeholder="Select" optionLabel="name" [showClear]="true"
+              formControlName="personalCategory" optionValue="code" [ngClass]="{
                 'ng-dirty': validateControl('personalCategory')
               }"></p-dropdown>
-            <small *ngIf="validateControl('personalCategory')" class="p-error"
-              >Field is required.</small
-            >
+            <small *ngIf="validateControl('personalCategory')" class="p-error">Field is required.</small>
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="firstName"
-              >Referred by <span style="color: red">*</span></label
-            >
-            <p-dropdown
-              [options]="referrals"
-              placeholder="Select"
-              optionLabel="name"
-              [showClear]="true"
-              formControlName="referral"
-              optionValue="code"
-              [ngClass]="{
+            <label class="mb-1" for="firstName">Referred by <span style="color: red">*</span></label>
+            <p-dropdown [options]="referrals" placeholder="Select" optionLabel="name" [showClear]="true"
+              formControlName="referral" optionValue="code" [ngClass]="{
                 'ng-dirty': validateControl('referral')
               }"></p-dropdown>
-            <small *ngIf="validateControl('referral')" class="p-error"
-              >Referred by is required.</small
-            >
+            <small *ngIf="validateControl('referral')" class="p-error">Referred by is required.</small>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="eMedicalRefNo">eMedical Ref No<span style="color: red">*</span></label>
+            <input id="eMedicalRefNo" type="text" pInputText formControlName="eMedicalRefNo" [ngClass]="{
+                'ng-dirty': validateControl('eMedicalRefNo')
+              }" />
+            <small *ngIf="validateControl('eMedicalRefNo')" class="p-error">eMedical Ref No is required.</small>
           </div>
         </div>
 
         <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="lastName"
-              >Last Name <span style="color: red">*</span></label
-            >
-            <input
-              id="lastName"
-              type="text"
-              pInputText
-              formControlName="lastName"
-              [ngClass]="{
+            <label class="mb-1" for="lastName">Last Name <span style="color: red">*</span></label>
+            <input id="lastName" type="text" pInputText formControlName="lastName" [ngClass]="{
                 'ng-dirty': validateControl('lastName')
               }" />
-            <small *ngIf="validateControl('lastName')" class="p-error"
-              >Last Name is required.</small
-            >
+            <small *ngIf="validateControl('lastName')" class="p-error">Last Name is required.</small>
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="firstName"
-              >First Name <span style="color: red">*</span></label
-            >
-            <input
-              id="firstName"
-              type="text"
-              pInputText
-              formControlName="firstName"
-              [ngClass]="{
+            <label class="mb-1" for="firstName">First Name <span style="color: red">*</span></label>
+            <input id="firstName" type="text" pInputText formControlName="firstName" [ngClass]="{
                 'ng-dirty': validateControl('firstName')
               }" />
-            <small *ngIf="validateControl('firstName')" class="p-error"
-              >Firstname is required.</small
-            >
+            <small *ngIf="validateControl('firstName')" class="p-error">Firstname is required.</small>
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="middleName"
-              >Middle Name <span style="color: red">*</span></label
-            >
-            <input
-              id="middleName"
-              type="text"
-              pInputText
-              formControlName="middleName"
-              [ngClass]="{
+            <label class="mb-1" for="middleName">Middle Name <span style="color: red">*</span></label>
+            <input id="middleName" type="text" pInputText formControlName="middleName" [ngClass]="{
                 'ng-dirty': validateControl('middleName')
               }" />
-            <small *ngIf="validateControl('middleName')" class="p-error"
-              >Middle Name is required.</small
-            >
+            <small *ngIf="validateControl('middleName')" class="p-error">Middle Name is required.</small>
           </div>
         </div>
 
         <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="birthDate"
-              >Date of Birth <span style="color: red">*</span></label
-            >
-            <p-calendar
-              inputId="icon"
-              id="birthDate"
-              formControlName="birthDate"
-              (onSelect)="calculateAge()"
-              [maxDate]="today"
-              (onInput)="calculateAge()"
-              [ngClass]="{
+            <label class="mb-1" for="birthDate">Date of Birth <span style="color: red">*</span></label>
+            <p-calendar inputId="icon" id="birthDate" formControlName="birthDate" (onSelect)="calculateAge()"
+              [maxDate]="today" (onInput)="calculateAge()" [ngClass]="{
                 'ng-dirty': validateControl('birthDate')
               }"></p-calendar>
-            <small *ngIf="validateControl('birthDate')" class="p-error"
-              >Date of Birth is required.</small
-            >
+            <small *ngIf="validateControl('birthDate')" class="p-error">Date of Birth is required.</small>
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="age"
-              >Age<span style="color: red">*</span></label
-            >
-            <input
-              pInputText
-              id="age"
-              formControlName="age"
-              [ngClass]="{
+            <label class="mb-1" for="age">Age <span style="color: red">*</span></label>
+            <input pInputText id="age" formControlName="age" [ngClass]="{
                 'ng-dirty': validateControl('age')
-              }"
-              readonly />
-            <small *ngIf="validateControl('age')" class="p-error"
-              >Age is required.</small
-            >
+              }" readonly />
+            <small *ngIf="validateControl('age')" class="p-error">Age is required.</small>
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="firstName"
-              >Civil Status <span style="color: red">*</span></label
-            >
-            <p-dropdown
-              [options]="civilStatus"
-              placeholder="Select"
-              optionLabel="name"
-              [showClear]="true"
-              formControlName="civilStatus"
-              optionValue="name"
-              [ngClass]="{
+            <label class="mb-1" for="civilStatus">Civil Status <span style="color: red">*</span></label>
+            <p-dropdown [options]="civilStatus" placeholder="Select" optionLabel="name" [showClear]="true"
+              formControlName="civilStatus" optionValue="name" [ngClass]="{
                 'ng-dirty': validateControl('civilStatus')
               }"></p-dropdown>
-            <small *ngIf="validateControl('civilStatus')" class="p-error"
-              >Civil Status is required.</small
-            >
+            <small *ngIf="validateControl('civilStatus')" class="p-error">Civil Status is required.</small>
           </div>
         </div>
 
         <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="gender"
-              >Gender<span style="color: red">*</span></label
-            >
-            <p-dropdown
-              [options]="gender"
-              placeholder="Select Gender"
-              optionLabel="name"
-              [showClear]="true"
-              formControlName="gender"
-              optionValue="name"
-              [ngClass]="{
+            <label class="mb-1" for="gender">Gender <span style="color: red">*</span></label>
+            <p-dropdown [options]="gender" placeholder="Select Gender" optionLabel="name" [showClear]="true"
+              formControlName="gender" optionValue="name" [ngClass]="{
                 'ng-dirty': validateControl('gender')
               }"></p-dropdown>
-            <small *ngIf="validateControl('gender')" class="p-error"
-              >Gender is required.</small
-            >
+            <small *ngIf="validateControl('gender')" class="p-error">Gender is required.</small>
           </div>
         </div>
 
-        <div class="p-fluid formgrid grid">
-          <div
-            class="field col-12 md:col-4"
-            *ngIf="personalForm.get('gender')?.value === 'Female'">
-            <label class="mb-1 mr-2" for="hasMenstrualPeriod"
-              >Is Menstrual Period Applicable?
+        <div class="p-fluid formgrid grid" *ngIf="personalForm.get('gender')?.value === 'Female'">
+          <div class="field col-12 md:col-4" >
+            <label class="mb-1 mr-2" for="hasMenstrualPeriod">Is Menstrual Period Applicable?
             </label>
-            <p-checkbox
-              [binary]="true"
-              inputId="hasMenstrualPeriod"
-              formControlName="hasMenstrualPeriod"
-              (onChange)="validateMenstrualDates($event)"></p-checkbox>
+            <p-checkbox [binary]="true" inputId="hasMenstrualPeriod" formControlName="hasMenstrualPeriod"
+              class="vertical-align-top" (onChange)="validateMenstrualDates($event)"></p-checkbox>
           </div>
         </div>
 
-        <div
-          class="p-fluid formgrid grid"
-          *ngIf="
+        <div class="p-fluid formgrid grid" *ngIf="
             personalForm.get('gender')?.value === 'Female' &&
             personalForm.get('hasMenstrualPeriod')?.value === true
           ">
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="menstrualPeriodStart"
-              >Menstrual Period Start <span style="color: red">*</span></label
-            >
-            <p-calendar
-              inputId="icon"
-              id="menstrualPeriodStart"
-              formControlName="menstrualPeriodStart"
-              [maxDate]="today"
-              [ngClass]="{
+            <label for="menstrualPeriodStart">Menstrual Period Start <span style="color: red">*</span></label>
+            <p-calendar inputId="icon" id="menstrualPeriodStart" formControlName="menstrualPeriodStart"
+              [maxDate]="today" [ngClass]="{
                 'ng-dirty': validateControl('menstrualPeriodStart')
               }"></p-calendar>
-            <small
-              *ngIf="validateControl('menstrualPeriodStart')"
-              class="p-error"
-              >Menstrual Period Start is required.</small
-            >
+            <small *ngIf="validateControl('menstrualPeriodStart')" class="p-error">Menstrual Period Start is
+              required.</small>
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="menstrualPeriodEnd"
-              >Menstrual Period End <span style="color: red">*</span></label
-            >
-            <p-calendar
-              inputId="icon"
-              id="menstrualPeriodEnd"
-              formControlName="menstrualPeriodEnd"
-              [maxDate]="today"
+            <label class="mb-1" for="menstrualPeriodEnd">Menstrual Period End <span style="color: red">*</span></label>
+            <p-calendar inputId="icon" id="menstrualPeriodEnd" formControlName="menstrualPeriodEnd" [maxDate]="today"
               [ngClass]="{
                 'ng-dirty': validateControl('menstrualPeriodEnd')
               }"></p-calendar>
-            <small *ngIf="validateControl('menstrualPeriodEnd')" class="p-error"
-              >Menstrual Period End is required.</small
-            >
+            <small *ngIf="validateControl('menstrualPeriodEnd')" class="p-error">Menstrual Period End is
+              required.</small>
           </div>
         </div>
 
         <div class="p-fluid formgrid grid">
           <div class="field col-12">
-            <label class="mb-1" for="intendedOccupation"
-              >Intended Occupation / Activity / Study(Course)
-              <span style="color: red">*</span></label
-            >
-            <textarea
-              pInputTextarea
-              formControlName="intendedOccupation"
-              [rows]="5"
-              placeholder="Intended Occupation / Activity / Study(Course)"
-              [ngClass]="{
+            <label class="mb-1" for="intendedOccupation">Intended Occupation / Activity / Study(Course)
+              <span style="color: red">*</span></label>
+            <textarea pInputTextarea formControlName="intendedOccupation" [rows]="5"
+              placeholder="Intended Occupation / Activity / Study(Course)" [ngClass]="{
                 'ng-dirty': validateControl('intendedOccupation')
               }"></textarea>
-            <small *ngIf="validateControl('intendedOccupation')" class="p-error"
-              >Intended Occupation / Activity / Study(Course) is
-              required.</small
-            >
+            <small *ngIf="validateControl('intendedOccupation')" class="p-error">Intended Occupation / Activity /
+              Study(Course) is
+              required.</small>
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-4">
+            <label class="small mb-1" for="passportNumber">Passport Number <span style="color: red">*</span></label>
+            <input id="passportNumber" type="text" pInputText formControlName="passportNumber" [ngClass]="{
+                'ng-dirty': validateControl('passportNumber')
+              }" />
+            <small *ngIf="validateControl('passportNumber')" class="p-error">Passport Number is Required.</small>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="dateIssued">Date Issued <span style="color: red">*</span></label>
+            <p-calendar inputId="icon" id="dateIssued" formControlName="dateIssued" [maxDate]="today" [ngClass]="{
+                'ng-dirty': validateControl('dateIssued')
+              }"></p-calendar>
+            <small *ngIf="validateControl('dateIssued')" class="p-error">Date Issued is required.</small>
+          </div>
+          <div class="field col-12 md:col-4 my-5">
+            <label class="mr-2" for="isExpired">Expired in 6 Months?
+            </label>
+            <p-checkbox [binary]="true" inputId="isExpired" class="vertical-align-top" formControlName="isExpired">
+            </p-checkbox>
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-2 my-5">
+            <label class="mr-2" for="hasOtherId">Other ID
+            </label>
+            <p-checkbox [binary]="true" inputId="hasOtherId" class="vertical-align-top" formControlName="hasOtherId" (onChange)="validateOtherId($event)">
+            </p-checkbox>
+          </div>
+          <div class="field col-12 md:col-4" *ngIf="personalForm.get('hasOtherId')?.value === true">
+            <label class="small mb-1" for="otherId">Other ID <span style="color: red">*</span></label>
+            <input id="otherId" type="text" pInputText formControlName="otherId" [ngClass]="{
+                'ng-dirty': validateControl('otherId')
+              }" />
+            <small *ngIf="validateControl('otherId')" class="p-error">Other ID is Required.</small>
+          </div>
+        </div>
+
+        <div class="p-fluid formgrid grid">
+          <div class="field col-12 md:col-4">
+            <label class="small mb-1" for="email">Email Address</label>
+            <input id="email" type="text" pInputText formControlName="email" placeholder="sample@sample.com"
+              (keypress)="validateEmail($event)" [ngClass]="{
+                'ng-dirty': validateControl('email')
+              }" />
+            <small *ngIf="validateControl('email')" class="p-error">Invalid Email Format.</small>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="mobileNumber">Mobile Number <span style="color: red">*</span></label>
+            <input type="text" pInputText pKeyFilter="int" formControlName="mobileNumber" inputId="mobileNumber"
+              [ngClass]="{
+            'ng-dirty': validateControl('mobileNumber')
+          }">
+            <small *ngIf="validateControl('mobileNumber')" class="p-error">Mobile Number is required.</small>
+          </div>
+          <div class="field col-12 md:col-4">
+            <label class="mb-1" for="landLineNumber">Landline Number <span style="color: red">*</span></label>
+            <input type="text" pInputText pKeyFilter="int" formControlName="landLineNumber" inputId="landLineNumber"
+              [ngClass]="{
+            'ng-dirty': validateControl('landLineNumber')
+          }">
+            <small *ngIf="validateControl('landLineNumber')" class="p-error">Landline Number is required.</small>
           </div>
         </div>
 
         <div class="p-fluid formgrid grid">
           <div class="field col-12">
-            <label class="mb-1" for="address"
-              >Address<span style="color: red">*</span></label
-            >
-            <textarea
-              pInputTextarea
-              formControlName="address"
-              [rows]="5"
-              placeholder="Address"
-              [ngClass]="{
+            <label class="mb-1" for="address">Address <span style="color: red">*</span></label>
+            <textarea pInputTextarea formControlName="address" [rows]="5" placeholder="Address" [ngClass]="{
                 'ng-dirty': validateControl('address')
               }"></textarea>
-            <small *ngIf="validateControl('address')" class="p-error"
-              >Address is required.</small
-            >
+            <small *ngIf="validateControl('address')" class="p-error">Address is required.</small>
           </div>
         </div>
 
         <div class="p-fluid formgrid grid">
-          <div class="field col-12 md:col-4">
-            <label class="mb-1" for="contactDetails"
-              >Contact Details<span style="color: red">*</span></label
-            >
-            <p-inputMask
-              id="contactDetails"
-              mask="99999999999"
-              placeholder="09123456789"
-              formControlName="contactDetails"
-              [ngClass]="{
-                'ng-dirty': validateControl('contactDetails')
-              }"></p-inputMask>
-            <small *ngIf="validateControl('contactDetails')" class="p-error"
-              >Contact Details is required.</small
-            >
-          </div>
-
-          <div class="field col-12 md:col-4">
-            <label class="small mb-1" for="email">Email Address</label>
-            <input
-              id="email"
-              type="text"
-              pInputText
-              formControlName="email"
-              placeholder="sample@sample.com"
-              (keypress)="validateEmail($event)"
-              [ngClass]="{
-                'ng-dirty': validateControl('email')
-              }" />
-            <small *ngIf="validateControl('email')" class="p-error"
-              >Invalid Email Format.</small
-            >
-          </div>
-
-          <div class="field col-12 md:col-4">
-            <label class="mb-1" for="eMedicalRefNo"
-              >eMedical Ref No<span style="color: red">*</span></label
-            >
-            <input
-              id="eMedicalRefNo"
-              type="text"
-              pInputText
-              placeholder="123456"
-              formControlName="eMedicalRefNo"
-              [ngClass]="{
-                'ng-dirty': validateControl('eMedicalRefNo')
-              }" />
-            <small *ngIf="validateControl('eMedicalRefNo')" class="p-error"
-              >Date of Birth is required.</small
-            >
+          <div class="field col-12">            
+            <p-checkbox [binary]="true" inputId="isAcceptedTerms" class="vertical-align-top mr-2" formControlName="isAcceptedTerms">
+            </p-checkbox>
+            <label for="isAcceptedTerms">I hereby declare that I have never had a previous medical examination
+              <strong>ANYWHERE</strong> as part of an embassy's visa or immigration requirement and that the information
+              contained herein are <strong>TRUE</strong> and <strong>Correct</strong>
+            </label>
           </div>
         </div>
+
       </form>
     </ng-template>
     <ng-template pTemplate="footer">
       <div class="grid grid-nogutter justify-content-end">
-        <p-button
-          label="Next"
-          (onClick)="nextPage()"
-          icon="pi pi-angle-right"
-          iconPos="right"
+        <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"
           [disabled]="personalForm.invalid"></p-button>
       </div>
     </ng-template>

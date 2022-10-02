@@ -45,7 +45,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
       birthDate: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       age: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       gender: ['', [Validators.required, Validators.pattern(/[\S]/)]],
-      contactDetails: ['', [Validators.required, Validators.pattern(/[\S]/)]],
+      mobileNumber: ['', [Validators.required]],
       email: '',
       address: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       eMedicalRefNo: ['', [Validators.required, Validators.pattern(/[\S]/)]],
@@ -58,9 +58,10 @@ export class PersonalComponent implements OnInit, OnDestroy {
       passportNumber: ['', Validators.required],
       dateIssued: ['', Validators.required],
       isExpired: [false, Validators.required],
+      hasOtherId: false,
       otherId: '',
       landLineNumber: ['', Validators.required],
-      isAcceptedTerms: [false, Validators.required],
+      isAcceptedTerms: [false, Validators.requiredTrue],
     });
   }
 
@@ -73,6 +74,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
       .subscribe(s => {
         this.personalForm.patchValue({
           id: s.personalInformation.id,
+          personalCategory: s.personalInformation.personalCategory,
+          referral: s.personalInformation.referral,
           firstName: s.personalInformation.firstName,
           lastName: s.personalInformation.lastName,
           middleName: s.personalInformation.middleName,
@@ -80,9 +83,22 @@ export class PersonalComponent implements OnInit, OnDestroy {
           age: s.personalInformation.age,
           gender: s.personalInformation.gender,
           address: s.personalInformation.address,
-          contactDetails: s.personalInformation.contactDetails,
+          mobileNumber: s.personalInformation.mobileNumber,
           email: s.personalInformation.email,
           eMedicalRefNo: s.personalInformation.eMedicalRefNo,
+          civilStatus: s.personalInformation.civilStatus,
+          hasMenstrualPeriod: s.personalInformation.hasMenstrualPeriod,
+          menstrualPeriodStart: s.personalInformation.menstrualPeriodStart,
+          menstrualPeriodEnd: s.personalInformation.menstrualPeriodEnd,
+          intendedOccupation: s.personalInformation.intendedOccupation,
+          hasPassport: s.personalInformation.hasPassport,
+          passportNumber: s.personalInformation.passportNumber,
+          dateIssued: s.personalInformation.dateIssued,
+          isExpired: s.personalInformation.isExpired,
+          hasOtherId: s.personalInformation.hasOtherId,
+          otherId: s.personalInformation.otherId,
+          landLineNumber: s.personalInformation.landLineNumber,
+          isAcceptedTerms: s.personalInformation.isAcceptedTerms,
         });
       });
 
@@ -94,9 +110,6 @@ export class PersonalComponent implements OnInit, OnDestroy {
       this.referrals = response;
     });
 
-    this.httpSvc.get('Client/GetReferrals').subscribe(response => {
-      this.referrals = response;
-    });
   }
 
   ngOnDestroy() {
@@ -153,10 +166,10 @@ export class PersonalComponent implements OnInit, OnDestroy {
   }
 
   validateMenstrualDates(event: any) {
-    console.log(event);
+    
+    this.personalForm.get('menstrualPeriodStart')?.patchValue('');
+    this.personalForm.get('menstrualPeriodEnd')?.patchValue('');
     if (event.checked) {
-      this.personalForm.get('menstrualPeriodStart')?.patchValue('');
-      this.personalForm.get('menstrualPeriodEnd')?.patchValue('');
       this.personalForm
         .get('menstrualPeriodStart')
         ?.addValidators(Validators.required);
@@ -164,11 +177,23 @@ export class PersonalComponent implements OnInit, OnDestroy {
         .get('menstrualPeriodEnd')
         ?.addValidators(Validators.required);
     } else {
-      this.personalForm.get('menstrualPeriodStart')?.removeValidators;
-      this.personalForm.get('menstrualPeriodEnd')?.removeValidators;
+      this.personalForm.get('menstrualPeriodStart')?.setValidators(null);
+      this.personalForm.get('menstrualPeriodEnd')?.setValidators(null);
     }
 
     this.personalForm.get('menstrualPeriodStart')?.updateValueAndValidity();
     this.personalForm.get('menstrualPeriodEnd')?.updateValueAndValidity();
+  }
+
+  validateOtherId(event: any) {
+    this.personalForm.get('otherId')?.patchValue('');
+    if (event.checked) {      
+      this.personalForm.get('otherId')?.addValidators(Validators.required)
+    } else {
+      this.personalForm.get('otherId')?.setValidators(null);
+      this.personalForm.get('otherId')?.setErrors(null);
+    }
+
+    this.personalForm.get('otherId')?.updateValueAndValidity();
   }
 }

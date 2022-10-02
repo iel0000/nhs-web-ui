@@ -21,6 +21,8 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   embassy!: IDropDown[];
   visaType!: IDropDown[];
   visaCategory!: IDropDown[];
+  lengthOfStay!: IDropDown[];
+  intendedWork!: IDropDown[];
   id: any;
 
   private ngUnsubscribe = new Subject<void>();
@@ -39,6 +41,13 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
       embassy: ['', Validators.required],
       visaType: ['', Validators.required],
       visaCategory: ['', Validators.required],
+      isFirstVisa: ['', Validators.required],
+      hasVisaRejected: ['', Validators.required],
+      lengthOfStay: '0',
+      hasLetterReceived: '',
+      isTemporaryVisa: '',
+      isHealthAssessed: '',
+      intendedWork: '0'
     });
   }
 
@@ -64,6 +73,13 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
           embassy: s.visaInformation.embassy,
           visaType: s.visaInformation.visaType,
           visaCategory: s.visaInformation.visaCategory,
+          isFirstVisa: s.visaInformation.isFirstVisa,
+          hasVisaRejected: s.visaInformation.hasVisaRejected,
+          lengthOfStay: s.visaInformation.lengthOfStay,
+          hasLetterReceived: s.visaInformation.hasLetterReceived,
+          isTemporaryVisa: s.visaInformation.isTemporaryVisa,
+          isHealthAssessed: s.visaInformation.isHealthAssessed,
+          intendedWork: s.visaInformation.intendedWork
         });
       });
 
@@ -75,6 +91,8 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
 
     this.getVisaTypes();
     this.getEmbassies();
+    this.getLengthOfStay();
+    this.getIntendedWork();
   }
 
   ngOnDestroy(): void {
@@ -98,8 +116,45 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  getVisaCategories(event: any) {
-    this.registrationSvc.getVisaCategory(+event.value);
+  onEmbassyChange(event: any) {
+    let embassyId = +event.value
+    this.registrationSvc.getVisaCategory(embassyId);
+    
+
+    this.visaForm.get('isTemporaryVisa')?.patchValue('');
+    this.visaForm.get('isHealthAssessed')?.patchValue('');
+    this.visaForm.get('intendedWork')?.patchValue('0');
+    this.visaForm.get('lengthOfStay')?.patchValue('0');
+    this.visaForm.get('hasLetterReceived')?.patchValue('');
+
+    if(embassyId === 1) {
+      this.visaForm.get('isTemporaryVisa')?.setValidators(Validators.required);
+      this.visaForm.get('isHealthAssessed')?.setValidators(Validators.required);
+      this.visaForm.get('intendedWork')?.setValidators([Validators.required, Validators.min(1)]);
+      this.visaForm.get('lengthOfStay')?.setValidators(null);
+      this.visaForm.get('hasLetterReceived')?.setValidators(null);
+    }
+    else if(embassyId === 2) {
+      this.visaForm.get('hasLetterReceived')?.setValidators(Validators.required);
+      this.visaForm.get('isTemporaryVisa')?.setValidators(null);
+      this.visaForm.get('isHealthAssessed')?.setValidators(null);
+      this.visaForm.get('intendedWork')?.setValidators(null);
+      this.visaForm.get('lengthOfStay')?.setValidators(null);
+    }
+    else if(embassyId === 3) {
+      this.visaForm.get('lengthOfStay')?.setValidators([Validators.required, Validators.min(1)]);
+      this.visaForm.get('hasLetterReceived')?.setValidators(null);
+      this.visaForm.get('isTemporaryVisa')?.setValidators(null);
+      this.visaForm.get('isHealthAssessed')?.setValidators(null);
+      this.visaForm.get('intendedWork')?.setValidators(null);
+    }
+
+    this.visaForm.get('isTemporaryVisa')?.updateValueAndValidity();
+    this.visaForm.get('isHealthAssessed')?.updateValueAndValidity();
+    this.visaForm.get('intendedWork')?.updateValueAndValidity();
+    this.visaForm.get('lengthOfStay')?.updateValueAndValidity();
+    this.visaForm.get('hasLetterReceived')?.updateValueAndValidity();
+    
   }
 
   back() {
@@ -128,5 +183,28 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
       // this.router.navigate(['register/labRequisition']);
       this.router.navigate(['register/review']);
     }
+  }
+
+  validateControl(controlName: string): boolean {
+    if (
+      (this.visaForm.get(controlName)?.dirty ||
+        this.visaForm.get(controlName)?.touched) &&
+      this.visaForm.get(controlName)?.invalid
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  getLengthOfStay() {
+    this.httpService.get('Client/GetIntendedLengthOfStay').subscribe(response => {
+      this.lengthOfStay = response;
+    })
+  }
+
+  getIntendedWork() {
+    this.httpService.get('Client/GetIntendedWork').subscribe(response => {
+      this.intendedWork = response;
+    })
   }
 }

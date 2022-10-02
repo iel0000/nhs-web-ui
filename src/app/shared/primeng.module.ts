@@ -9,7 +9,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { SidebarModule } from 'primeng/sidebar';
-import { RadioButtonModule } from 'primeng/radiobutton';
+import {RadioButtonModule} from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RippleModule } from 'primeng/ripple';
@@ -25,6 +25,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {PanelModule} from 'primeng/panel';
+import {PanelMenuModule} from 'primeng/panelmenu';
+import {FieldsetModule} from 'primeng/fieldset';
+import {ChartModule} from 'primeng/chart';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -52,6 +58,12 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ToastModule,
     ToolbarModule,
     InputTextareaModule,
+    InputNumberModule,
+    KeyFilterModule,
+    PanelModule,
+    PanelMenuModule,
+    FieldsetModule,
+    ChartModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -61,8 +73,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     MenubarModule,
     ButtonModule,
     StyleClassModule,
-    AvatarGroupModule,
-    BadgeModule,
+    SidebarModule,
+    RadioButtonModule,
+    InputSwitchModule,
+    RippleModule,
     AvatarModule,
     CalendarModule,
     CheckboxModule,
@@ -70,12 +84,17 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     DropdownModule,
     StepsModule,
     CardModule,
-    InputMaskModule,
     TableModule,
     ConfirmDialogModule,
     ToastModule,
     ToolbarModule,
     InputTextareaModule,
+    InputNumberModule,
+    KeyFilterModule,
+    PanelModule,
+    PanelMenuModule,
+    FieldsetModule,
+    ChartModule
   ],
   providers: [MessageService, ConfirmationService],
 })

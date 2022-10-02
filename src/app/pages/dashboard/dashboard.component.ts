@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
   faBars = faBars;
   faBell = faBell;
   faChartLine = faChartLine;
+  basicData: any;
+  basicOptions: any;
 
   pageTitle: string | undefined;
   constructor(private http: HttpClient) {}
@@ -24,9 +26,20 @@ export class DashboardComponent implements OnInit {
       next: (result: any) => console.log(result),
       error: (err: HttpErrorResponse) => console.log(err),
     });
+
+    this.basicData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+          {
+              label: 'First Dataset',
+              data: [65, 59, 80, 81, 56, 55, 40],
+              fill: false,
+              borderColor: '#42A5F5',
+              tension: .4
+          }
+      ]
+  };
   }
 
-  // toggleNavbar(){
-  //   this.isOpen = !this.isOpen;
-  // }
+  
 }

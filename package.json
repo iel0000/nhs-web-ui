@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "build:prod": "ng build --configuration production",
-    "build:stage":  "ng build --configuration staging"
+    "build:stage": "ng build --configuration staging"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@ngrx/store": "^14.3.0",
     "bootstrap": "^5.2.0",
+    "chart.js": "^3.9.1",
     "jquery": "^3.6.0",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
