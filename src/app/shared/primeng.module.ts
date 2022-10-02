@@ -9,7 +9,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { SidebarModule } from 'primeng/sidebar';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RippleModule } from 'primeng/ripple';
@@ -25,12 +25,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {KeyFilterModule} from 'primeng/keyfilter';
-import {PanelModule} from 'primeng/panel';
-import {PanelMenuModule} from 'primeng/panelmenu';
-import {FieldsetModule} from 'primeng/fieldset';
-import {ChartModule} from 'primeng/chart';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { PanelModule } from 'primeng/panel';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ChartModule } from 'primeng/chart';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -63,7 +63,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     PanelModule,
     PanelMenuModule,
     FieldsetModule,
-    ChartModule
+    ChartModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -94,7 +94,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     PanelModule,
     PanelMenuModule,
     FieldsetModule,
-    ChartModule
+    ChartModule,
   ],
   providers: [MessageService, ConfirmationService],
 })

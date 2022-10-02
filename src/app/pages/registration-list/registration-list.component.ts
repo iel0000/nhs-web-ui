@@ -6,7 +6,7 @@ import {
   LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
-import { formatDate } from "@angular/common";
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-registration-list',
@@ -29,12 +29,11 @@ export class RegistrationListComponent implements OnInit {
     private httpSvc: HttpService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     console.log('init');
   }
-
 
   loadTableItems() {
     this.httpSvc.get('Client/GetRegistrationList').subscribe(
@@ -54,20 +53,22 @@ export class RegistrationListComponent implements OnInit {
   }
 
   getControlNumber(element: any): string {
-    let controlNumber = `${formatDate(element.dateCreated, 'yyyy-MM-dd', 'en-us')}-${this.padLeft(element.id, '0', 5)}`
+    let controlNumber = `${formatDate(
+      element.dateCreated,
+      'yyyy-MM-dd',
+      'en-us'
+    )}-${this.padLeft(element.id, '0', 5)}`;
 
     if (element.personalInformation.personalCategory === 3) {
-      controlNumber = `P-${controlNumber}`
-    }
-    else if (element.personalInformation.personalCategory === 4) {
-      controlNumber = `SC-${controlNumber}`
+      controlNumber = `P-${controlNumber}`;
+    } else if (element.personalInformation.personalCategory === 4) {
+      controlNumber = `SC-${controlNumber}`;
     }
     return controlNumber;
   }
 
-
   padLeft(text: string, padChar: string, size: number): string {
-    return (String(padChar).repeat(size) + text).substr((size * -1), size);
+    return (String(padChar).repeat(size) + text).substr(size * -1, size);
   }
 
   loadRegisterPage() {
@@ -109,6 +110,6 @@ export class RegistrationListComponent implements OnInit {
   }
 
   generatePdf(item: any) {
-    console.log(item.id)
+    console.log(item.id);
   }
 }

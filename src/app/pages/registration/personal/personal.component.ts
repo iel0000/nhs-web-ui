@@ -109,7 +109,6 @@ export class PersonalComponent implements OnInit, OnDestroy {
     this.httpSvc.get('Client/GetReferrals').subscribe(response => {
       this.referrals = response;
     });
-
   }
 
   ngOnDestroy() {
@@ -166,7 +165,6 @@ export class PersonalComponent implements OnInit, OnDestroy {
   }
 
   validateMenstrualDates(event: any) {
-    
     this.personalForm.get('menstrualPeriodStart')?.patchValue('');
     this.personalForm.get('menstrualPeriodEnd')?.patchValue('');
     if (event.checked) {
@@ -187,8 +185,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
 
   validateOtherId(event: any) {
     this.personalForm.get('otherId')?.patchValue('');
-    if (event.checked) {      
-      this.personalForm.get('otherId')?.addValidators(Validators.required)
+    if (event.checked) {
+      this.personalForm.get('otherId')?.addValidators(Validators.required);
     } else {
       this.personalForm.get('otherId')?.setValidators(null);
       this.personalForm.get('otherId')?.setErrors(null);

@@ -62,7 +62,8 @@ export class RegistrationService {
           id: response.id,
           personalInformation: {
             id: response.personalInformation.id,
-            personalCategory: response.personalInformation.personalCategory.toString(),
+            personalCategory:
+              response.personalInformation.personalCategory.toString(),
             referral: response.personalInformation.referral.toString(),
             firstName: response.personalInformation.firstName,
             lastName: response.personalInformation.lastName,
@@ -100,7 +101,7 @@ export class RegistrationService {
             hasLetterReceived: response.visaInformation.hasLetterReceived,
             isTemporaryVisa: response.visaInformation.isTemporaryVisa,
             isHealthAssessed: response.visaInformation.isHealthAssessed,
-            intendedWork: response.visaInformation.intendedWork.toString()
+            intendedWork: response.visaInformation.intendedWork.toString(),
           },
           labRequisition: {
             id: response.labRequisition.id,
@@ -108,7 +109,7 @@ export class RegistrationService {
           },
         };
 
-        this.getVisaCategory(response.visaInformation.embassy.toString())
+        this.getVisaCategory(response.visaInformation.embassy.toString());
 
         this.store.dispatch(
           LoadRegistrationRecord({

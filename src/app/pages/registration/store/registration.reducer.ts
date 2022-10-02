@@ -43,7 +43,7 @@ export const initialState: IRegistration = {
     hasLetterReceived: '',
     isTemporaryVisa: '',
     isHealthAssessed: '',
-    intendedWork: '0'
+    intendedWork: '0',
   },
   labRequisition: {
     id: 0,

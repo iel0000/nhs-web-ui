@@ -47,7 +47,7 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
       hasLetterReceived: '',
       isTemporaryVisa: '',
       isHealthAssessed: '',
-      intendedWork: '0'
+      intendedWork: '0',
     });
   }
 
@@ -79,7 +79,7 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
           hasLetterReceived: s.visaInformation.hasLetterReceived,
           isTemporaryVisa: s.visaInformation.isTemporaryVisa,
           isHealthAssessed: s.visaInformation.isHealthAssessed,
-          intendedWork: s.visaInformation.intendedWork
+          intendedWork: s.visaInformation.intendedWork,
         });
       });
 
@@ -117,9 +117,8 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   }
 
   onEmbassyChange(event: any) {
-    let embassyId = +event.value
+    let embassyId = +event.value;
     this.registrationSvc.getVisaCategory(embassyId);
-    
 
     this.visaForm.get('isTemporaryVisa')?.patchValue('');
     this.visaForm.get('isHealthAssessed')?.patchValue('');
@@ -127,22 +126,26 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
     this.visaForm.get('lengthOfStay')?.patchValue('0');
     this.visaForm.get('hasLetterReceived')?.patchValue('');
 
-    if(embassyId === 1) {
+    if (embassyId === 1) {
       this.visaForm.get('isTemporaryVisa')?.setValidators(Validators.required);
       this.visaForm.get('isHealthAssessed')?.setValidators(Validators.required);
-      this.visaForm.get('intendedWork')?.setValidators([Validators.required, Validators.min(1)]);
+      this.visaForm
+        .get('intendedWork')
+        ?.setValidators([Validators.required, Validators.min(1)]);
       this.visaForm.get('lengthOfStay')?.setValidators(null);
       this.visaForm.get('hasLetterReceived')?.setValidators(null);
-    }
-    else if(embassyId === 2) {
-      this.visaForm.get('hasLetterReceived')?.setValidators(Validators.required);
+    } else if (embassyId === 2) {
+      this.visaForm
+        .get('hasLetterReceived')
+        ?.setValidators(Validators.required);
       this.visaForm.get('isTemporaryVisa')?.setValidators(null);
       this.visaForm.get('isHealthAssessed')?.setValidators(null);
       this.visaForm.get('intendedWork')?.setValidators(null);
       this.visaForm.get('lengthOfStay')?.setValidators(null);
-    }
-    else if(embassyId === 3) {
-      this.visaForm.get('lengthOfStay')?.setValidators([Validators.required, Validators.min(1)]);
+    } else if (embassyId === 3) {
+      this.visaForm
+        .get('lengthOfStay')
+        ?.setValidators([Validators.required, Validators.min(1)]);
       this.visaForm.get('hasLetterReceived')?.setValidators(null);
       this.visaForm.get('isTemporaryVisa')?.setValidators(null);
       this.visaForm.get('isHealthAssessed')?.setValidators(null);
@@ -154,7 +157,6 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
     this.visaForm.get('intendedWork')?.updateValueAndValidity();
     this.visaForm.get('lengthOfStay')?.updateValueAndValidity();
     this.visaForm.get('hasLetterReceived')?.updateValueAndValidity();
-    
   }
 
   back() {
@@ -197,14 +199,16 @@ export class VisaInfoComponent implements OnInit, OnDestroy {
   }
 
   getLengthOfStay() {
-    this.httpService.get('Client/GetIntendedLengthOfStay').subscribe(response => {
-      this.lengthOfStay = response;
-    })
+    this.httpService
+      .get('Client/GetIntendedLengthOfStay')
+      .subscribe(response => {
+        this.lengthOfStay = response;
+      });
   }
 
   getIntendedWork() {
     this.httpService.get('Client/GetIntendedWork').subscribe(response => {
       this.intendedWork = response;
-    })
+    });
   }
 }
