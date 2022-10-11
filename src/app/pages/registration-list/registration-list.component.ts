@@ -9,6 +9,7 @@ import {
 import { formatDate } from '@angular/common';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { IRegistration } from '@app/shared/interface';
 const htmlToPdfmake = require('html-to-pdfmake');
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -27,6 +28,7 @@ export class RegistrationListComponent implements OnInit {
     { field: 'createdBy', header: 'CREATED BY' },
   ];
   isLoading: boolean = true;
+  detailsToPrint: any;
 
   @ViewChild('contentToConvert')
   contentToConvert!: ElementRef;
@@ -117,9 +119,73 @@ export class RegistrationListComponent implements OnInit {
   }
 
   generatePdf(item: any) {
+    this.httpSvc
+      .get(`Client/LoadRegistrationRecord/${item.id}`)
+      .subscribe(response => {
+        let registrationModel: IRegistration = {
+          id: response.id,
+          personalInformation: {
+            id: response.personalInformation.id,
+            personalCategory:
+              response.personalInformation.personalCategory.toString(),
+            referral: response.personalInformation.referral.toString(),
+            firstName: response.personalInformation.firstName,
+            lastName: response.personalInformation.lastName,
+            middleName: response.personalInformation.middleName,
+            birthDate: response.personalInformation.birthDate,
+            age: response.personalInformation.age,
+            gender: response.personalInformation.gender,
+            address: response.personalInformation.address,
+            mobileNumber: response.personalInformation.mobileNumber,
+            email: response.personalInformation.email,
+            eMedicalRefNo: response.personalInformation.eMedicalRefNo,
+            civilStatus: response.personalInformation.civilStatus,
+            hasMenstrualPeriod: response.personalInformation.hasMenstrualPeriod,
+            menstrualPeriodStart:
+              response.personalInformation.menstrualPeriodStart,
+            menstrualPeriodEnd: response.personalInformation.menstrualPeriodEnd,
+            intendedOccupation: response.personalInformation.intendedOccupation,
+            hasPassport: response.personalInformation.hasPassport,
+            passportNumber: response.personalInformation.passportNumber,
+            dateIssued: response.personalInformation.dateIssued,
+            isExpired: response.personalInformation.isExpired,
+            hasOtherId: response.personalInformation.hasOtherId,
+            otherId: response.personalInformation.otherId,
+            landLineNumber: response.personalInformation.landLineNumber,
+            isAcceptedTerms: response.personalInformation.isAcceptedTerms,
+          },
+          visaInformation: {
+            id: response.visaInformation.id,
+            embassy: response.visaInformation.embassy.toString(),
+            visaCategory: response.visaInformation.visaCategory.toString(),
+            visaType: response.visaInformation.visaType.toString(),
+            isFirstVisa: response.visaInformation.isFirstVisa,
+            hasVisaRejected: response.visaInformation.hasVisaRejected,
+            lengthOfStay: response.visaInformation.lengthOfStay.toString(),
+            hasLetterReceived: response.visaInformation.hasLetterReceived,
+            isTemporaryVisa: response.visaInformation.isTemporaryVisa,
+            isHealthAssessed: response.visaInformation.isHealthAssessed,
+            intendedWork: response.visaInformation.intendedWork.toString(),
+          },
+          labRequisition: {
+            id: response.labRequisition.id,
+            labRequisition: response.labRequisition.labRequisition,
+          },
+        };
+
+        this.detailsToPrint = registrationModel;
+
+        //make time to load properdetails
+        setTimeout(() => {
+          this.printPdf();
+        });
+      });
+  }
+  printPdf() {
     const pdfTable = this.contentToConvert.nativeElement;
     var html = htmlToPdfmake(pdfTable.innerHTML);
     const documentDefinition = { content: html };
     pdfMake.createPdf(documentDefinition).print();
+    this.detailsToPrint = null;
   }
 }
