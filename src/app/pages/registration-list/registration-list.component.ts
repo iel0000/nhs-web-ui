@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
 import {
@@ -7,6 +7,10 @@ import {
   MessageService,
 } from 'primeng/api';
 import { formatDate } from '@angular/common';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+const htmlToPdfmake = require('html-to-pdfmake');
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-registration-list',
@@ -23,6 +27,9 @@ export class RegistrationListComponent implements OnInit {
     { field: 'createdBy', header: 'CREATED BY' },
   ];
   isLoading: boolean = true;
+
+  @ViewChild('contentToConvert')
+  contentToConvert!: ElementRef;
 
   constructor(
     private router: Router,
@@ -110,6 +117,9 @@ export class RegistrationListComponent implements OnInit {
   }
 
   generatePdf(item: any) {
-    console.log(item.id);
+    const pdfTable = this.contentToConvert.nativeElement;
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).print();
   }
 }
