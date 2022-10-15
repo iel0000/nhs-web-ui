@@ -9,6 +9,7 @@ import { Gender } from '@app/shared/constants/gender';
 import { IDropDown } from '@app/shared/interface';
 import { HttpService } from '@app/shared/services';
 import { CiviStatus } from '@app/shared/constants';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-personal',
@@ -25,13 +26,16 @@ export class PersonalComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject<void>();
   today: Date;
+  birthDate!: string;
+  dateIssued!: string;
 
   constructor(
     private store: Store,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private httpSvc: HttpService
+    private httpSvc: HttpService,
+    private datePipe: DatePipe
   ) {
     this.today = new Date();
 
@@ -72,6 +76,19 @@ export class PersonalComponent implements OnInit, OnDestroy {
       .select(selectRecord)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(s => {
+        this.birthDate = s.personalInformation.birthDate
+          ? this.datePipe.transform(
+              new Date(s.personalInformation.birthDate),
+              'MM/dd/yyyy'
+            ) || ''
+          : '';
+        this.dateIssued = s.personalInformation.dateIssued
+          ? this.datePipe.transform(
+              new Date(s.personalInformation.dateIssued),
+              'MM/dd/yyyy'
+            ) || ''
+          : '';
+
         this.personalForm.patchValue({
           id: s.personalInformation.id,
           personalCategory: s.personalInformation.personalCategory,
@@ -79,7 +96,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
           firstName: s.personalInformation.firstName,
           lastName: s.personalInformation.lastName,
           middleName: s.personalInformation.middleName,
-          birthDate: s.personalInformation.birthDate,
+          birthDate: this.birthDate,
           age: s.personalInformation.age,
           gender: s.personalInformation.gender,
           address: s.personalInformation.address,
@@ -88,12 +105,16 @@ export class PersonalComponent implements OnInit, OnDestroy {
           eMedicalRefNo: s.personalInformation.eMedicalRefNo,
           civilStatus: s.personalInformation.civilStatus,
           hasMenstrualPeriod: s.personalInformation.hasMenstrualPeriod,
-          menstrualPeriodStart: s.personalInformation.menstrualPeriodStart,
-          menstrualPeriodEnd: s.personalInformation.menstrualPeriodEnd,
+          menstrualPeriodStart: s.personalInformation.menstrualPeriodStart
+            ? s.personalInformation.menstrualPeriodStart
+            : '',
+          menstrualPeriodEnd: s.personalInformation.menstrualPeriodEnd
+            ? s.personalInformation.menstrualPeriodEnd
+            : '',
           intendedOccupation: s.personalInformation.intendedOccupation,
           hasPassport: s.personalInformation.hasPassport,
           passportNumber: s.personalInformation.passportNumber,
-          dateIssued: s.personalInformation.dateIssued,
+          dateIssued: this.dateIssued,
           isExpired: s.personalInformation.isExpired,
           hasOtherId: s.personalInformation.hasOtherId,
           otherId: s.personalInformation.otherId,
@@ -155,6 +176,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
 
   calculateAge() {
     let control = this.personalForm.get('birthDate');
+    console.log(control?.value);
     let age = 0;
     if (!control?.invalid) {
       let timeDiff = Math.abs(Date.now() - new Date(control?.value).getTime());

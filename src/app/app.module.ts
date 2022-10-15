@@ -24,6 +24,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { UsersComponent } from './pages/users/users.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { DatePipe } from '@angular/common';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -71,6 +72,7 @@ export function tokenGetter() {
       useClass: LoadingInterceptor,
       multi: true,
     },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })

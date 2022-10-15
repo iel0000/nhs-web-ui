@@ -122,6 +122,8 @@
               inputId="icon"
               id="birthDate"
               formControlName="birthDate"
+              dataType="string"
+              [(ngModel)]="birthDate"
               (onSelect)="calculateAge()"
               [maxDate]="today"
               (onInput)="calculateAge()"
@@ -293,6 +295,8 @@
               inputId="icon"
               id="dateIssued"
               formControlName="dateIssued"
+              [(ngModel)]="dateIssued"
+              dataType="string"
               [maxDate]="today"
               [ngClass]="{
                 'ng-dirty': validateControl('dateIssued')

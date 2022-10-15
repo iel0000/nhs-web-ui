@@ -1,6 +1,7 @@
 import { ILabRequisition, IRegistration } from '@app/shared/interface';
 import { createReducer, on } from '@ngrx/store';
 import * as RegistrationPageActions from './registration.action';
+import { formatDate } from '@angular/common';
 
 export const initialState: IRegistration = {
   id: 0,
@@ -56,6 +57,16 @@ export const registrationPageReducer = createReducer(
   on(
     RegistrationPageActions.UpdatePersonalInformation,
     (state, { payload }): IRegistration => {
+      payload.birthDate = formatDate(
+        payload.birthDate,
+        'yyyy-MM-ddT00:00:00.000',
+        'en-US'
+      );
+      payload.dateIssued = formatDate(
+        payload.dateIssued,
+        'yyyy-MM-ddT00:00:00.000',
+        'en-US'
+      );
       return { ...state, personalInformation: payload };
     }
   ),
