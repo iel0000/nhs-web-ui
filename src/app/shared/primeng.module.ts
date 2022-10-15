@@ -31,6 +31,8 @@ import { PanelModule } from 'primeng/panel';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ChartModule } from 'primeng/chart';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { MenuModule } from 'primeng/menu';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -64,6 +66,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     PanelMenuModule,
     FieldsetModule,
     ChartModule,
+    MegaMenuModule,
+    MenuModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -95,6 +99,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     PanelMenuModule,
     FieldsetModule,
     ChartModule,
+    MegaMenuModule,
+    MenuModule,
   ],
   providers: [MessageService, ConfirmationService],
 })

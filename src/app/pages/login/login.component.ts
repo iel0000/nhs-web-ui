@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Logged In',
-            detail: `Welcome ${data.user}`,
+            detail: `Welcome ${data.firstName} ${data.lastName}`,
           });
           this.router.navigate(['dashboard']);
         },

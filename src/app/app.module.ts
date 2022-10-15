@@ -23,6 +23,7 @@ import { LoadingInterceptor } from '@core/interceptor';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UsersComponent } from './pages/users/users.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
+import { ErrorComponent } from './pages/error/error.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -43,6 +44,7 @@ export function tokenGetter() {
     SpinnerComponent,
     UsersComponent,
     UserFormComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
