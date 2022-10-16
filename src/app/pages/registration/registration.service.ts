@@ -4,6 +4,7 @@ import { HttpService } from '@app/shared/services';
 import { IRegistration } from '@app/shared/interface';
 import { Store } from '@ngrx/store';
 import { LoadRegistrationRecord } from './store';
+import { DatePipe } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
@@ -24,7 +25,11 @@ export class RegistrationService {
   private readonly _registrationRecord = new BehaviorSubject<any[]>([]);
   readonly registrationRecord$ = this._registrationRecord.asObservable();
 
-  constructor(private httpService: HttpService, private store: Store) {}
+  constructor(
+    private httpService: HttpService,
+    private store: Store,
+    private datePipe: DatePipe
+  ) {}
 
   getEmbassies() {
     this.httpService.get('Client/GetEmbassies').subscribe(response => {
@@ -68,7 +73,12 @@ export class RegistrationService {
             firstName: response.personalInformation.firstName,
             lastName: response.personalInformation.lastName,
             middleName: response.personalInformation.middleName,
-            birthDate: response.personalInformation.birthDate,
+            birthDate: response.personalInformation.birthDate
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.birthDate),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
             age: response.personalInformation.age,
             gender: response.personalInformation.gender,
             address: response.personalInformation.address,
@@ -77,13 +87,28 @@ export class RegistrationService {
             eMedicalRefNo: response.personalInformation.eMedicalRefNo,
             civilStatus: response.personalInformation.civilStatus,
             hasMenstrualPeriod: response.personalInformation.hasMenstrualPeriod,
-            menstrualPeriodStart:
-              response.personalInformation.menstrualPeriodStart,
-            menstrualPeriodEnd: response.personalInformation.menstrualPeriodEnd,
+            menstrualPeriodStart: response.personalInformation
+              .menstrualPeriodStart
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.menstrualPeriodStart),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
+            menstrualPeriodEnd: response.personalInformation.menstrualPeriodEnd
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.menstrualPeriodEnd),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
             intendedOccupation: response.personalInformation.intendedOccupation,
             hasPassport: response.personalInformation.hasPassport,
             passportNumber: response.personalInformation.passportNumber,
-            dateIssued: response.personalInformation.dateIssued,
+            dateIssued: response.personalInformation.dateIssued
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.dateIssued),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
             isExpired: response.personalInformation.isExpired,
             hasOtherId: response.personalInformation.hasOtherId,
             otherId: response.personalInformation.otherId,

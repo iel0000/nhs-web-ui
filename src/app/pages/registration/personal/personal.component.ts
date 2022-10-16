@@ -76,18 +76,8 @@ export class PersonalComponent implements OnInit, OnDestroy {
       .select(selectRecord)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(s => {
-        this.birthDate = s.personalInformation.birthDate
-          ? this.datePipe.transform(
-              new Date(s.personalInformation.birthDate),
-              'MM/dd/yyyy'
-            ) || ''
-          : '';
-        this.dateIssued = s.personalInformation.dateIssued
-          ? this.datePipe.transform(
-              new Date(s.personalInformation.dateIssued),
-              'MM/dd/yyyy'
-            ) || ''
-          : '';
+        this.birthDate = s.personalInformation.birthDate;
+        this.dateIssued = s.personalInformation.dateIssued;
 
         this.personalForm.patchValue({
           id: s.personalInformation.id,
