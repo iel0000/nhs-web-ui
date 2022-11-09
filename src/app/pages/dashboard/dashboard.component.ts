@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '@app/shared/services';
 import { environment } from '@environments/environment';
 import { faBars, faBell, faChartLine } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,17 +16,13 @@ export class DashboardComponent implements OnInit {
   faChartLine = faChartLine;
   basicData: any;
   basicOptions: any;
+  userCount!: number;
 
   pageTitle: string | undefined;
-  constructor(private http: HttpClient) {}
+  constructor(private httpSvc: HttpService,) {}
 
   ngOnInit() {
     this.pageTitle = 'Home';
-
-    this.http.get(`${environment.apiUrl}/api/Client/GetEmbassies`).subscribe({
-      next: (result: any) => console.log(result),
-      error: (err: HttpErrorResponse) => console.log(err),
-    });
 
     this.basicData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -39,5 +36,13 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
+
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.httpSvc.get('User/GetAllUsers').subscribe(response => {
+      this.userCount = response.length;
+    });
   }
 }
