@@ -34,10 +34,27 @@ export class MenuComponent implements OnInit {
             routerLink: ['registration-list'],
           },
           {
-            label: 'Users',
-            icon: 'pi pi-fw pi-user',
-            routerLink: ['users'],
-            visible: this.isAdmin,
+            label: 'Pending Appointments',
+            icon: 'pi pi-calendar',
+            routerLink: ['appointments'],
+          },
+          {
+            label: 'Admin',
+            icon: 'pi pi-fw pi-cog',
+            items: [
+              {
+                label: 'Users',
+                icon: 'pi pi-fw pi-user',
+                routerLink: ['admin/users'],
+                visible: this.isAdmin,
+              },
+              {
+                label: 'Branches',
+                icon: 'pi pi-fw pi-sitemap',
+                routerLink: ['admin/branches'],
+                visible: this.isAdmin,
+              },
+            ],
           },
         ],
       },

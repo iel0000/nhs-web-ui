@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card border-0 rounded-lg">
       <div class="card-header justify-content-center bg-white border-0">
-        <h3 class="my-2">Manage Users</h3>
+        <h3 class="my-2">Manage Branches</h3>
       </div>
     </div>
     <div class="p-fluid formgrid grid card border-0 rounded-lg">
@@ -16,33 +16,29 @@
               label="New"
               icon="pi pi-plus"
               class="p-button-info"
-              (click)="addUser()"></button>
+              (click)="addBranch()"></button>
           </ng-template>
         </p-toolbar>
         <p-table
           [value]="items"
           responsiveLayout="scroll"
           [lazy]="true"
-          (onLazyLoad)="loadUsers()"
+          (onLazyLoad)="loadBranches()"
           [loading]="isLoading">
           <ng-template pTemplate="header">
             <tr>
               <th>ID</th>
-              <th>EMAIL</th>
-              <th>FIRST NAME</th>
-              <th>LAST NAME</th>
-              <th>BRANCH DESIGNATION</th>
+              <th>BRANCH NAME</th>
+              <th>LOCATION</th>
               <th>DATE CREATED</th>
               <th>Action</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
-              <td>{{ item.userId }}</td>
-              <td>{{ item.email }}</td>
+              <td>{{ item.id }}</td>
               <td>{{ item.firstName }}</td>
               <td>{{ item.lastName }}</td>
-              <td>{{ item.branchName }}</td>
               <td>{{ item.dateCreated | date: 'dd/MMM/yyyy' }}</td>
               <td>
                 <button
@@ -50,13 +46,13 @@
                   pRipple
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-success mr-2"
-                  (click)="editUser(item)"></button>
+                  (click)="editBranch(item)"></button>
                 <button
                   pButton
                   pRipple
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-warning"
-                  (click)="deleteUser(item)"></button>
+                  (click)="deleteBranch(item)"></button>
               </td>
             </tr>
           </ng-template>

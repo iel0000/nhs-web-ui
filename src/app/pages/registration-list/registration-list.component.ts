@@ -124,6 +124,7 @@ export class RegistrationListComponent implements OnInit {
       .subscribe(response => {
         let registrationModel: IRegistration = {
           id: response.id,
+          branch: response.branchId,
           personalInformation: {
             id: response.personalInformation.id,
             personalCategory:

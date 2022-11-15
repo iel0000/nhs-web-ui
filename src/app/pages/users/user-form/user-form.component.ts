@@ -20,6 +20,7 @@ export class UserFormComponent implements OnInit {
   userForm: FormGroup;
   password: string = '';
   isEdit = false;
+  branches: any;
 
   constructor(
     private fb: FormBuilder,
@@ -43,12 +44,19 @@ export class UserFormComponent implements OnInit {
       ],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required],
+      branch: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.httpSvc.get('User/GetRoles').subscribe(response => {
+    this.httpSvc.get('Admin/GetRoles').subscribe(response => {
       this.roles = response.sort((a: any, b: any) =>
+        a.name.localeCompare(b.name)
+      );
+    });
+
+    this.httpSvc.get('Admin/GetAllBranches').subscribe(response => {
+      this.branches = response.sort((a: any, b: any) =>
         a.name.localeCompare(b.name)
       );
     });
@@ -68,7 +76,7 @@ export class UserFormComponent implements OnInit {
   }
 
   loadUserDetails(id: string) {
-    this.httpSvc.get(`User/GetUserById/${id}`).subscribe(response => {
+    this.httpSvc.get(`Admin/GetUserById/${id}`).subscribe(response => {
       console.log(response);
 
       this.userForm.patchValue({
@@ -77,6 +85,7 @@ export class UserFormComponent implements OnInit {
         lastName: response.lastName,
         email: response.userName,
         role: response.role,
+        branch: response.branch,
       });
 
       this.userForm.get('password')?.setValidators(null);
@@ -106,9 +115,9 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    let url = 'User/Create';
+    let url = 'Admin/Create';
     if (this.isEdit) {
-      url = 'User/Update';
+      url = 'Admin/Update';
     }
 
     this.httpSvc.post(url, this.userForm.getRawValue()).subscribe(
@@ -119,7 +128,7 @@ export class UserFormComponent implements OnInit {
           detail: response.message,
         });
 
-        this.router.navigate(['users']);
+        this.router.navigate(['admin/users']);
       },
       error => {
         this.messageService.add({

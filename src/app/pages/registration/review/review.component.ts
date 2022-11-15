@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@app/core/auth';
 import { statusMessage } from '@app/shared/constants';
 import { IChoices } from '@app/shared/interface';
 import {
@@ -42,10 +43,12 @@ export class ReviewComponent implements OnInit, OnDestroy {
     private registrationSvc: RegistrationService,
     private httpService: HttpService,
     private messageService: MessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authSvc: AuthenticationService
   ) {
     this.reviewForm = {
       id: 0,
+      branch: 0,
       personalInformation: {
         id: 0,
         personalCategory: '',
@@ -125,6 +128,9 @@ export class ReviewComponent implements OnInit, OnDestroy {
           this.router.navigate(['register/personal']);
         }
         this.reviewForm.id = s.id;
+        this.reviewForm.branch = s.branch
+          ? s.branch
+          : this.authSvc.currentUserValue.branchId;
         this.reviewForm.personalInformation = s.personalInformation;
         this.reviewForm.labRequisition = s.labRequisition;
         this.reviewForm.visaInformation = s.visaInformation;

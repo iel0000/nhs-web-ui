@@ -2,61 +2,47 @@
   <div class="col-lg-12">
     <div class="card border-0 rounded-lg">
       <div class="card-header justify-content-center bg-white border-0">
-        <h3 class="my-2">Manage Users</h3>
+        <h3 class="my-2">Pending Appointments</h3>
       </div>
     </div>
     <div class="p-fluid formgrid grid card border-0 rounded-lg">
       <div class="field col-12 md:col-12">
-        <p-toolbar styleClass="mb-4">
-          <ng-template pTemplate="left"> </ng-template>
-          <ng-template pTemplate="right">
-            <button
-              pButton
-              pRipple
-              label="New"
-              icon="pi pi-plus"
-              class="p-button-info"
-              (click)="addUser()"></button>
-          </ng-template>
-        </p-toolbar>
         <p-table
           [value]="items"
           responsiveLayout="scroll"
           [lazy]="true"
-          (onLazyLoad)="loadUsers()"
+          (onLazyLoad)="loadAppointments()"
           [loading]="isLoading">
           <ng-template pTemplate="header">
             <tr>
-              <th>ID</th>
+              <th>REFERENCE ID</th>
               <th>EMAIL</th>
               <th>FIRST NAME</th>
               <th>LAST NAME</th>
-              <th>BRANCH DESIGNATION</th>
-              <th>DATE CREATED</th>
+              <th>APPOINTMENT DATE</th>
               <th>Action</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
-              <td>{{ item.userId }}</td>
+              <td>{{ item.referenceNumber }}</td>
               <td>{{ item.email }}</td>
               <td>{{ item.firstName }}</td>
               <td>{{ item.lastName }}</td>
-              <td>{{ item.branchName }}</td>
-              <td>{{ item.dateCreated | date: 'dd/MMM/yyyy' }}</td>
+              <td>{{ item.appointmentDate | date: 'dd/MMM/yyyy' }}</td>
               <td>
                 <button
                   pButton
                   pRipple
-                  icon="pi pi-pencil"
+                  icon="pi pi-check"
                   class="p-button-rounded p-button-success mr-2"
-                  (click)="editUser(item)"></button>
+                  (click)="actionClicked(item, 0)"></button>
                 <button
                   pButton
                   pRipple
-                  icon="pi pi-trash"
+                  icon="pi pi-times"
                   class="p-button-rounded p-button-warning"
-                  (click)="deleteUser(item)"></button>
+                  (click)="actionClicked(item, 2)"></button>
               </td>
             </tr>
           </ng-template>

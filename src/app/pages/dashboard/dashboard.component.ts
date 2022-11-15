@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '@app/shared/services';
 import { environment } from '@environments/environment';
 import { faBars, faBell, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +18,19 @@ export class DashboardComponent implements OnInit {
   basicData: any;
   basicOptions: any;
   userCount!: number;
+  appointmentCount!: number;
+  registrationCount!: number;
 
   pageTitle: string | undefined;
-  constructor(private httpSvc: HttpService,) {}
+  constructor(
+    private httpSvc: HttpService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.pageTitle = 'Home';
 
+    //Todo get details from DB
     this.basicData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
@@ -38,11 +45,52 @@ export class DashboardComponent implements OnInit {
     };
 
     this.loadUsers();
+    this.loadPendingAppointments();
+    this.loadRegistration();
   }
 
   loadUsers() {
-    this.httpSvc.get('User/GetAllUsers').subscribe(response => {
-      this.userCount = response.length;
-    });
+    this.httpSvc.get('Admin/GetAllUsers').subscribe(
+      response => {
+        this.userCount = response.length;
+      },
+      error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Get User Count',
+          detail: error.message,
+        });
+      }
+    );
+  }
+
+  loadPendingAppointments() {
+    this.httpSvc.get('Appointment/GetPendingAppointments').subscribe(
+      response => {
+        this.appointmentCount = response.length;
+      },
+      error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Get Appointment Count',
+          detail: error.message,
+        });
+      }
+    );
+  }
+
+  loadRegistration() {
+    this.httpSvc.get('Client/GetRegistrationList').subscribe(
+      response => {
+        this.registrationCount = response.length;
+      },
+      error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Get Registration Count',
+          detail: error.message,
+        });
+      }
+    );
   }
 }

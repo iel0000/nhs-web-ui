@@ -5,6 +5,7 @@ import { formatDate } from '@angular/common';
 
 export const initialState: IRegistration = {
   id: 0,
+  branch: 0,
   personalInformation: {
     id: 0,
     personalCategory: '',
@@ -57,17 +58,18 @@ export const registrationPageReducer = createReducer(
   on(
     RegistrationPageActions.UpdatePersonalInformation,
     (state, { payload }): IRegistration => {
-      payload.birthDate = formatDate(
+      let values = { ...payload };
+      values.birthDate = formatDate(
         payload.birthDate,
         'yyyy-MM-ddT00:00:00.000',
         'en-US'
       );
-      payload.dateIssued = formatDate(
+      values.dateIssued = formatDate(
         payload.dateIssued,
         'yyyy-MM-ddT00:00:00.000',
         'en-US'
       );
-      return { ...state, personalInformation: payload };
+      return { ...state, personalInformation: values };
     }
   ),
   on(

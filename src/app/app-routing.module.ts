@@ -15,6 +15,8 @@ import {
 import { RegistrationListComponent } from '@app/pages/registration-list/registration-list.component';
 import { UsersComponent } from './pages/users/users.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { BranchesComponent } from './pages/admin/branches/branches.component';
 
 const routes: Routes = [
   {
@@ -48,20 +50,42 @@ const routes: Routes = [
         ],
       },
       {
-        path: 'users/:action',
+        path: 'admin/users/:action',
         component: UserFormComponent,
         canActivate: [AuthGuard],
         data: { role: 'Admin' },
       },
       {
-        path: 'users/:action/:id',
+        path: 'admin/users/:action/:id',
         component: UserFormComponent,
         canActivate: [AuthGuard],
         data: { role: 'Admin' },
       },
       {
-        path: 'users',
+        path: 'admin/users',
         component: UsersComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'appointments',
+        component: AppointmentsComponent,
+      },
+      {
+        path: 'admin/branches/:action',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'admin/branches/:action/:id',
+        component: UserFormComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'Admin' },
+      },
+      {
+        path: 'admin/branches',
+        component: BranchesComponent,
         canActivate: [AuthGuard],
         data: { role: 'Admin' },
       },

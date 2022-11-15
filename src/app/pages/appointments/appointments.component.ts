@@ -4,13 +4,12 @@ import { HttpService } from '@app/shared/services';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-appointments',
+  templateUrl: './appointments.component.html',
+  styleUrls: ['./appointments.component.scss'],
 })
-export class UsersComponent implements OnInit {
+export class AppointmentsComponent implements OnInit {
   items: any;
-
   isLoading: boolean = true;
 
   constructor(
@@ -24,40 +23,43 @@ export class UsersComponent implements OnInit {
     console.log('init');
   }
 
-  addUser() {
-    this.router.navigate(['admin/users/new']);
+  loadAppointments() {
+    this.httpSvc
+      .get(`Appointment/GetPendingAppointments`)
+      .subscribe(response => {
+        this.items = response;
+        this.isLoading = false;
+      });
   }
 
-  loadUsers() {
-    this.httpSvc.get('Admin/GetAllUsers').subscribe(response => {
-      this.items = response;
-      this.isLoading = false;
-    });
-  }
+  actionClicked(item: any, status: number) {
+    let message = 'Confirm Accept Appointment?';
+    if (status === 2) {
+      message = 'Confirm Decline Appointment?';
+    }
 
-  editUser(item: any) {
-    this.router.navigate([`admin/users/edit/${item.userId}`]);
-  }
-
-  deleteUser(item: any) {
+    let payload = {
+      appointmentId: item.Id,
+      appointmetStatus: status,
+    };
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete selected record?',
+      message: message,
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.httpSvc.get(`Admin/Delete/${item.userId}`).subscribe(
+        this.httpSvc.post(`Appointment/UpdateStatus`, payload).subscribe(
           response => {
             this.messageService.add({
               severity: response.status.toLowerCase(),
-              summary: 'Delete Record',
+              summary: 'Update Appointment',
               detail: response.message,
             });
-            this.loadUsers();
+            this.loadAppointments();
           },
           error => {
             this.messageService.add({
               severity: 'error',
-              summary: 'Delete Record',
+              summary: 'Update Appointment',
               detail: error.message,
             });
           }

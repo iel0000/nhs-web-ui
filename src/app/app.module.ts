@@ -25,6 +25,8 @@ import { UsersComponent } from './pages/users/users.component';
 import { UserFormComponent } from './pages/users/user-form/user-form.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { DatePipe } from '@angular/common';
+import { BranchesComponent } from './pages/admin/branches/branches.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -46,6 +48,8 @@ export function tokenGetter() {
     UsersComponent,
     UserFormComponent,
     ErrorComponent,
+    BranchesComponent,
+    AppointmentsComponent,
   ],
   imports: [
     BrowserModule,

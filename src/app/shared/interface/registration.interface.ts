@@ -1,5 +1,6 @@
 export interface IRegistration {
   id: number;
+  branch: number;
   personalInformation: IPersonalInformation;
   visaInformation: IVisaInformation;
   labRequisition: ILabRequisition;
