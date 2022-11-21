@@ -25,10 +25,24 @@ export class TopbarComponent {
     );
     this.items = [
       {
-        label: 'Home',
+        label: `${this.currentUser?.firstName} ${this.currentUser?.lastName}`,
+        icon: 'pi pi-fw pi-user',
+        items: [
+          {
+            label: 'Profile',
+            icon: 'pi pi-fw pi-user-plus',
+            routerLink: [`profile`],
+          },
+          {
+            label: 'Logout',
+            icon: 'pi pi-fw pi-power-off',
+            command: () => this.logout(),
+          },
+        ],
       },
     ];
   }
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);

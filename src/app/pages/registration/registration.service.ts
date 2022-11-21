@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { BehaviorSubject, of, Subject } from 'rxjs';
 import { HttpService } from '@app/shared/services';
-import { IDropDown } from '@app/shared/interface';
+import { IRegistration } from '@app/shared/interface';
+import { Store } from '@ngrx/store';
+import { LoadRegistrationRecord } from './store';
+import { DatePipe } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class RegistrationService {
@@ -18,23 +19,129 @@ export class RegistrationService {
   private readonly _visaType = new BehaviorSubject<any[]>([]);
   readonly visaType$ = this._visaType.asObservable();
 
-  constructor(private httpService: HttpService) {}
+  private readonly _labRequisitionItems = new BehaviorSubject<any[]>([]);
+  readonly labRequisitionItems$ = this._labRequisitionItems.asObservable();
+
+  private readonly _registrationRecord = new BehaviorSubject<any[]>([]);
+  readonly registrationRecord$ = this._registrationRecord.asObservable();
+
+  constructor(
+    private httpService: HttpService,
+    private store: Store,
+    private datePipe: DatePipe
+  ) {}
 
   getEmbassies() {
-    this.httpService.get('Client/GetEmbassies').subscribe(embassy => {
-      this._embassyList.next(embassy);
+    this.httpService.get('Client/GetEmbassies').subscribe(response => {
+      this._embassyList.next(response);
     });
   }
 
-  getVisaCategory() {
-    this.httpService.get('Client/GetVisaCategories').subscribe(embassy => {
-      this._visaCategory.next(embassy);
-    });
+  getVisaCategory(embassyId: number) {
+    this.httpService
+      .get(`Client/GetVisaCategories/${embassyId}`)
+      .subscribe(response => {
+        this._visaCategory.next(response);
+      });
   }
 
   getVisaType() {
-    this.httpService.get('Client/GetVisaTypes').subscribe(embassy => {
-      this._visaType.next(embassy);
+    this.httpService.get('Client/GetVisaTypes').subscribe(response => {
+      this._visaType.next(response);
     });
+  }
+
+  getLabRequisitionItems() {
+    this.httpService
+      .get('Client/GetLabRequisitionItems')
+      .subscribe(response => {
+        this._labRequisitionItems.next(response);
+      });
+  }
+
+  loadRegistrationRecord(id: any) {
+    this.httpService
+      .get(`Client/LoadRegistrationRecord/${id}`)
+      .subscribe(response => {
+        let registrationModel: IRegistration = {
+          id: response.id,
+          branch: response.branchId,
+          personalInformation: {
+            id: response.personalInformation.id,
+            personalCategory:
+              response.personalInformation.personalCategory.toString(),
+            referral: response.personalInformation.referral.toString(),
+            firstName: response.personalInformation.firstName,
+            lastName: response.personalInformation.lastName,
+            middleName: response.personalInformation.middleName,
+            birthDate: response.personalInformation.birthDate
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.birthDate),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
+            age: response.personalInformation.age,
+            gender: response.personalInformation.gender,
+            address: response.personalInformation.address,
+            mobileNumber: response.personalInformation.mobileNumber,
+            email: response.personalInformation.email,
+            eMedicalRefNo: response.personalInformation.eMedicalRefNo,
+            civilStatus: response.personalInformation.civilStatus,
+            hasMenstrualPeriod: response.personalInformation.hasMenstrualPeriod,
+            menstrualPeriodStart: response.personalInformation
+              .menstrualPeriodStart
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.menstrualPeriodStart),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
+            menstrualPeriodEnd: response.personalInformation.menstrualPeriodEnd
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.menstrualPeriodEnd),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
+            intendedOccupation: response.personalInformation.intendedOccupation,
+            hasPassport: response.personalInformation.hasPassport,
+            passportNumber: response.personalInformation.passportNumber,
+            dateIssued: response.personalInformation.dateIssued
+              ? this.datePipe.transform(
+                  new Date(response.personalInformation.dateIssued),
+                  'MM/dd/yyyy'
+                ) || ''
+              : '',
+            isExpired: response.personalInformation.isExpired,
+            hasOtherId: response.personalInformation.hasOtherId,
+            otherId: response.personalInformation.otherId,
+            landLineNumber: response.personalInformation.landLineNumber,
+            isAcceptedTerms: response.personalInformation.isAcceptedTerms,
+          },
+          visaInformation: {
+            id: response.visaInformation.id,
+            embassy: response.visaInformation.embassy.toString(),
+            visaCategory: response.visaInformation.visaCategory.toString(),
+            visaType: response.visaInformation.visaType.toString(),
+            isFirstVisa: response.visaInformation.isFirstVisa,
+            hasVisaRejected: response.visaInformation.hasVisaRejected,
+            lengthOfStay: response.visaInformation.lengthOfStay.toString(),
+            hasLetterReceived: response.visaInformation.hasLetterReceived,
+            isTemporaryVisa: response.visaInformation.isTemporaryVisa,
+            isHealthAssessed: response.visaInformation.isHealthAssessed,
+            intendedWork: response.visaInformation.intendedWork.toString(),
+          },
+          labRequisition: {
+            id: response.labRequisition.id,
+            labRequisition: response.labRequisition.labRequisition,
+          },
+        };
+
+        this.getVisaCategory(response.visaInformation.embassy.toString());
+
+        this.store.dispatch(
+          LoadRegistrationRecord({
+            payload: <IRegistration>registrationModel,
+          })
+        );
+      });
   }
 }

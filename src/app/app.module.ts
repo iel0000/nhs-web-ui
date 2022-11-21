@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DashboardComponent, LoginComponent } from '@app/pages';
 import {
   RegistrationComponent,
@@ -17,6 +17,18 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { registrationPageReducer } from '@app/pages/registration/store';
 import { JwtModule } from '@auth0/angular-jwt';
+import { RegistrationListComponent } from './pages/registration-list/registration-list.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from '@core/interceptor';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { UsersComponent } from './pages/users/users.component';
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
+import { ErrorComponent } from './pages/error/error.component';
+import { DatePipe } from '@angular/common';
+import { BranchesComponent } from './pages/admin/branches/branches.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { ProfileComponent } from './pages/users/profile/profile.component';
+import { BranchesFormComponent } from './pages/admin/branches/branches-form/branches-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -33,6 +45,15 @@ export function tokenGetter() {
     LabRequisitionComponent,
     XrayRequisitionComponent,
     ReviewComponent,
+    RegistrationListComponent,
+    SpinnerComponent,
+    UsersComponent,
+    UserFormComponent,
+    ErrorComponent,
+    BranchesComponent,
+    AppointmentsComponent,
+    ProfileComponent,
+    BranchesFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,12 +66,22 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:44370'],
+        allowedDomains: [
+          'localhost:44370',
+          'stage-webapi.nationwidehealthsystems.com',
+        ],
         disallowedRoutes: [],
       },
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    DatePipe,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,6 +10,7 @@ import { first } from 'rxjs/operators';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthenticationService } from '@core/auth';
+import { MessageService } from 'primeng/api';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private messageService: MessageService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -67,8 +69,13 @@ export class LoginComponent implements OnInit {
       )
       .pipe(first())
       .subscribe({
-        next: () => {
+        next: data => {
           // get return url from route parameters or default to '/'
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Logged In',
+            detail: `Welcome ${data.firstName} ${data.lastName}`,
+          });
           this.router.navigate(['dashboard']);
         },
         error: error => {

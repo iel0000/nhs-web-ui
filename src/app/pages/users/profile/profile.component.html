@@ -1,0 +1,146 @@
+<div class="p-fluid formgrid grid">
+  <div class="col-lg-12">
+    <div class="card border-0 rounded-lg">
+      <div class="card-header justify-content-center bg-white border-0">
+        <h3 class="my-2">Profile</h3>
+      </div>
+    </div>
+    <div class="row p-fluid formgrid grid bg-white p-5 rounded-4">
+      <div class="col-12 md:col-12">
+        <form
+          class="mt-4"
+          [formGroup]="userForm"
+          autocomplete="off"
+          (submit)="save()">
+          <div class="p-formgrid grid">
+            <div class="field col">
+              <label htmlFor="firstName"
+                >First Name <span style="color: red">*</span></label
+              >
+              <input
+                pInputText
+                id="firstName"
+                formControlName="firstName"
+                type="text"
+                [ngClass]="{
+                  'ng-dirty': validateControl('firstName')
+                }" />
+              <small *ngIf="validateControl('firstName')" class="p-error"
+                >First Name is required.</small
+              >
+            </div>
+            <div class="field col">
+              <label htmlFor="lastName"
+                >Last Name <span style="color: red">*</span></label
+              >
+              <input
+                pInputText
+                id="lastName"
+                formControlName="lastName"
+                type="text"
+                [ngClass]="{ 'ng-dirty': validateControl('lastName') }" />
+              <small *ngIf="validateControl('lastName')" class="p-error"
+                >Last Name is required.</small
+              >
+            </div>
+          </div>
+          <div class="p-formgrid grid">
+            <div class="field col">
+              <label htmlFor="email"
+                >Email <span style="color: red">*</span></label
+              >
+              <input
+                id="disabled-input"
+                type="text"
+                pInputText
+                [disabled]="true"
+                [value]="email" />
+            </div>
+            <div class="field col">
+              <label htmlFor="lastName"
+                >Role <span style="color: red">*</span></label
+              >
+              <input
+                id="disabled-input"
+                type="text"
+                pInputText
+                [disabled]="true"
+                [value]="role" />
+            </div>
+          </div>
+          <div class="p-formgrid grid">
+            <div class="field col-6">
+              <label htmlFor="branch"
+                >Branch Designation <span style="color: red">*</span></label
+              >
+              <input
+                id="disabled-input"
+                type="text"
+                pInputText
+                [disabled]="true"
+                [value]="branchName" />
+            </div>
+          </div>
+          <div class="p-formgrid grid">
+            <div class="field col">
+              <label htmlFor="password"
+                >Password <span style="color: red">*</span></label
+              >
+              <p-password
+                id="password"
+                formControlName="password"
+                [ngClass]="{
+                  'ng-dirty': validateControl('password')
+                }"
+                (onBlur)="changePassword()"></p-password>
+              <small *ngIf="validateControl('password')" class="p-error">
+                <span *ngIf="userForm.get('password')?.errors?.['required']"
+                  >Password is Required</span
+                >
+                <span *ngIf="userForm.get('password')?.errors?.['pattern']"
+                  >Password must contain:
+                  <ul>
+                    <li>At least one lowercase</li>
+                    <li>At least one uppercase</li>
+                    <li>At least one numeric</li>
+                    <li>Minimum 8 characters</li>
+                  </ul>
+                </span>
+              </small>
+            </div>
+            <div class="field col">
+              <label htmlFor="confirmPassword"
+                >Confirm Password <span style="color: red">*</span></label
+              >
+              <p-password
+                id="confirmPassword"
+                formControlName="confirmPassword"
+                [ngClass]="{ 'ng-dirty': validateControl('confirmPassword') }"
+                [feedback]="false"
+                (onBlur)="changePassword()"></p-password>
+              <small *ngIf="validateControl('confirmPassword')" class="p-error"
+                ><span
+                  *ngIf="userForm.get('confirmPassword')?.errors?.['required']"
+                  >Confirm Password is Required.</span
+                >
+                <span
+                  *ngIf="userForm.get('confirmPassword')?.errors?.['confirmPasswordValidator']"
+                  >Passsword and Confirm Password didn't match.</span
+                >
+              </small>
+            </div>
+          </div>
+          <div class="grid grid-nogutter justify-content-end">
+            <p-button
+              label="Save"
+              (onClick)="save()"
+              icon="pi pi-save"
+              iconPos="right"
+              styleClass="p-button-success"
+              [disabled]="userForm.invalid || userForm.pristine"></p-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

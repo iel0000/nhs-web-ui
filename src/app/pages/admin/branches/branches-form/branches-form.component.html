@@ -1,0 +1,64 @@
+<div class="p-fluid formgrid grid">
+  <div class="col-lg-12">
+    <div class="card border-0 rounded-lg">
+      <div class="card-header justify-content-center bg-white border-0">
+        <h3 class="my-2">{{ title }}</h3>
+      </div>
+    </div>
+    <div class="row p-fluid formgrid grid bg-white p-5 rounded-4">
+      <div class="col-12 md:col-12">
+        <form
+          class="mt-4"
+          [formGroup]="branchForm"
+          autocomplete="off"
+          (submit)="save()">
+          <div class="p-formgrid grid">
+            <div class="field col-6">
+              <label htmlFor="firstName"
+                >Branch Name <span style="color: red">*</span></label
+              >
+              <input
+                pInputText
+                id="name"
+                formControlName="name"
+                type="text"
+                [ngClass]="{
+                  'ng-dirty': validateControl('name')
+                }" />
+              <small *ngIf="validateControl('name')" class="p-error"
+                >Name is required.</small
+              >
+            </div>
+          </div>
+          <div class="p-formgrid grid">
+            <div class="field col">
+              <label htmlFor="location"
+                >Location <span style="color: red">*</span></label
+              >
+              <textarea
+                pInputTextarea
+                formControlName="location"
+                [rows]="5"
+                placeholder="Location"
+                [ngClass]="{
+                  'ng-dirty': validateControl('location')
+                }"></textarea>
+              <small *ngIf="validateControl('location')" class="p-error"
+                >Location is required.</small
+              >
+            </div>
+          </div>
+          <div class="grid grid-nogutter justify-content-end">
+            <p-button
+              label="Save"
+              (onClick)="save()"
+              icon="pi pi-save"
+              iconPos="right"
+              styleClass="p-button-success"
+              [disabled]="branchForm.invalid || branchForm.pristine"></p-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

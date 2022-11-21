@@ -20,6 +20,22 @@ import { DropdownModule } from 'primeng/dropdown';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { InputMaskModule } from 'primeng/inputmask';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { PanelModule } from 'primeng/panel';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ChartModule } from 'primeng/chart';
+import { MegaMenuModule } from 'primeng/megamenu';
+import { MenuModule } from 'primeng/menu';
+import { ChipModule } from 'primeng/chip';
+
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
@@ -40,8 +56,21 @@ import { InputMaskModule } from 'primeng/inputmask';
     DropdownModule,
     StepsModule,
     CardModule,
+    TableModule,
+    ConfirmDialogModule,
+    ToastModule,
+    ToolbarModule,
+    InputTextareaModule,
+    InputNumberModule,
+    KeyFilterModule,
+    PanelModule,
+    PanelMenuModule,
+    FieldsetModule,
+    ChartModule,
+    MegaMenuModule,
+    MenuModule,
+    ChipModule,
   ],
-  providers: [],
   exports: [
     ReactiveFormsModule,
     HttpClientModule,
@@ -50,8 +79,10 @@ import { InputMaskModule } from 'primeng/inputmask';
     MenubarModule,
     ButtonModule,
     StyleClassModule,
-    AvatarGroupModule,
-    BadgeModule,
+    SidebarModule,
+    RadioButtonModule,
+    InputSwitchModule,
+    RippleModule,
     AvatarModule,
     CalendarModule,
     CheckboxModule,
@@ -59,7 +90,21 @@ import { InputMaskModule } from 'primeng/inputmask';
     DropdownModule,
     StepsModule,
     CardModule,
-    InputMaskModule,
+    TableModule,
+    ConfirmDialogModule,
+    ToastModule,
+    ToolbarModule,
+    InputTextareaModule,
+    InputNumberModule,
+    KeyFilterModule,
+    PanelModule,
+    PanelMenuModule,
+    FieldsetModule,
+    ChartModule,
+    MegaMenuModule,
+    MenuModule,
+    ChipModule,
   ],
+  providers: [MessageService, ConfirmationService],
 })
 export class PrimeNgModule {}
