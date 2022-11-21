@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:44312',
+  environmentName: 'Production',
+  apiUrl: 'https://nhs-api.nationwidehealthsystems.com',
 };
