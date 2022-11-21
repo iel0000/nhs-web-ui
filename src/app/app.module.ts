@@ -27,6 +27,8 @@ import { ErrorComponent } from './pages/error/error.component';
 import { DatePipe } from '@angular/common';
 import { BranchesComponent } from './pages/admin/branches/branches.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { ProfileComponent } from './pages/users/profile/profile.component';
+import { BranchesFormComponent } from './pages/admin/branches/branches-form/branches-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -50,6 +52,8 @@ export function tokenGetter() {
     ErrorComponent,
     BranchesComponent,
     AppointmentsComponent,
+    ProfileComponent,
+    BranchesFormComponent,
   ],
   imports: [
     BrowserModule,

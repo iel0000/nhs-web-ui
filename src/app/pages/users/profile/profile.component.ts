@@ -1,41 +1,41 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  MinLengthValidator,
-  Validators,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConfirmPasswordValidator } from '@app/core/validators';
 import { HttpService } from '@app/shared/services';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
 })
-export class UserFormComponent implements OnInit {
-  roles: any;
-  userForm: FormGroup;
-  password: string = '';
-  isEdit = false;
-  branches: any;
-  title = 'Create User';
+export class ProfileComponent implements OnInit {
+  userForm: any;
+  isEdit: any;
+  branchName!: string;
 
   constructor(
-    private fb: FormBuilder,
     private httpSvc: HttpService,
+    private fb: FormBuilder,
+    private changeDetectorRef: ChangeDetectorRef,
     private messageService: MessageService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
+    private router: Router
+  ) {}
+
+  get email() {
+    return this.userForm.get('email').value;
+  }
+  get role() {
+    return this.userForm.get('role').value;
+  }
+
+  ngOnInit(): void {
     this.userForm = this.fb.group({
       id: '0',
       firstName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
       lastName: ['', [Validators.required, Validators.pattern(/[\S]/)]],
-      email: ['', [Validators.required, Validators.email]],
+      email: [''],
       password: [
         '',
         [
@@ -44,41 +44,15 @@ export class UserFormComponent implements OnInit {
         ],
       ],
       confirmPassword: ['', Validators.required],
-      role: ['', Validators.required],
-      branch: ['', Validators.required],
+      role: [''],
+      branch: [''],
     });
+
+    this.loadProfile();
   }
 
-  ngOnInit(): void {
-    this.httpSvc.get('Admin/GetRoles').subscribe(response => {
-      this.roles = response.sort((a: any, b: any) =>
-        a.name.localeCompare(b.name)
-      );
-    });
-
-    this.httpSvc.get('Admin/GetAllBranches').subscribe(response => {
-      this.branches = response.sort((a: any, b: any) =>
-        a.name.localeCompare(b.name)
-      );
-    });
-
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.title = 'Edit User';
-      this.isEdit = true;
-      this.loadUserDetails(id);
-    } else {
-      this.userForm.addValidators(
-        ConfirmPasswordValidator(
-          this.userForm.get('password'),
-          this.userForm.get('confirmPassword')
-        )
-      );
-    }
-  }
-
-  loadUserDetails(id: string) {
-    this.httpSvc.get(`Admin/GetUserById/${id}`).subscribe(response => {
+  loadProfile() {
+    this.httpSvc.get('Admin/GetProfile').subscribe(response => {
       console.log(response);
 
       this.userForm.patchValue({
@@ -90,11 +64,12 @@ export class UserFormComponent implements OnInit {
         branch: response.branch,
       });
 
+      this.branchName = response.branchName;
+
       this.userForm.get('password')?.setValidators(null);
       this.userForm.get('password')?.setErrors(null);
       this.userForm.get('confirmPassword')?.setValidators(null);
       this.userForm.get('confirmPassword')?.setErrors(null);
-      this.userForm.get('email')?.disable();
 
       this.userForm.updateValueAndValidity();
     });
@@ -117,37 +92,29 @@ export class UserFormComponent implements OnInit {
       return;
     }
 
-    let url = 'Admin/Create';
-    if (this.isEdit) {
-      url = 'Admin/Update';
-    }
+    this.httpSvc
+      .post('Admin/SaveProfile', this.userForm.getRawValue())
+      .subscribe(
+        response => {
+          this.messageService.add({
+            severity: response.status.toLowerCase(),
+            summary: 'Save Record',
+            detail: response.message,
+          });
 
-    this.httpSvc.post(url, this.userForm.getRawValue()).subscribe(
-      response => {
-        this.messageService.add({
-          severity: response.status.toLowerCase(),
-          summary: 'Save Record',
-          detail: response.message,
-        });
-
-        this.router.navigate(['admin/users']);
-      },
-      error => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Save Record',
-          detail: error.error.message,
-        });
-      }
-    );
+          this.router.navigate(['profile']);
+        },
+        error => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Save Record',
+            detail: error.error.message,
+          });
+        }
+      );
   }
 
   changePassword() {
-    //console.log(event.target.value)
-    if (!this.isEdit) {
-      return;
-    }
-
     if (
       this.userForm.get('password')?.value ||
       this.userForm.get('confirmPassword')?.value

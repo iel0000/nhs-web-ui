@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '@app/core/auth';
 import { HttpService } from '@app/shared/services';
 import { environment } from '@environments/environment';
 import { faBars, faBell, faChartLine } from '@fortawesome/free-solid-svg-icons';
@@ -20,11 +21,13 @@ export class DashboardComponent implements OnInit {
   userCount!: number;
   appointmentCount!: number;
   registrationCount!: number;
+  isAdmin = false;
 
   pageTitle: string | undefined;
   constructor(
     private httpSvc: HttpService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authSvc: AuthenticationService
   ) {}
 
   ngOnInit() {
@@ -44,7 +47,13 @@ export class DashboardComponent implements OnInit {
       ],
     };
 
-    this.loadUsers();
+    this.isAdmin = this.authSvc.currentUserValue.role.some(
+      (x: any) => x === 'Admin'
+    );
+
+    if (this.isAdmin) {
+      this.loadUsers();
+    }
     this.loadPendingAppointments();
     this.loadRegistration();
   }

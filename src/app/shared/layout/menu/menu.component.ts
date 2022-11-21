@@ -41,6 +41,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Admin',
             icon: 'pi pi-fw pi-cog',
+            visible: this.isAdmin,
             items: [
               {
                 label: 'Users',

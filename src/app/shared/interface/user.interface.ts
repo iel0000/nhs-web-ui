@@ -4,7 +4,7 @@ export interface IUser {
   firstName: string;
   lastName: string;
   token?: string;
-  role: string;
+  role: string[];
   branchId: number;
   lastLogin: string;
 }

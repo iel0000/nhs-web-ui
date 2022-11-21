@@ -31,7 +31,7 @@ export class TopbarComponent {
           {
             label: 'Profile',
             icon: 'pi pi-fw pi-user-plus',
-            routerLink: [`profile/${this.currentUser?.id}`],
+            routerLink: [`profile`],
           },
           {
             label: 'Logout',
