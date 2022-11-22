@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   environmentName: 'Production',
-  apiUrl: 'https://nhs-api.nationwidehealthsystems.com',
+  apiUrl: 'https://web-api.nationwidehealthsystems.com',
 };
