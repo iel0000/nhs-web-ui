@@ -69,6 +69,7 @@ export function tokenGetter() {
         allowedDomains: [
           'localhost:44370',
           'stage-webapi.nationwidehealthsystems.com',
+          'web-api.nationwidehealthsystems.com',
         ],
         disallowedRoutes: [],
       },
