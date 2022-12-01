@@ -273,13 +273,17 @@
         <div class="p-fluid formgrid grid">
           <div class="field col-12 md:col-4">
             <label class="small mb-1" for="passportNumber"
-              >Passport Number <span style="color: red">*</span></label
+              >Passport Number
+              <span style="color: red" *ngIf="isPassportRequired"
+                >*</span
+              ></label
             >
             <input
               id="passportNumber"
               type="text"
               pInputText
               formControlName="passportNumber"
+              (keyup)="onPassportChange($event)"
               [ngClass]="{
                 'ng-dirty': validateControl('passportNumber')
               }" />
@@ -289,7 +293,10 @@
           </div>
           <div class="field col-12 md:col-4">
             <label class="mb-1" for="dateIssued"
-              >Date Issued <span style="color: red">*</span></label
+              >Date Issued
+              <span style="color: red" *ngIf="isPassportRequired"
+                >*</span
+              ></label
             >
             <p-calendar
               inputId="icon"
@@ -324,12 +331,16 @@
               inputId="hasOtherId"
               class="vertical-align-top"
               formControlName="hasOtherId"
-              (onChange)="validateOtherId($event)">
+              (onChange)="validateOtherId($event)"
+              [disabled]="personalForm.get('passportNumber')?.value">
             </p-checkbox>
           </div>
           <div
             class="field col-12 md:col-4"
-            *ngIf="personalForm.get('hasOtherId')?.value === true">
+            *ngIf="
+              personalForm.get('hasOtherId')?.value === true &&
+              !personalForm.get('passportNumber')?.value
+            ">
             <label class="small mb-1" for="otherId"
               >Other ID <span style="color: red">*</span></label
             >
@@ -382,21 +393,13 @@
             >
           </div>
           <div class="field col-12 md:col-4">
-            <label class="mb-1" for="landLineNumber"
-              >Landline Number <span style="color: red">*</span></label
-            >
+            <label class="mb-1" for="landLineNumber">Landline Number</label>
             <input
               type="text"
               pInputText
               pKeyFilter="int"
               formControlName="landLineNumber"
-              inputId="landLineNumber"
-              [ngClass]="{
-                'ng-dirty': validateControl('landLineNumber')
-              }" />
-            <small *ngIf="validateControl('landLineNumber')" class="p-error"
-              >Landline Number is required.</small
-            >
+              inputId="landLineNumber" />
           </div>
         </div>
 

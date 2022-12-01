@@ -28,6 +28,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
   today: Date;
   birthDate!: string;
   dateIssued!: string;
+  isPassportRequired = true;
 
   constructor(
     private store: Store,
@@ -64,7 +65,7 @@ export class PersonalComponent implements OnInit, OnDestroy {
       isExpired: [false, Validators.required],
       hasOtherId: false,
       otherId: '',
-      landLineNumber: ['', Validators.required],
+      landLineNumber: [''],
       isAcceptedTerms: [false, Validators.requiredTrue],
     });
   }
@@ -111,6 +112,27 @@ export class PersonalComponent implements OnInit, OnDestroy {
           landLineNumber: s.personalInformation.landLineNumber,
           isAcceptedTerms: s.personalInformation.isAcceptedTerms,
         });
+
+        this.isPassportRequired = !s.personalInformation.hasOtherId;
+
+        if (!this.isPassportRequired) {
+          this.personalForm.get('passportNumber')?.setValidators(null);
+          this.personalForm.get('dateIssued')?.setValidators(null);
+          this.personalForm.get('isExpired')?.setValidators(null);
+        } else {
+          this.personalForm
+            .get('passportNumber')
+            ?.addValidators(Validators.required);
+          this.personalForm
+            .get('dateIssued')
+            ?.addValidators(Validators.required);
+          this.personalForm
+            .get('isExpired')
+            ?.addValidators(Validators.required);
+        }
+        this.personalForm.get('passportNumber')?.updateValueAndValidity();
+        this.personalForm.get('dateIssued')?.updateValueAndValidity();
+        this.personalForm.get('isExpired')?.updateValueAndValidity();
       });
 
     this.httpSvc.get('Client/GetPersonalCategories').subscribe(response => {
@@ -199,11 +221,35 @@ export class PersonalComponent implements OnInit, OnDestroy {
     this.personalForm.get('otherId')?.patchValue('');
     if (event.checked) {
       this.personalForm.get('otherId')?.addValidators(Validators.required);
+      this.personalForm.get('passportNumber')?.patchValue('');
+      this.personalForm.get('dateIssued')?.patchValue('');
+      this.personalForm.get('isExpired')?.patchValue(false);
+
+      this.personalForm.get('passportNumber')?.setValidators(null);
+      this.personalForm.get('dateIssued')?.setValidators(null);
+      this.personalForm.get('isExpired')?.setValidators(null);
     } else {
       this.personalForm.get('otherId')?.setValidators(null);
       this.personalForm.get('otherId')?.setErrors(null);
+      this.personalForm
+        .get('passportNumber')
+        ?.addValidators(Validators.required);
+      this.personalForm.get('dateIssued')?.addValidators(Validators.required);
+      this.personalForm.get('isExpired')?.addValidators(Validators.required);
     }
 
     this.personalForm.get('otherId')?.updateValueAndValidity();
+    this.personalForm.get('passportNumber')?.updateValueAndValidity();
+    this.personalForm.get('dateIssued')?.updateValueAndValidity();
+    this.personalForm.get('isExpired')?.updateValueAndValidity();
+
+    this.isPassportRequired = !event.checked;
+  }
+
+  onPassportChange(event: any) {
+    console.log(event.target.value);
+    if (event.target.value) {
+      this.personalForm.get('hasOtherId')?.patchValue(false);
+    }
   }
 }

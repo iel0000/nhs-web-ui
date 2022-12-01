@@ -34,18 +34,18 @@ export class DashboardComponent implements OnInit {
     this.pageTitle = 'Home';
 
     //Todo get details from DB
-    this.basicData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: '#42A5F5',
-          tension: 0.4,
-        },
-      ],
-    };
+    // this.basicData = {
+    //   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    //   datasets: [
+    //     {
+    //       label: 'First Dataset',
+    //       data: [65, 59, 80, 81, 56, 55, 40],
+    //       fill: false,
+    //       borderColor: '#42A5F5',
+    //       tension: 0.4,
+    //     },
+    //   ],
+    // };
 
     this.isAdmin = this.authSvc.currentUserValue.role.some(
       (x: any) => x === 'Admin'
