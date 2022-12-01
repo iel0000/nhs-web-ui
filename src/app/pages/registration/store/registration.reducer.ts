@@ -59,16 +59,12 @@ export const registrationPageReducer = createReducer(
     RegistrationPageActions.UpdatePersonalInformation,
     (state, { payload }): IRegistration => {
       let values = { ...payload };
-      values.birthDate = formatDate(
-        payload.birthDate,
-        'yyyy-MM-ddT00:00:00.000',
-        'en-US'
-      );
-      values.dateIssued = formatDate(
-        payload.dateIssued,
-        'yyyy-MM-ddT00:00:00.000',
-        'en-US'
-      );
+      values.birthDate = payload.birthDate
+        ? formatDate(payload.birthDate, 'yyyy-MM-ddT00:00:00.000', 'en-US')
+        : '';
+      values.dateIssued = payload.dateIssued
+        ? formatDate(payload.dateIssued, 'yyyy-MM-ddT00:00:00.000', 'en-US')
+        : '';
       return { ...state, personalInformation: values };
     }
   ),
