@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-branches',
@@ -14,8 +14,9 @@ export class BranchesComponent implements OnInit {
 
   constructor(
     private httpSvc: HttpService,
-    private msgSvc: MessageService,
-    private router: Router
+    private messageService: MessageService,
+    private router: Router,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -37,5 +38,30 @@ export class BranchesComponent implements OnInit {
     this.router.navigate([`admin/branches/edit/${item.id}`]);
   }
 
-  deleteBranch(item: any) {}
+  deleteBranch(item: any) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete selected record?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.httpSvc.get(`Admin/DeleteBranch/${item.id}`).subscribe(
+          response => {
+            this.messageService.add({
+              severity: response.status.toLowerCase(),
+              summary: 'Delete Record',
+              detail: response.message,
+            });
+            this.loadBranches();
+          },
+          error => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Delete Record',
+              detail: error.message,
+            });
+          }
+        );
+      },
+    });
+  }
 }
