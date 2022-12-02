@@ -302,6 +302,45 @@ export class RegistrationListComponent implements OnInit {
             },
           },
         },
+        { text: 'Please Read', fontSize: 8, bold: true, margin: [0, 30, 0, 0] },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', '*'],
+            body: [
+              [
+                {
+                  colSpan: 2,
+                  text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus',
+                  style: 'paragraph',
+                },
+                '',
+              ],
+              [
+                {
+                  colSpan: 2,
+                  text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus',
+                  style: 'paragraph',
+                },
+                '',
+              ],
+            ],
+          },
+          fontSize: 8,
+          layout: {
+            hLineColor: function (i, node) {
+              console.log(i, ':', node.table.body.length);
+              return i === 0 || i === node.table.body.length
+                ? 'black'
+                : 'white';
+            },
+            vLineColor: function (i, node) {
+              return i === 0 || i === node.table.widths?.length
+                ? 'black'
+                : 'white';
+            },
+          },
+        },
       ],
       styles: {
         header: {
