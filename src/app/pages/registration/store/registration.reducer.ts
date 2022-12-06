@@ -65,6 +65,15 @@ export const registrationPageReducer = createReducer(
       values.dateIssued = payload.dateIssued
         ? formatDate(payload.dateIssued, 'yyyy-MM-ddT00:00:00.000', 'en-US')
         : '';
+
+      values.menstrualPeriodEnd = payload.menstrualPeriodEnd
+        ? formatDate(payload.menstrualPeriodEnd, 'yyyy-MM-ddT00:00:00.000', 'en-US')
+        : '';
+
+      values.menstrualPeriodStart = payload.menstrualPeriodStart
+        ? formatDate(payload.menstrualPeriodStart, 'yyyy-MM-ddT00:00:00.000', 'en-US')
+        : '';
+
       return { ...state, personalInformation: values };
     }
   ),
