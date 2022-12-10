@@ -8,11 +8,36 @@
     <div class="p-fluid formgrid grid card border-0 rounded-lg">
       <div class="field col-12 md:col-12">
         <p-table
+          #dt
+          dataKey="id"
           [value]="items"
-          responsiveLayout="scroll"
-          [lazy]="true"
-          (onLazyLoad)="loadAppointments()"
-          [loading]="isLoading">
+          [loading]="isLoading"
+          [paginator]="true"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [globalFilterFields]="[
+            'referenceNumber',
+            'personalInformation.email',
+            'personalInformation.firstName',
+            'personalInformation.lastName',
+            'appointmentDate'
+          ]">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <span class="p-input-icon-left ml-auto w-19rem">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="
+                    dt.filterGlobal($any($event.target).value, 'contains')
+                  "
+                  placeholder="Search Keyword" />
+              </span>
+            </div>
+          </ng-template>
           <ng-template pTemplate="header">
             <tr>
               <th>REFERENCE ID</th>
@@ -26,10 +51,13 @@
           <ng-template pTemplate="body" let-item>
             <tr>
               <td>{{ item.referenceNumber }}</td>
-              <td>{{ item.email }}</td>
-              <td>{{ item.firstName }}</td>
-              <td>{{ item.lastName }}</td>
-              <td>{{ item.appointmentDate | date: 'dd/MMM/yyyy' }}</td>
+              <td>{{ item.personalInformation.email }}</td>
+              <td>{{ item.personalInformation.firstName }}</td>
+              <td>{{ item.personalInformation.lastName }}</td>
+              <td>
+                {{ item.appointmentDate | date: 'dd/MMM/yyyy' }}
+                {{ item.appointmentTime.name }}
+              </td>
               <td>
                 <button
                   pButton

@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
@@ -20,7 +21,7 @@ export class AppointmentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('init');
+    this.loadAppointments();
   }
 
   loadAppointments() {
