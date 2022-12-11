@@ -109,9 +109,7 @@
 
           <div class="p-fluid formgrid grid">
             <div class="field col-12 md:col-4">
-              <label class="small mb-1" for="passportNumber"
-                >Passport Number</label
-              >
+              <label class="mb-1" for="passportNumber">Passport Number</label>
               <div class="text-lg">
                 {{ personalInformation.passportNumber }}
               </div>
@@ -134,14 +132,14 @@
             class="p-fluid formgrid grid"
             *ngIf="personalInformation.hasOtherId">
             <div class="field col-12 md:col-4">
-              <label class="small mb-1" for="otherId">Other ID</label>
+              <label class="mb-1" for="otherId">Other ID</label>
               <div class="text-lg">{{ personalInformation.otherId }}</div>
             </div>
           </div>
 
           <div class="p-fluid formgrid grid">
             <div class="field col-12 md:col-4">
-              <label class="small mb-1" for="email">Email Address</label>
+              <label class="mb-1" for="email">Email Address</label>
               <div class="text-lg">{{ personalInformation.email }}</div>
             </div>
             <div class="field col-12 md:col-4">
