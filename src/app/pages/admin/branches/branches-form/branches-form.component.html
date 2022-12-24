@@ -75,7 +75,10 @@
               >
             </div>
             <div class="field col-6 col-md-12">
-              <label for="slotCount">Appointment Slot per Time</label>
+              <label for="slotCount"
+                >Appointment Slot per Hour
+                <span style="color: red">*</span></label
+              >
               <p-inputNumber
                 formControlName="slotCount"
                 inputId="slotCount"
@@ -88,7 +91,7 @@
                 }">
               </p-inputNumber>
               <small *ngIf="validateControl('slotCount')" class="p-error"
-                >Appointment Slot per Time is required.</small
+                >Appointment Slot per Hour is required.</small
               >
             </div>
           </div>
@@ -100,7 +103,7 @@
                     pRipple
                     class="p-button-success mr-2 p-button"
                     (click)="openNew()"
-                    ><i class="pi pi-plus mr-2"></i><b>New</b></a
+                    ><i class="pi pi-plus mr-2"></i><b>Add Dates</b></a
                   >
                 </ng-template>
               </p-toolbar>

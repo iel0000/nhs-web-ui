@@ -47,10 +47,10 @@ export const initialState: IRegistration = {
     isHealthAssessed: '',
     intendedWork: '0',
   },
-  labRequisition: {
-    id: 0,
-    labRequisition: [],
-  },
+  // labRequisition: {
+  //   id: 0,
+  //   labRequisition: [],
+  // },
 };
 
 export const registrationPageReducer = createReducer(
@@ -91,26 +91,26 @@ export const registrationPageReducer = createReducer(
       return { ...state, visaInformation: payload };
     }
   ),
-  on(
-    RegistrationPageActions.UpdateLabRequisition,
-    (state, { payload }): IRegistration => {
-      let labRequisitionId = state.labRequisition.id;
-      let newData: ILabRequisition = {
-        id: labRequisitionId,
-        labRequisition: payload,
-      };
-      return { ...state, labRequisition: newData };
-    }
-  ),
+  // on(
+  //   RegistrationPageActions.UpdateLabRequisition,
+  //   (state, { payload }): IRegistration => {
+  //     let labRequisitionId = state.labRequisition.id;
+  //     let newData: ILabRequisition = {
+  //       id: labRequisitionId,
+  //       labRequisition: payload,
+  //     };
+  //     return { ...state, labRequisition: newData };
+  //   }
+  // ),
   on(RegistrationPageActions.ResetRegistrationForm, (state): IRegistration => {
     let personalInformation = initialState.personalInformation;
     let visaInformation = initialState.visaInformation;
-    let labRequisition = initialState.labRequisition;
+    // let labRequisition = initialState.labRequisition;
     return {
       ...state,
       personalInformation: personalInformation,
       visaInformation: visaInformation,
-      labRequisition: labRequisition,
+      // labRequisition: labRequisition,
     };
   }),
   on(
@@ -118,7 +118,7 @@ export const registrationPageReducer = createReducer(
     (state, { payload }): IRegistration => {
       let personalInformation = payload.personalInformation;
       let visaInformation = payload.visaInformation;
-      let labRequisition = payload.labRequisition;
+      // let labRequisition = payload.labRequisition;
       let id = payload.id;
 
       return {
@@ -126,7 +126,7 @@ export const registrationPageReducer = createReducer(
         id: id,
         personalInformation: personalInformation,
         visaInformation: visaInformation,
-        labRequisition: labRequisition,
+        // labRequisition: labRequisition,
       };
     }
   )

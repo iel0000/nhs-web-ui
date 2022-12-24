@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
 import {
@@ -42,7 +49,7 @@ export class RegistrationListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('init');
+    this.loadTableItems();
   }
 
   loadTableItems() {
@@ -169,10 +176,10 @@ export class RegistrationListComponent implements OnInit {
             isHealthAssessed: response.visaInformation.isHealthAssessed,
             intendedWork: response.visaInformation.intendedWork.toString(),
           },
-          labRequisition: {
-            id: response.labRequisition.id,
-            labRequisition: response.labRequisition.labRequisition,
-          },
+          // labRequisition: {
+          //   id: response.labRequisition.id,
+          //   labRequisition: response.labRequisition.labRequisition,
+          // },
         };
 
         this.detailsToPrint = registrationModel;
@@ -183,6 +190,11 @@ export class RegistrationListComponent implements OnInit {
         });
       });
   }
+
+  view(item: any) {
+    this.router.navigate(['registration-details', item.id]);
+  }
+
   printPdf() {
     var dd: TDocumentDefinitions = {
       content: [

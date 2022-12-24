@@ -21,7 +21,9 @@
               <label class="mb-1" for="eMedicalRefNo"
                 >eMedical Ref No<span style="color: red">*</span></label
               >
-              <div class="text-lg">{{ personalInformation.eMedicalRefNo }}</div>
+              <div class="text-lg">
+                {{ personalInformation.eMedicalRefNo || '-' }}
+              </div>
             </div>
           </div>
 
@@ -111,19 +113,22 @@
             <div class="field col-12 md:col-4">
               <label class="mb-1" for="passportNumber">Passport Number</label>
               <div class="text-lg">
-                {{ personalInformation.passportNumber }}
+                {{ personalInformation.passportNumber || '-' }}
               </div>
             </div>
             <div class="field col-12 md:col-4">
               <label class="mb-1" for="dateIssued">Date Issued</label>
               <div class="text-lg">
-                {{ personalInformation.dateIssued | date }}
+                {{ (personalInformation.dateIssued | date) || '-' }}
               </div>
             </div>
             <div class="field col-12 md:col-4">
               <label class="mr-2" for="isExpired">Expired in 6 Months? </label>
-              <div class="text-lg">
+              <div class="text-lg" *ngIf="!personalInformation.hasOtherId">
                 {{ personalInformation.isExpired ? 'Yes' : 'No' }}
+              </div>
+              <div class="text-lg" *ngIf="personalInformation.hasOtherId">
+                -
               </div>
             </div>
           </div>
@@ -133,14 +138,16 @@
             *ngIf="personalInformation.hasOtherId">
             <div class="field col-12 md:col-4">
               <label class="mb-1" for="otherId">Other ID</label>
-              <div class="text-lg">{{ personalInformation.otherId }}</div>
+              <div class="text-lg">
+                {{ personalInformation.otherId || '-' }}
+              </div>
             </div>
           </div>
 
           <div class="p-fluid formgrid grid">
             <div class="field col-12 md:col-4">
               <label class="mb-1" for="email">Email Address</label>
-              <div class="text-lg">{{ personalInformation.email }}</div>
+              <div class="text-lg">{{ personalInformation.email || '-' }</div>
             </div>
             <div class="field col-12 md:col-4">
               <label class="mb-1" for="mobileNumber">Mobile Number</label>
@@ -149,7 +156,7 @@
             <div class="field col-12 md:col-4">
               <label class="mb-1" for="landLineNumber">Landline Number</label>
               <div class="text-lg">
-                {{ personalInformation.landLineNumber }}
+                {{ personalInformation.landLineNumber || '-' }}
               </div>
             </div>
           </div>

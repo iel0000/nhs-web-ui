@@ -19,6 +19,7 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { BranchesComponent } from './pages/admin/branches/branches.component';
 import { ProfileComponent } from './pages/users/profile/profile.component';
 import { BranchesFormComponent } from './pages/admin/branches/branches-form/branches-form.component';
+import { DetailsComponent } from './pages/registration-list/details/details.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'registration-list',
         component: RegistrationListComponent,
+      },
+      {
+        path: 'registration-details/:id',
+        component: DetailsComponent,
       },
       {
         path: 'register',

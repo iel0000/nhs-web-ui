@@ -22,14 +22,40 @@
       </div>
       <div class="field col-12 md:col-12">
         <p-table
+          #dt
+          dataKey="id"
           [value]="items"
           responsiveLayout="scroll"
-          [lazy]="true"
-          (onLazyLoad)="loadTableItems()"
-          [loading]="isLoading">
+          [loading]="isLoading"
+          [paginator]="true"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [globalFilterFields]="[
+            'referenceNumber',
+            'personalInformation.firstName',
+            'personalInformation.lastName',
+            'dateCreated'
+          ]">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <span class="p-input-icon-left ml-auto w-19rem">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="
+                    dt.filterGlobal($any($event.target).value, 'contains')
+                  "
+                  placeholder="Search Keyword" />
+              </span>
+            </div>
+          </ng-template>
           <ng-template pTemplate="header">
             <tr>
               <th>ID</th>
+              <th>REFERENCE NUMBER</th>
               <th>FIRST NAME</th>
               <th>LAST NAME</th>
               <th>DATE CREATED</th>
@@ -40,9 +66,10 @@
           <ng-template pTemplate="body" let-item>
             <tr>
               <td>{{ getControlNumber(item) }}</td>
+              <td>{{ item.referenceNumber }}</td>
               <td>{{ item.personalInformation.firstName }}</td>
               <td>{{ item.personalInformation.lastName }}</td>
-              <td>{{ item.dateCreated | date: 'dd/MMM/yyyy' }}</td>
+              <td>{{ item.dateCreated | date: 'yyyy-MM-dd' }}</td>
               <td>{{ item.createdBy }}</td>
               <td>
                 <button
@@ -63,6 +90,12 @@
                   icon="pi pi-print"
                   class="p-button-rounded p-button-text"
                   (click)="generatePdf(item)"></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-eye"
+                  class="p-button-rounded p-button-text p-button-secondary"
+                  (click)="view(item)"></button>
               </td>
             </tr>
           </ng-template>
