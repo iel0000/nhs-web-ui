@@ -81,6 +81,6 @@ export class AppointmentsComponent implements OnInit {
   }
 
   view(item: any) {
-    console.log(item);
+    this.router.navigate(['appointmet-details', item.id]);
   }
 }
