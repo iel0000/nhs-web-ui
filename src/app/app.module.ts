@@ -68,7 +68,7 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         allowedDomains: [
           'localhost:44370',
-          'iel0000.github.io',
+          'htcdc.runasp.net',
         ],
         disallowedRoutes: [],
       },
