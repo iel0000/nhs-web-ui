@@ -8,11 +8,37 @@
     <div class="p-fluid formgrid grid card border-0 rounded-lg">
       <div class="field col-12 md:col-12">
         <p-table
+          #dt
+          dataKey="id"
           [value]="items"
-          responsiveLayout="scroll"
-          [lazy]="true"
-          (onLazyLoad)="loadAppointments()"
-          [loading]="isLoading">
+          [loading]="isLoading"
+          [paginator]="true"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [globalFilterFields]="[
+            'referenceNumber',
+            'personalInformation.email',
+            'personalInformation.firstName',
+            'personalInformation.lastName',
+            'appointmentDate',
+            'appointmentTime.name'
+          ]">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <span class="p-input-icon-left ml-auto w-19rem">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  (input)="
+                    dt.filterGlobal($any($event.target).value, 'contains')
+                  "
+                  placeholder="Search Keyword" />
+              </span>
+            </div>
+          </ng-template>
           <ng-template pTemplate="header">
             <tr>
               <th>REFERENCE ID</th>
@@ -26,23 +52,32 @@
           <ng-template pTemplate="body" let-item>
             <tr>
               <td>{{ item.referenceNumber }}</td>
-              <td>{{ item.email }}</td>
-              <td>{{ item.firstName }}</td>
-              <td>{{ item.lastName }}</td>
-              <td>{{ item.appointmentDate | date: 'dd/MMM/yyyy' }}</td>
+              <td>{{ item.personalInformation.email }}</td>
+              <td>{{ item.personalInformation.firstName }}</td>
+              <td>{{ item.personalInformation.lastName }}</td>
+              <td>
+                {{ item.appointmentDate | date: 'yyyy-MM-dd' }}
+                {{ item.appointmentTime.name }}
+              </td>
               <td>
                 <button
                   pButton
                   pRipple
                   icon="pi pi-check"
-                  class="p-button-rounded p-button-success mr-2"
-                  (click)="actionClicked(item, 0)"></button>
+                  class="p-button-rounded p-button-text p-button-success"
+                  (click)="showDialog(item, 0)"></button>
                 <button
                   pButton
                   pRipple
                   icon="pi pi-times"
-                  class="p-button-rounded p-button-warning"
-                  (click)="actionClicked(item, 2)"></button>
+                  class="p-button-rounded p-button-text p-button-warning"
+                  (click)="showDialog(item, 2)"></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-eye"
+                  class="p-button-rounded p-button-text p-button-secondary"
+                  (click)="view(item)"></button>
               </td>
             </tr>
           </ng-template>
@@ -56,3 +91,38 @@
     </div>
   </div>
 </div>
+
+<p-dialog [(visible)]="isShowDialog" [style]="{ width: '30vw' }">
+  <ng-template pTemplate="header">
+    <h3>{{ message }}</h3>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <div class="p-fluid formgrid grid" *ngIf="status === 0">
+      <div class="field col-12">
+        <label class="mb-1" for="eMedicalRefNo"
+          >eMedical Ref No<span style="color: red">*</span></label
+        ><br />
+        <input
+          id="eMedicalRefNo"
+          type="text"
+          pInputText
+          [(ngModel)]="eMedicalRefNo" />
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times"
+      label="No"
+      (click)="isShowDialog = false"></button>
+    <button
+      type="button"
+      pButton
+      icon="pi pi-check"
+      label="Yes"
+      (click)="actionClicked(selectedItem, status)"
+      [disabled]="!eMedicalRefNo && status === 0"></button>
+  </ng-template>
+</p-dialog>

@@ -129,10 +129,10 @@ export class RegistrationService {
             isHealthAssessed: response.visaInformation.isHealthAssessed,
             intendedWork: response.visaInformation.intendedWork.toString(),
           },
-          labRequisition: {
-            id: response.labRequisition.id,
-            labRequisition: response.labRequisition.labRequisition,
-          },
+          // labRequisition: {
+          //   id: response.labRequisition.id,
+          //   labRequisition: response.labRequisition.labRequisition,
+          // },
         };
 
         this.getVisaCategory(response.visaInformation.embassy.toString());

@@ -3,7 +3,7 @@ export interface IRegistration {
   branch: number;
   personalInformation: IPersonalInformation;
   visaInformation: IVisaInformation;
-  labRequisition: ILabRequisition;
+  // labRequisition: ILabRequisition;
 }
 
 export interface IPersonalInformation {

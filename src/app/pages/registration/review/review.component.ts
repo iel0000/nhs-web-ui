@@ -90,10 +90,10 @@ export class ReviewComponent implements OnInit, OnDestroy {
         isHealthAssessed: '',
         intendedWork: '0',
       },
-      labRequisition: {
-        id: 0,
-        labRequisition: [],
-      },
+      // labRequisition: {
+      //   id: 0,
+      //   labRequisition: [],
+      // },
     };
   }
 
@@ -132,7 +132,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
           ? s.branch
           : this.authSvc.currentUserValue.branchId;
         this.reviewForm.personalInformation = s.personalInformation;
-        this.reviewForm.labRequisition = s.labRequisition;
+        // this.reviewForm.labRequisition = s.labRequisition;
         this.reviewForm.visaInformation = s.visaInformation;
       });
 
@@ -172,6 +172,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
+
   getlabRequisition() {
     this.registrationSvc.labRequisitionItems$.subscribe(response => {
       this.selectedLabRequisition = [];
@@ -182,16 +183,16 @@ export class ReviewComponent implements OnInit, OnDestroy {
         })
       );
 
-      this.reviewForm.labRequisition.labRequisition.forEach(element => {
-        let labItem = this.labItems.find(x => x.value === element);
-        if (labItem) {
-          this.selectedLabRequisition.push(labItem.description);
-        }
-      });
+      // this.reviewForm.labRequisition.labRequisition.forEach(element => {
+      //   let labItem = this.labItems.find(x => x.value === element);
+      //   if (labItem) {
+      //     this.selectedLabRequisition.push(labItem.description);
+      //   }
+      // });
 
-      if (this.selectedLabRequisition.length === 0) {
-        this.selectedLabRequisition.push(' ');
-      }
+      // if (this.selectedLabRequisition.length === 0) {
+      //   this.selectedLabRequisition.push(' ');
+      // }
     });
   }
 

@@ -1,0 +1,338 @@
+<div class="row">
+  <div class="col-lg-12" *ngIf="item">
+    <div class="card border-0 rounded-lg">
+      <div class="card-header justify-content-center bg-white border-0">
+        <h3 class="my-2">{{ item.referenceNumber }}</h3>
+      </div>
+    </div>
+    <p-card>
+      <ng-template pTemplate="content">
+        <div class="p-fluid formgrid grid">
+          <p-panel
+            header="Personal Information"
+            [toggleable]="true"
+            class="w-100">
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="firstName">Appointment Date</label>
+                <div class="text-lg">
+                  {{ item.appointmentDate | date: 'yyyy-MM-dd' }}
+                  {{ item.appointmentTime.name }}
+                </div>
+              </div>
+            </div>
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="firstName"
+                  >Child/Adult/PWD/Senior</label
+                >
+                <div class="text-lg">{{ categories }}</div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="firstName">Referred by</label>
+                <div class="text-lg">{{ referrals }}</div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label for="firstName">Last Name</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.lastName }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label for="firstName">First Name</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.firstName }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label for="firstName">Middle Name</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.middleName }}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="birthDate">Date of Birth</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.birthDate | date }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="age">Age</label>
+                <div class="text-lg">{{ item.personalInformation.age }}</div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="civilStatus">Civil Status</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.civilStatus }}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="gender">Gender</label>
+                <div class="text-lg">{{ item.personalInformation.gender }}</div>
+              </div>
+            </div>
+
+            <div
+              class="p-fluid formgrid grid"
+              *ngIf="item.personalInformation.gender === 'Female'">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1 mr-2" for="hasMenstrualPeriod"
+                  >Is Menstrual Period Applicable?
+                </label>
+                <div class="text-lg">
+                  {{
+                    item.personalInformation.hasMenstrualPeriod ? 'Yes' : 'No'
+                  }}
+                </div>
+              </div>
+              <div
+                class="field col-12 md:col-4"
+                *ngIf="
+                  item.personalInformation.gender === 'Female' &&
+                  item.personalInformation.hasMenstrualPeriod
+                ">
+                <label for="menstrualPeriodStart">Menstrual Period Start</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.menstrualPeriodStart | date }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="menstrualPeriodEnd"
+                  >Menstrual Period End</label
+                >
+                <div class="text-lg">
+                  {{ item.personalInformation.menstrualPeriodEnd | date }}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12">
+                <label class="mb-1" for="intendedOccupation"
+                  >Intended Occupation / Activity / Study(Course)</label
+                >
+                <div class="text-lg">
+                  {{ item.personalInformation.intendedOccupation }}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="passportNumber">Passport Number</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.passportNumber || '-' }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="dateIssued">Date Issued</label>
+                <div class="text-lg">
+                  {{
+                    item.personalInformation.passportNumber
+                      ? (item.personalInformation.dateIssued | date) || '-'
+                      : '-'
+                  }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mr-2" for="isExpired"
+                  >Expired in 6 Months?
+                </label>
+                <div
+                  class="text-lg"
+                  *ngIf="!item.personalInformation.hasOtherId">
+                  {{ item.personalInformation.isExpired ? 'Yes' : 'No' }}
+                </div>
+                <div
+                  class="text-lg"
+                  *ngIf="item.personalInformation.hasOtherId">
+                  -
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-fluid formgrid grid"
+              *ngIf="item.personalInformation.hasOtherId">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="otherId">Other ID</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.otherId || '-' }}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="email">Email Address</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.email || '-' }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="mobileNumber">Mobile Number</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.mobileNumber }}
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label class="mb-1" for="landLineNumber">Landline Number</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.landLineNumber || '-' }}
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12">
+                <label class="mb-1" for="address">Address</label>
+                <div class="text-lg">
+                  {{ item.personalInformation.address }}
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <div class="p-fluid formgrid grid my-2">
+          <p-panel header="VISA Information" [toggleable]="true" class="w-100">
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12 md:col-4">
+                <label for="embassy"> Embassy</label>
+                <div class="text-lg">{{ embassy }}</div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label for="visaType">Visa Type</label>
+                <div class="text-lg">{{ visaType }}</div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <label for="visaCategory">Visa Category</label>
+                <div class="text-lg">{{ visaCategory }}</div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-muted">
+                      a. Is this your or your family's visa-related medical
+                      examination
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-lg">
+                      {{ item.visaInformation.isFirstVisa | titlecase }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-fluid formgrid grid">
+              <div class="field col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-muted">
+                      b. Has your or your family's application for a visa ever
+                      rejected before?
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-lg">
+                      {{ item.visaInformation.hasVisaRejected | titlecase }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-fluid formgrid grid"
+              *ngIf="item.visaInformation.embassy === 1">
+              <div class="field col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-muted">
+                      c. If you are applying for a Temporary visa, do you intend
+                      to apply for a permanent stay in Australia within the next
+                      6-12 months?
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-lg">
+                      {{ item.visaInformation.isTemporaryVisa | titlecase }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-muted">
+                      Would you like your health to be assessed "upfront" for a
+                      permanent stay in Australia?
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-lg">
+                      {{ item.visaInformation.isHealthAssessed | titlecase }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field col-12 md:col-6">
+                <div class="text-muted">
+                  Do you intend to work or study to be a
+                </div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <div class="text-lg">{{ intendedWork }}</div>
+              </div>
+            </div>
+
+            <div
+              class="p-fluid formgrid grid"
+              *ngIf="item.visaInformation.embassy === 2">
+              <div class="field col-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-muted">
+                      c. Did you receive a letter that your application is under
+                      review based on the new public policy effective June
+                      01,2008?
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="text-lg">
+                      {{ item.visaInformation.hasLetterReceived | titlecase }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-fluid formgrid grid"
+              *ngIf="item.visaInformation.embassy === 3">
+              <div class="field col-12 md:col-6">
+                <div class="text-muted">c. Length Of Stay</div>
+              </div>
+              <div class="field col-12 md:col-4">
+                <div class="text-lg">{{ lengthOfStay }}</div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>

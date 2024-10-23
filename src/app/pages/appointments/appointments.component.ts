@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '@app/shared/services';
@@ -11,6 +12,12 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 export class AppointmentsComponent implements OnInit {
   items: any;
   isLoading: boolean = true;
+  isShowDialog = false;
+  status!: number;
+  message!: string;
+  eMedicalRefNo!: string;
+
+  selectedItem: any;
 
   constructor(
     private httpSvc: HttpService,
@@ -20,7 +27,7 @@ export class AppointmentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('init');
+    this.loadAppointments();
   }
 
   loadAppointments() {
@@ -32,39 +39,48 @@ export class AppointmentsComponent implements OnInit {
       });
   }
 
-  actionClicked(item: any, status: number) {
-    let message = 'Confirm Accept Appointment?';
+  showDialog(item: any, status: number) {
+    this.eMedicalRefNo = '';
+    this.message = 'Confirm Accept Appointment?';
     if (status === 2) {
-      message = 'Confirm Decline Appointment?';
+      this.message = 'Confirm Decline Appointment?';
     }
+    this.isShowDialog = true;
+    this.selectedItem = item;
+    this.status = status;
+  }
 
+  actionClicked(item: any, status: number) {
     let payload = {
-      appointmentId: item.Id,
-      appointmetStatus: status,
+      appointmentId: item.id,
+      appointmentStatus: status,
+      eMedicalNumber: this.eMedicalRefNo,
     };
-    this.confirmationService.confirm({
-      message: message,
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.httpSvc.post(`Appointment/UpdateStatus`, payload).subscribe(
-          response => {
-            this.messageService.add({
-              severity: response.status.toLowerCase(),
-              summary: 'Update Appointment',
-              detail: response.message,
-            });
-            this.loadAppointments();
-          },
-          error => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Update Appointment',
-              detail: error.message,
-            });
-          }
-        );
+
+    this.httpSvc.post(`Appointment/UpdateStatus`, payload).subscribe(
+      response => {
+        this.isShowDialog = false;
+
+        this.messageService.add({
+          severity: response.status.toLowerCase(),
+          summary: 'Update Appointment',
+          detail: response.message,
+        });
+        this.loadAppointments();
       },
-    });
+      error => {
+        this.isShowDialog = false;
+
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Update Appointment',
+          detail: error.message,
+        });
+      }
+    );
+  }
+
+  view(item: any) {
+    this.router.navigate(['appointmet-details', item.id]);
   }
 }

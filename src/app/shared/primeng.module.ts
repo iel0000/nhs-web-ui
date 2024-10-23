@@ -34,6 +34,8 @@ import { ChartModule } from 'primeng/chart';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenuModule } from 'primeng/menu';
 import { ChipModule } from 'primeng/chip';
+import { SkeletonModule } from 'primeng/skeleton';
+import { DialogModule } from 'primeng/dialog';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -70,6 +72,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     MegaMenuModule,
     MenuModule,
     ChipModule,
+    SkeletonModule,
+    DialogModule,
   ],
   exports: [
     ReactiveFormsModule,
@@ -104,6 +108,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     MegaMenuModule,
     MenuModule,
     ChipModule,
+    SkeletonModule,
+    DialogModule,
   ],
   providers: [MessageService, ConfirmationService],
 })

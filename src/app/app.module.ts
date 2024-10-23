@@ -29,6 +29,8 @@ import { BranchesComponent } from './pages/admin/branches/branches.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { ProfileComponent } from './pages/users/profile/profile.component';
 import { BranchesFormComponent } from './pages/admin/branches/branches-form/branches-form.component';
+import { DetailsComponent } from './pages/registration-list/details/details.component';
+import { AppointmentDetailsComponent } from './pages/appointments/appointment-details/appointment-details.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -54,6 +56,8 @@ export function tokenGetter() {
     AppointmentsComponent,
     ProfileComponent,
     BranchesFormComponent,
+    DetailsComponent,
+    AppointmentDetailsComponent,
   ],
   imports: [
     BrowserModule,

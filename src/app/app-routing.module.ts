@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ApplicationRef, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/auth';
 import { DashboardComponent, ErrorComponent, LoginComponent } from '@app/pages';
@@ -19,6 +19,8 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
 import { BranchesComponent } from './pages/admin/branches/branches.component';
 import { ProfileComponent } from './pages/users/profile/profile.component';
 import { BranchesFormComponent } from './pages/admin/branches/branches-form/branches-form.component';
+import { DetailsComponent } from './pages/registration-list/details/details.component';
+import { AppointmentDetailsComponent } from './pages/appointments/appointment-details/appointment-details.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,10 @@ const routes: Routes = [
       {
         path: 'registration-list',
         component: RegistrationListComponent,
+      },
+      {
+        path: 'registration-details/:id',
+        component: DetailsComponent,
       },
       {
         path: 'register',
@@ -72,6 +78,10 @@ const routes: Routes = [
       {
         path: 'appointments',
         component: AppointmentsComponent,
+      },
+      {
+        path: 'appointmet-details/:id',
+        component: AppointmentDetailsComponent,
       },
       {
         path: 'admin/branches/:action',

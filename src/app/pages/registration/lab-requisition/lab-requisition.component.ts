@@ -44,7 +44,7 @@ export class LabRequisitionComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.labTest = s.labRequisition.labRequisition;
+        // this.labTest = s.labRequisition.labRequisition;
       });
 
     this.getLabItems();
